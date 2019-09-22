@@ -12,6 +12,7 @@ public class main {
 		// mediaAritmeticaSimples(amostra1);
 		// mediaAritmeticaPonderada(amostra1, pesos);
 		moda(amostra1);
+		System.out.print(somatorio(amostra1));
 	}
 
 	private static int somatorio(int[] amostra) {
