@@ -17,7 +17,7 @@ public class main {
 	private static int somatorio(int[] amostra) {
 		int somatorio = 0;
 		for (int i = 0; i < amostra.length; i++) {
-			somatorio += i;
+			somatorio += amostra[i];
 		}
 		return somatorio;
 	}
