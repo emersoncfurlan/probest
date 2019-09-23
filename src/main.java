@@ -26,7 +26,7 @@ public class main {
 		while (opcao != SAIR_DO_PROGRAMA) {
 			switch (opcao) {
 			case SOMATORIO:
-				JOptionPane.showConfirmDialog(null, somatorio(pesos));
+				JOptionPane.showConfirmDialog(null, somatorio(amostra));
 				break;
 			case MEDIA_ARITMETICA_SIMPLES:
 				JOptionPane.showConfirmDialog(null, mediaAritmeticaSimples(amostra));
@@ -62,7 +62,7 @@ public class main {
 				JOptionPane.showConfirmDialog(null, fatorial(possibilidade));
 				break;
 			case SAIR_DO_PROGRAMA:
-				JOptionPane.showMessageDialog(null, "[Programa ser� encerado!]");
+				JOptionPane.showMessageDialog(null, "[Programa será encerado!]");
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Opcao Invalida!");
@@ -113,17 +113,17 @@ public class main {
 	}
 
 	/*
-	 * Ms: m�dia aritm�tica simples x1, x2, x3,...,xn: valores dos dados n: numero
+	 * Ms: média aritmética simples x1, x2, x3,...,xn: valores dos dados n: numero
 	 * de dados
 	 */
-	private static int mediaAritmeticaSimples(int[] amostra) {
-		return somatorio(amostra) / amostra.length;
+	private static double mediaAritmeticaSimples(int[] amostra) {
+		return (double)somatorio(amostra) / amostra.length;
 	}
 
 	/*
-	 * A m�dia aritm�tica ponderada � calculada multiplicando cada valor do conjunto
-	 * de dados pelo seu peso. Depois, encontra-se a soma desses valores que ser�
-	 * dividida pela soma dos pesos Mp: M�dia aritm�tica ponderada p1, p2,..., pn:
+	 * A média aritmética ponderada é calculada multiplicando cada valor do conjunto
+	 * de dados pelo seu peso. Depois, encontra-se a soma desses valores que será
+	 * dividida pela soma dos pesos Mp: Média aritmética ponderada p1, p2,..., pn:
 	 * pesos x1, x2,...,xn: valores dos dados
 	 */
 	private static int mediaAritmeticaPonderada(int[] amostra, int[] pesos) {
@@ -161,9 +161,9 @@ public class main {
 
 	/*
 	 * A Moda (Mo) representa o valor mais frequente de um conjunto de dados, sendo
-	 * assim, para defini-la basta observar a frequência com que os valores
-	 * aparecem. Um conjunto de dados � chamado de bimodal quando apresenta duas
-	 * modas, ou seja, dois valores são mais frequentes.
+	 * assim, para defini-la basta observar a frequÃªncia com que os valores
+	 * aparecem. Um conjunto de dados é chamado de bimodal quando apresenta duas
+	 * modas, ou seja, dois valores sÃ£o mais frequentes.
 	 */
 	private static int moda(int[] amostra) {
 		boolean resp = false;
@@ -174,8 +174,8 @@ public class main {
 		// verifica frequencia dos numeros
 		for (int i = 0; i < amostraOrdenada.length; i++) {
 			// percorre o vetor j a cada item do vetor i para contabilizar,
-			// como a amostra est� ordenada se o item posterior for diferente do item atual
-			// não tem porque voltar e rever o item
+			// como a amostra está ordenada se o item posterior for diferente do item atual
+			// nÃ£o tem porque voltar e rever o item
 			for (int j = 0; j < amostraOrdenada.length; j++) {
 
 			}
@@ -185,8 +185,8 @@ public class main {
 	}
 
 	/*
-	 * Quando o n�mero elementos de um conjunto � par, a mediana � encontrada pela
-	 * m�dia dos dois valores centrais. Assim, esses valores são somados e
+	 * Quando o número elementos de um conjunto é par, a mediana é encontrada pela
+	 * média dos dois valores centrais. Assim, esses valores sÃ£o somados e
 	 * divididos por dois.
 	 */
 	private static int mediana(int[] amostra) {
@@ -198,11 +198,11 @@ public class main {
 	}
 
 	/*
-	 * Variância � uma medida de dispersão e � usada tamb�m para expressar o
-	 * quanto um conjunto de dados se desvia da m�dia. ∑: símbolo de somatório.
-	 * Indica que temos que somar todos os termos, desde a primeira posição (i=1)
-	 * at� a posição n xi: valor na posição i no conjunto de dados MA: m�dia
-	 * aritm�tica dos dados n: quantidade de dados
+	 * VariÃ¢ncia é uma medida de dispersÃ£o e é usada também para expressar o
+	 * quanto um conjunto de dados se desvia da média. âˆ‘: sÃ­mbolo de somatÃ³rio.
+	 * Indica que temos que somar todos os termos, desde a primeira posiÃ§Ã£o (i=1)
+	 * até a posiÃ§Ã£o n xi: valor na posiÃ§Ã£o i no conjunto de dados MA: média
+	 * aritmética dos dados n: quantidade de dados
 	 */
 	private static int variancia(int[] amostra) {
 		int ma = mediaAritmeticaSimples(amostra);
@@ -216,13 +216,13 @@ public class main {
 		return somat / amostra.length;
 	}
 
-	// Desvio Padrão
+	// Desvio PadrÃ£o
 	private static double desvioPadrao(int[] amostra) {
 		int variancia = variancia(amostra);
 		return Math.sqrt(variancia);
 	}
 
-	// Media Geom�trica
+	// Media Geométrica
 	private static double mediaGeometrica(int[] amostra) {
 		double mg = 0;
 		int produto = 0;
@@ -241,13 +241,13 @@ public class main {
 
 	// Amplitude
 	private static int amplitude(int[] amostra) {
-		// Essa medida de dispers�o � definida como a diferenca entre a maior e a menor
-		// observa��o de um conjunto de dados, isto �:
+		// Essa medida de dispersão é definida como a diferenca entre a maior e a menor
+		// observação de um conjunto de dados, isto é:
 		int a = amostra[0] - amostra[amostra.length];
 		return a;
 	}
 
-	// Coeficiente de Varia��o
+	// Coeficiente de Variação
 	private static double coeficienteDeVariacao(int[] amostra) {
 		double cv = (desvioPadrao(amostra) * 100) / mediaAritmeticaSimples(amostra);
 		return cv;
@@ -255,16 +255,16 @@ public class main {
 
 	// Formula da Probabilidade
 	/*
-	 * Em um fen�meno aleatório, as possibilidades de ocorrência de um evento são
-	 * igualmente prov�veis. p(A): probabilidade da ocorrência de um evento A n(A):
-	 * n�mero de casos que nos interessam (evento A) n(Ω): n�mero total de casos
-	 * possíveis
+	 * Em um fenómeno aleatÃ³rio, as possibilidades de ocorrÃªncia de um evento sÃ£o
+	 * igualmente prováveis. p(A): probabilidade da ocorrÃªncia de um evento A n(A):
+	 * número de casos que nos interessam (evento A) n(Î©): número total de casos
+	 * possÃ­veis
 	 */
 	private static double probabilidade(int[] amostra, int possibilidade) {
 		// Sendo assim, podemos encontrar a probabilidade de ocorrer um determinado
-		// resultado atrav�s da divisão
-		// entre o n�mero de eventos favor�veis e o n�mero total de resultados
-		// possíveis:
+		// resultado através da divisÃ£o
+		// entre o número de eventos favoráveis e o número total de resultados
+		// possÃ­veis:
 		long numTotal = fatorial(amostra.length);
 		long pa = possibilidade / numTotal;
 		// converter para porcentagem aproximada
