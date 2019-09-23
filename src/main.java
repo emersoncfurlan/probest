@@ -103,13 +103,15 @@ public class main {
 		return somatorio;
 	}
 
-	private static int mediaHarmonica(int[] amostra) {
+	private static double mediaHarmonica(int[] amostra) {
 		int mediaHarm = amostra.length;
-		int somat = 0;
-		for (int i = 1; i < amostra.length; i++) {
-			somat = 1 / amostra[i];
+		double somat =0;
+		for (int i = 0; i < amostra.length; i++) {
+			somat +=Math.pow(amostra[i], -1);
+			
 		}
-		return mediaHarm / somat;
+			
+		return mediaHarm/somat;
 	}
 
 	/*
