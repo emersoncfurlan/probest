@@ -276,10 +276,10 @@ public class main {
 	 * divididos por dois.
 	 */
 	private static int mediana(int[] amostra) {
-		if (amostra.length % 2 == 0) { // par
-			return amostra[amostra.length / 2];
-		} else { // impar
+	if (amostra.length % 2 == 0) { // par
 			return ((amostra[(amostra.length / 2)] + amostra[(amostra.length / 2) + 1]) / 2);
+		} else { // impar
+			return amostra[amostra.length / 2]; 
 		}
 	}
 
