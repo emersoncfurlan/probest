@@ -3,4 +3,6 @@ Projeto de probabilidade e estatística do curso de Análise e Desenvolvimento d
 
 Este tem como intuito ser um software para gerar e solucionar equações, resolvendo os problemas dispostos pelo professor da disciplina.
 
+Interface utilizada desenvolvida com a biblioteca JOptionPane.
+
 
