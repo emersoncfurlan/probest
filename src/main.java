@@ -1,5 +1,5 @@
 import java.util.Random;
-import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class main {
@@ -18,39 +18,39 @@ public class main {
 	private static final int SAIR_DO_PROGRAMA = 13;
 
 	public static void main(String[] args) {
-		int[] amostra = { 1,1,2,2,3,3 };
-		int[] pesos = { 0, 1, 2, 2, 1, 0, 3, 4 };
+		int[] amostra = { 15, 18, 16, 43 , 25, 10, 10};
+		int[] pesos = { 0, 1, 2, 2, 1, 0, 1};
 		int possibilidade = 2;
 		Integer opcao = menu();
 
 		while (opcao != SAIR_DO_PROGRAMA) {
 			switch (opcao) {
 			case SOMATORIO:
-				JOptionPane.showConfirmDialog(null, somatorio(pesos));
+				JOptionPane.showConfirmDialog(null, somatorio(amostra)); // arrumado
 				break;
 			case MEDIA_ARITMETICA_SIMPLES:
-				JOptionPane.showConfirmDialog(null, mediaAritmeticaSimples(amostra));
+				JOptionPane.showConfirmDialog(null, mediaAritmeticaSimples(amostra)); // correto
 				break;
 			case MEDIA_ARITMETICA_PONDERADA:
-				JOptionPane.showConfirmDialog(null, mediaAritmeticaPonderada(amostra, pesos));
+				JOptionPane.showConfirmDialog(null, mediaAritmeticaPonderada(amostra, pesos)); // arrumado
 				break;
 			case MODA:
-				JOptionPane.showConfirmDialog(null, arrayToString(moda(amostra)));
+				JOptionPane.showConfirmDialog(null, moda(amostra)); // testando uma modificação
 				break;
 			case MEDIANA:
-				JOptionPane.showConfirmDialog(null, mediana(amostra));
+				JOptionPane.showConfirmDialog(null, mediana(ordenarAmostra(amostra))); // arrumado
 				break;
 			case VARIANCIA:
-				JOptionPane.showConfirmDialog(null, variancia(amostra));
+				JOptionPane.showConfirmDialog(null, variancia(amostra)); // arrumado o somatório
 				break;
 			case DESVIO_PADRAO:
-				JOptionPane.showConfirmDialog(null, desvioPadrao(amostra));
+				JOptionPane.showConfirmDialog(null, desvioPadrao(amostra)); //  correto
 				break;
 			case MEDIA_GEOMETRICA:
-				JOptionPane.showConfirmDialog(null, mediaGeometrica(amostra));
+				JOptionPane.showConfirmDialog(null, mediaGeometrica(amostra)); // feito
 				break;
 			case MEDIA_HARMONICA:
-				JOptionPane.showConfirmDialog(null, mediaHarmonica(amostra));
+				JOptionPane.showConfirmDialog(null, mediaHarmonica(amostra)); // feito
 				break;
 			case PRODUTO:
 				JOptionPane.showConfirmDialog(null, produto(amostra));
@@ -62,7 +62,7 @@ public class main {
 				JOptionPane.showConfirmDialog(null, fatorial(possibilidade));
 				break;
 			case SAIR_DO_PROGRAMA:
-				JOptionPane.showMessageDialog(null, "[Programa será encerado!]");
+				JOptionPane.showMessageDialog(null, "[Programa ser� encerado!]");
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Opcao Invalida!");
@@ -95,52 +95,8 @@ public class main {
 		return Integer.parseInt(strOpcao);
 	}
 
-	private static int somatorio(int[] amostra) {
-		int somatorio = 0;
-		for (int i = 0; i < amostra.length; i++) {
-			somatorio += amostra[i];
-		}
-		return somatorio;
-	}
 
-	private static int mediaHarmonica(int[] amostra) {
-		int mediaHarm = amostra.length;
-		int somat = 0;
-		for (int i = 1; i < amostra.length; i++) {
-			somat = 1 / amostra[i];
-		}
-		return mediaHarm / somat;
-	}
-
-	/*
-	 * Ms: média aritmética simples x1, x2, x3,...,xn: valores dos dados n: numero
-	 * de dados
-	 */
-	private static int mediaAritmeticaSimples(int[] amostra) {
-		return somatorio(amostra) / amostra.length;
-	}
-
-	/*
-	 * A média aritmética ponderada é calculada multiplicando cada valor do conjunto
-	 * de dados pelo seu peso. Depois, encontra-se a soma desses valores que será
-	 * dividida pela soma dos pesos Mp: Média aritmética ponderada p1, p2,..., pn:
-	 * pesos x1, x2,...,xn: valores dos dados
-	 */
-	private static int mediaAritmeticaPonderada(int[] amostra, int[] pesos) {
-		int somatorioAmostra = 0;
-		int somatorioPesos = 0;
-		if (amostra.length == pesos.length) {
-			for (int i = 0; i < amostra.length; i++) {
-				somatorioAmostra += i;
-			}
-			for (int i = 0; i < amostra.length; i++) {
-				somatorioPesos += i;
-			}
-			return somatorioAmostra / somatorioPesos;
-		} else
-			return 0;
-	}
-
+	// MATRIZ ORDENADA //
 	private static int[] ordenarAmostra(int[] amostra) {
 		boolean resp = false;
 		int x = 0;
@@ -159,137 +115,92 @@ public class main {
 		return amostra;
 	}
 
-	// Método necessário para se retirar a moda
-	// Recebe um vetor e retorna um vetor sem elementos repetidos
-	// Dá pra melhorar se alguém souber
-	private static int[] tiraRepetidos(int[] amostra) {
-		boolean tem; // Variável auxiliar para checar se o valor da amostra "TEM" no resultado
-		ArrayList<Integer> result = new ArrayList<Integer>();
+	// PARTES DO PROGRAMA //
 
+	private static int somatorio(int[] amostra) {
+		int somatorio = 0;
 		for (int i = 0; i < amostra.length; i++) {
-			tem = false; // Inicia como se não tem
-			for (int j = 0; j < result.size(); j++) { // Passa por todos os elementos da ArrayList result
-				if (amostra[i] == result.get(j)) {
-					tem = true; // Já tem o elemento
-				}
-			}
-			if (!tem) { // Se não tem, adicionar no result
-				result.add(amostra[i]);
-			}
+			somatorio += amostra[i];
 		}
-
-		int fim[] = new int[result.size()]; // Vetor final para converter de ArrayList para vetor
-
-		for (int i = 0; i < result.size(); i++) {
-			fim[i] = result.get(i);
-		}
-
-		return fim;
-	}
-
-	// Conta quantas vezes um elemento aparece num vetor
-	// Não sei se já existe um método que faz isso, não achei
-	// Auxilia na função da moda
-	private static int contaNoVetor(int[] amostra, int elemento) {
-		int contador = 0;
-		for (int i = 0; i < amostra.length; i++) {
-			if (amostra[i] == elemento) {
-				contador++;
-			}
-		}
-		return contador;
+		return somatorio;
 	}
 
 	/*
-	 * A Moda (Mo) representa os valores mais frequentes de um conjunto de dados,
-	 * sendo assim, para defini-la basta observar a frequência com que os valores
-	 * aparecem. Um conjunto de dados pode ser bimodal, trimodal, quadrimodal...
+	 * Ms: m�dia aritm�tica simples x1, x2, x3,...,xn: valores dos dados n: numero
+	 * de dados
 	 */
-	private static int[] moda(int[] amostra) {
-		int semRepetidos[] = tiraRepetidos(amostra); // Amostra sem dados repetidos
-		int freq[] = new int[semRepetidos.length]; // Vetor que vai armazenar a frequência dos itens individuais
-		/*
-		 * O seguinte 'for', checa a quantidade dos itens do vetor sem repetidos dentro
-		 * da amostra e grava a frequencia no vetor freq
-		 */
-		for (int i = 0; i < freq.length; i++) {
-			int quant = 0;
-			for (int j = 0; j < amostra.length; j++) {
-				if (semRepetidos[i] == amostra[j]) {
-					quant++;
-				}
-			}
-			freq[i] = quant;
-		}
-
-		int moda = freq[0]; // Grava a frequência modal
-		for (int i = 0; i < freq.length; i++) { // Pega a maior frequência e salva em moda
-			if (freq[i] > moda) {
-				moda = freq[i];
-			}
-		}
-
-		// Se o elemento com mais frequência se repete em todas as vezes não há moda
-		if (freq.length == contaNoVetor(freq, moda)) {
-			return null; // Se já não tem moda, retorna null
-		}
-
-		// Lista de modas (em ArrayList), pode ter mais de uma e ir adicionando
-		ArrayList<Integer> modasArList = new ArrayList<Integer>();
-
-		for (int i = 0; i < freq.length; i++) {
-			if (freq[i] == moda) { 
-				// Adiciona os valores que tem a mesma frequência (a frequência modal)
-				modasArList.add(semRepetidos[i]);
-			}
-		}
-
-		// Lista de modas (em vetor)
-		int[] modas = new int[modasArList.size()];
-
-		// Converte de ArrayList para Vetor
-		for (int i = 0; i < modas.length; i++) {
-			modas[i] = modasArList.get(i);
-		}
-
-		return modas;
-	}
-
-	// O método moda retorna um vetor, este método está sendo usado para transformar as modas em String
-	private static String arrayToString(int[] vetor) {
-		if (vetor != null) {
-			String result = "";
-			for (int i = 0; i < vetor.length; i++) {
-				result += vetor[i];
-				if (i != vetor.length - 1) {
-					result += ", ";
-				}
-			}
-			return result;
-		}
-		return "";
+	private static int mediaAritmeticaSimples(int[] amostra) {
+		return somatorio(amostra) / amostra.length;
 	}
 
 	/*
-	 * Quando o número elementos de um conjunto é par, a mediana é encontrada pela
-	 * média dos dois valores centrais. Assim, esses valores sÃ£o somados e
+	 * A m�dia aritm�tica ponderada � calculada multiplicando cada valor do conjunto
+	 * de dados pelo seu peso. Depois, encontra-se a soma desses valores que ser�
+	 * dividida pela soma dos pesos Mp: M�dia aritm�tica ponderada p1, p2,..., pn:
+	 * pesos x1, x2,...,xn: valores dos dados
+	 */
+	private static int mediaAritmeticaPonderada(int[] amostra, int[] pesos) {
+		int valorAmostra = 0;
+		int valorPesos = 0;
+		String saida="";
+		if (amostra.length == pesos.length) {
+			for (int i = 0; i < amostra.length; i++) {
+				valorAmostra+= amostra[i]*pesos[i];
+				valorPesos+= pesos[i];
+			}
+			return valorAmostra / valorPesos;
+		} else
+			return 0;
+	}
+
+
+	/*
+	 * A Moda (Mo) representa o valor mais frequente de um conjunto de dados, sendo
+	 * assim, para defini-la basta observar a frequência com que os valores
+	 * aparecem. Um conjunto de dados � chamado de bimodal quando apresenta duas
+	 * modas, ou seja, dois valores são mais frequentes.
+	 */
+
+	private static int moda(int[] amostra) {
+		boolean resp = false;
+		int x = 0;
+		int contador[] = new int[amostra.length];
+		// ordenando a amostra
+		int[] amostraOrdenada = ordenarAmostra(amostra);
+		// verifica frequencia dos numeros
+		for (int i = 0; i < amostraOrdenada.length; i++) {
+			// percorre o vetor j a cada item do vetor i para contabilizar,
+			// como a amostra está ordenada se o item posterior for diferente do item atual
+			// nÃ£o tem porque voltar e rever o item
+			for (int j = 0; j < amostraOrdenada.length; j++) {
+
+			}
+			System.out.println(contador[i]);
+		}
+		return 0;
+	}
+
+	/*
+	 * Quando o n�mero elementos de um conjunto � par, a mediana � encontrada pela
+	 * m�dia dos dois valores centrais. Assim, esses valores são somados e
 	 * divididos por dois.
 	 */
 	private static int mediana(int[] amostra) {
-	if (amostra.length % 2 == 0) { // par
+		if (amostra.length % 2 == 0) { // par
 			return ((amostra[(amostra.length / 2)] + amostra[(amostra.length / 2) + 1]) / 2);
 		} else { // impar
-			return amostra[amostra.length / 2]; 
+			return amostra[amostra.length / 2];
 		}
 	}
 
 	/*
-	 * VariÃ¢ncia é uma medida de dispersÃ£o e é usada também para expressar o
-	 * quanto um conjunto de dados se desvia da média. âˆ‘: sÃ­mbolo de somatÃ³rio.
-	 * Indica que temos que somar todos os termos, desde a primeira posiÃ§Ã£o (i=1)
-	 * até a posiÃ§Ã£o n xi: valor na posiÃ§Ã£o i no conjunto de dados MA: média
-	 * aritmética dos dados n: quantidade de dados
+	 * Variância � uma medida de dispersão e � usada tamb�m para expressar o
+	 * quanto um conjunto de dados se desvia da m�dia. ∑: símbolo de somatório.
+	 * Indica que temos que somar todos os termos, desde a primeira posição (i=1)
+	 * at� a posição n xi: valor na posição i no conjunto de dados MA: m�dia
+	 * aritm�tica dos dados n: quantidade de dados
 	 */
+
 	private static int variancia(int[] amostra) {
 		int ma = mediaAritmeticaSimples(amostra);
 		int somat = 0;
@@ -297,29 +208,39 @@ public class main {
 		for (int i = 0; i < amostra.length; i++) {
 			amostra[i] -= ma;
 			amostra[i] = amostra[i] ^ 2;
+			somat+=amostra[i];
 		}
-		somat = somatorio(amostra);
-		return somat / amostra.length;
+		return somat / (amostra.length-1); // trabalhando com a perda de um valor, ou não?
 	}
 
-	// Desvio PadrÃ£o
+	// Desvio Padrão
 	private static double desvioPadrao(int[] amostra) {
 		int variancia = variancia(amostra);
 		return Math.sqrt(variancia);
 	}
 
-	// Media Geométrica
+	// media harmonica
+	private static int mediaHarmonica(int[] amostra) {
+		int mediaHarm = amostra.length;
+		int somat = 0;
+		for (int i = 0; i < amostra.length; i++) {
+			somat += 1 / amostra[i];
+		}
+		return mediaHarm / somat;
+	}
+
+	// Media Geom�trica
 	private static double mediaGeometrica(int[] amostra) {
 		double mg = 0;
 		int produto = 0;
 		produto = produto(amostra);
-		mg = Math.sqrt(Math.pow(produto, amostra.length));
+		mg = Math.pow(produto, (1/amostra.length));
 		return mg;
 	}
 
 	private static int produto(int[] amostra) {
-		int valor = 0;
-		for (int i = 0; i < amostra.length; i++) {
+		int valor = amostra[0];
+		for (int i = 1; i < amostra.length; i++) {
 			valor *= amostra[i];
 		}
 		return valor;
@@ -327,13 +248,13 @@ public class main {
 
 	// Amplitude
 	private static int amplitude(int[] amostra) {
-		// Essa medida de dispersão é definida como a diferenca entre a maior e a menor
-		// observação de um conjunto de dados, isto é:
+		// Essa medida de dispers�o � definida como a diferenca entre a maior e a menor
+		// observa��o de um conjunto de dados, isto �:
 		int a = amostra[0] - amostra[amostra.length];
 		return a;
 	}
 
-	// Coeficiente de Variação
+	// Coeficiente de Varia��o
 	private static double coeficienteDeVariacao(int[] amostra) {
 		double cv = (desvioPadrao(amostra) * 100) / mediaAritmeticaSimples(amostra);
 		return cv;
@@ -341,16 +262,16 @@ public class main {
 
 	// Formula da Probabilidade
 	/*
-	 * Em um fenómeno aleatÃ³rio, as possibilidades de ocorrÃªncia de um evento sÃ£o
-	 * igualmente prováveis. p(A): probabilidade da ocorrÃªncia de um evento A n(A):
-	 * número de casos que nos interessam (evento A) n(Î©): número total de casos
-	 * possÃ­veis
+	 * Em um fen�meno aleatório, as possibilidades de ocorrência de um evento são
+	 * igualmente prov�veis. p(A): probabilidade da ocorrência de um evento A n(A):
+	 * n�mero de casos que nos interessam (evento A) n(Ω): n�mero total de casos
+	 * possíveis
 	 */
 	private static double probabilidade(int[] amostra, int possibilidade) {
 		// Sendo assim, podemos encontrar a probabilidade de ocorrer um determinado
-		// resultado através da divisÃ£o
-		// entre o número de eventos favoráveis e o número total de resultados
-		// possÃ­veis:
+		// resultado atrav�s da divisão
+		// entre o n�mero de eventos favor�veis e o n�mero total de resultados
+		// possíveis:
 		long numTotal = fatorial(amostra.length);
 		long pa = possibilidade / numTotal;
 		// converter para porcentagem aproximada
