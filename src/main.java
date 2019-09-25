@@ -296,8 +296,8 @@ public class main {
 	 * até a posiÃ§Ã£o n xi: valor na posiÃ§Ã£o i no conjunto de dados MA: média
 	 * aritmética dos dados n: quantidade de dados
 	 */
-	private static int variancia(int[] amostra) {
-		int ma = mediaAritmeticaSimples(amostra);
+	private static double variancia(int[] amostra) {
+		double ma = mediaAritmeticaSimples(amostra);
 		int somat = 0;
 		// prepara os valores
 		for (int i = 0; i < amostra.length; i++) {
@@ -310,7 +310,7 @@ public class main {
 
 	// Desvio PadrÃ£o
 	private static double desvioPadrao(int[] amostra) {
-		int variancia = variancia(amostra);
+		double variancia = variancia(amostra);
 		return Math.sqrt(variancia);
 	}
 
