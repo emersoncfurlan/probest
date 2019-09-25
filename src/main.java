@@ -116,9 +116,15 @@ public class main {
 	 * Ms: média aritmética simples x1, x2, x3,...,xn: valores dos dados n: numero
 	 * de dados
 	 */
-	private static int mediaAritmeticaSimples(int[] amostra) {
-		return somatorio(amostra) / amostra.length;
+	private static double mediaAritmeticaSimples(int[] amostra) {
+		double amostraAux= amostra.length;
+		int somatorioAux = 0;
+		for (int i = 0; i < amostra.length; i++) {
+			somatorioAux += amostra[i];
+		}
+		return somatorioAux/amostraAux;
 	}
+
 
 	/*
 	 * A média aritmética ponderada é calculada multiplicando cada valor do conjunto
