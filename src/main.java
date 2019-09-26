@@ -300,13 +300,11 @@ public class main {
 	 */
 	private static double variancia(int[] amostra) {
 		double ma = mediaAritmeticaSimples(amostra);
-		int somat = 0;
+		double somat = 0;
 		// prepara os valores
 		for (int i = 0; i < amostra.length; i++) {
-			amostra[i] -= ma;
-			amostra[i] = amostra[i] ^ 2;
+			somat += Math.pow((double) amostra[i] - ma, 2);
 		}
-		somat = somatorio(amostra);
 		return somat / amostra.length;
 	}
 
