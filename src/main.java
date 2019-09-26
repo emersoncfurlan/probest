@@ -18,7 +18,7 @@ public class main {
 	private static final int SAIR_DO_PROGRAMA = 13;
 
 	public static void main(String[] args) {
-		int[] amostra = { 1,1,2,2,3,3 };
+		int[] amostra = { 36, 35, 34, 38, 36, 38, 41 };
 		int[] pesos = { 0, 1, 2, 2, 1, 0, 3, 4 };
 		int possibilidade = 2;
 		Integer opcao = menu();
@@ -26,7 +26,7 @@ public class main {
 		while (opcao != SAIR_DO_PROGRAMA) {
 			switch (opcao) {
 			case SOMATORIO:
-				JOptionPane.showConfirmDialog(null, somatorio(pesos));
+				JOptionPane.showConfirmDialog(null, somatorio(amostra));
 				break;
 			case MEDIA_ARITMETICA_SIMPLES:
 				JOptionPane.showConfirmDialog(null, mediaAritmeticaSimples(amostra));
@@ -103,11 +103,11 @@ public class main {
 		return somatorio;
 	}
 
-	private static int mediaHarmonica(int[] amostra) {
+	private static double mediaHarmonica(int[] amostra) {
 		int mediaHarm = amostra.length;
-		int somat = 0;
+		double somat = 0;
 		for (int i = 1; i < amostra.length; i++) {
-			somat = 1 / amostra[i];
+			somat += Math.pow(amostra[i], -1);
 		}
 		return mediaHarm / somat;
 	}
@@ -117,14 +117,13 @@ public class main {
 	 * de dados
 	 */
 	private static double mediaAritmeticaSimples(int[] amostra) {
-		double amostraAux= amostra.length;
+		double amostraAux = amostra.length;
 		int somatorioAux = 0;
 		for (int i = 0; i < amostra.length; i++) {
 			somatorioAux += amostra[i];
 		}
-		return somatorioAux/amostraAux;
+		return somatorioAux / amostraAux;
 	}
-
 
 	/*
 	 * A média aritmética ponderada é calculada multiplicando cada valor do conjunto
@@ -244,7 +243,7 @@ public class main {
 		ArrayList<Integer> modasArList = new ArrayList<Integer>();
 
 		for (int i = 0; i < freq.length; i++) {
-			if (freq[i] == moda) { 
+			if (freq[i] == moda) {
 				// Adiciona os valores que tem a mesma frequência (a frequência modal)
 				modasArList.add(semRepetidos[i]);
 			}
@@ -261,7 +260,8 @@ public class main {
 		return modas;
 	}
 
-	// O método moda retorna um vetor, este método está sendo usado para transformar as modas em String
+	// O método moda retorna um vetor, este método está sendo usado para transformar
+	// as modas em String
 	private static String arrayToString(int[] vetor) {
 		if (vetor != null) {
 			String result = "";
@@ -281,11 +281,13 @@ public class main {
 	 * média dos dois valores centrais. Assim, esses valores sÃ£o somados e
 	 * divididos por dois.
 	 */
-	private static int mediana(int[] amostra) {
-	if (amostra.length % 2 == 0) { // par
-			return ((amostra[(amostra.length / 2)] + amostra[(amostra.length / 2) + 1]) / 2);
+	private static double mediana(int[] amostra) {
+		int amostraOrdenada[] = ordenarAmostra(amostra);
+		
+		if (amostra.length % 2 == 0) { // par
+			return (double)(amostraOrdenada[(amostra.length / 2)] + amostra[(amostra.length / 2) - 1]) / 2;
 		} else { // impar
-			return amostra[amostra.length / 2]; 
+			return amostraOrdenada[amostra.length / 2]; 
 		}
 	}
 
