@@ -319,13 +319,13 @@ public class main {
 		double mg = 0;
 		int produto = 0;
 		produto = produto(amostra);
-		mg = Math.sqrt(Math.pow(produto, amostra.length));
+		mg = Math.pow(produto, Math.pow(amostra.length, -1));
 		return mg;
 	}
 
 	private static int produto(int[] amostra) {
-		int valor = 0;
-		for (int i = 0; i < amostra.length; i++) {
+		int valor = amostra[0];
+		for (int i = 1; i < amostra.length; i++) {
 			valor *= amostra[i];
 		}
 		return valor;
