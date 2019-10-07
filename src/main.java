@@ -323,8 +323,8 @@ public class main {
 		return mg;
 	}
 
-	private static int produto(int[] amostra) {
-		int valor = amostra[0];
+	private static long produto(int[] amostra) {
+		long valor = amostra[0];
 		for (int i = 1; i < amostra.length; i++) {
 			valor *= amostra[i];
 		}
