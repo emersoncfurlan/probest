@@ -132,16 +132,18 @@ public class main {
 	 * pesos x1, x2,...,xn: valores dos dados
 	 */
 	private static int mediaAritmeticaPonderada(int[] amostra, int[] pesos) {
-		int somatorioAmostra = 0;
-		int somatorioPesos = 0;
+		int mAPonderada = 0;
+		int somaPesos = 0;
+
 		if (amostra.length == pesos.length) {
 			for (int i = 0; i < amostra.length; i++) {
-				somatorioAmostra += i;
+				mAPonderada += amostra[i] * pesos[i];
 			}
-			for (int i = 0; i < amostra.length; i++) {
-				somatorioPesos += i;
+			for (int i = 0; i < pesos.length; i++) {
+				somaPesos += pesos[i];
 			}
-			return somatorioAmostra / somatorioPesos;
+			mAPonderada = mAPonderada / somaPesos;
+			return  mAPonderada;
 		} else
 			return 0;
 	}
@@ -317,7 +319,7 @@ public class main {
 	// Media Geométrica
 	private static double mediaGeometrica(int[] amostra) {
 		double mg = 0;
-		int produto = 0;
+		double produto = 0;
 		produto = produto(amostra);
 		mg = Math.pow(produto, Math.pow(amostra.length, -1));
 		return mg;
