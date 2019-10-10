@@ -15,7 +15,8 @@ public class main {
 	private static final int PRODUTO = 10;
 	private static final int PROBABILIDADE = 11;
 	private static final int FATORIAL = 12;
-	private static final int SAIR_DO_PROGRAMA = 13;
+	private static final int MOSTRAR_AMOSTRA = 13;
+	private static final int SAIR_DO_PROGRAMA = 0;
 
 	public static void main(String[] args) {
 		int[] amostra = { 36, 35, 34, 38, 36, 38, 41 };
@@ -61,6 +62,9 @@ public class main {
 			case FATORIAL:
 				JOptionPane.showConfirmDialog(null, fatorial(possibilidade));
 				break;
+			case MOSTRAR_AMOSTRA:
+				JOptionPane.showConfirmDialog(null, vetorToString(amostra));
+				break;
 			case SAIR_DO_PROGRAMA:
 				JOptionPane.showMessageDialog(null, "[Programa será encerado!]");
 				break;
@@ -86,7 +90,8 @@ public class main {
 		menu += "\n[10] - Produto";
 		menu += "\n[11] - Probabilidade";
 		menu += "\n[12] - Fatorial";
-		menu += "\n[13] - Sair";
+		menu += "\n[13] - Mostrar Amostra";
+		menu += "\n[0] - Sair";
 		menu += "\n[ ------------------------- ]";
 		menu += "\nInforme sua opcao: ";
 
