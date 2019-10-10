@@ -131,9 +131,9 @@ public class main {
 	 * dividida pela soma dos pesos Mp: Média aritmética ponderada p1, p2,..., pn:
 	 * pesos x1, x2,...,xn: valores dos dados
 	 */
-	private static int mediaAritmeticaPonderada(int[] amostra, int[] pesos) {
-		int mAPonderada = 0;
-		int somaPesos = 0;
+	private static double mediaAritmeticaPonderada(int[] amostra, int[] pesos) {
+		double mAPonderada = 0;
+		double somaPesos = 0;
 
 		if (amostra.length == pesos.length) {
 			for (int i = 0; i < amostra.length; i++) {
