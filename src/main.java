@@ -35,7 +35,7 @@ public class main {
 				JOptionPane.showConfirmDialog(null, mediaAritmeticaPonderada(amostra, pesos));
 				break;
 			case MODA:
-				JOptionPane.showConfirmDialog(null, arrayToString(moda(amostra)));
+				JOptionPane.showConfirmDialog(null, vetorToString(moda(amostra)));
 				break;
 			case MEDIANA:
 				JOptionPane.showConfirmDialog(null, mediana(amostra));
@@ -264,7 +264,7 @@ public class main {
 
 	// O método moda retorna um vetor, este método está sendo usado para transformar
 	// as modas em String
-	private static String arrayToString(int[] vetor) {
+	private static String vetorToString(int[] vetor) {
 		if (vetor != null) {
 			String result = "";
 			for (int i = 0; i < vetor.length; i++) {
@@ -275,7 +275,7 @@ public class main {
 			}
 			return result;
 		}
-		return "";
+		return "N/A";
 	}
 
 	/*
