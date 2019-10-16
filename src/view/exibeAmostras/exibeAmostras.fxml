@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="768.0" prefWidth="1013.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+   <children>
+      <VBox layoutX="-6.0" prefHeight="768.0" prefWidth="1024.0">
+         <children>
+            <AnchorPane prefHeight="48.0" prefWidth="1002.0" style="-fx-background-color: #666666;">
+               <children>
+                  <Label layoutX="131.0" layoutY="14.0" text="Probest" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Circle fx:id="close" fill="#fa4771" layoutX="16.0" layoutY="24.0" onMouseClicked="#closeclick" radius="5.0" stroke="#fa4771" strokeType="INSIDE" />
+                  <Circle fx:id="min" fill="#ffc965" layoutX="30.0" layoutY="24.0" onMouseClicked="#minclick" radius="5.0" stroke="#ffc965" strokeType="INSIDE" />
+                  <Circle fill="#42cf9b" layoutX="45.0" layoutY="24.0" radius="5.0" stroke="#42cf9b" strokeType="INSIDE" />
+               </children>
+            </AnchorPane>
+            <AnchorPane onMouseClicked="#voltar" prefHeight="53.0" prefWidth="989.0" style="-fx-background-color: #7ed957;">
+               <children>
+                  <Label fx:id="tituloTela" layoutX="399.0" layoutY="12.0" prefHeight="30.0" prefWidth="226.0" text="Amostras Cadastradas" textFill="#fefefe">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox prefHeight="550.0" prefWidth="1024.0">
+               <children>
+                  <TableView fx:id="tableAmostras" prefHeight="554.0" prefWidth="1024.0">
+                    <columns>
+                      <TableColumn prefWidth="108.0" text="Nome" />
+                      <TableColumn minWidth="0.0" prefWidth="175.0" text="Descrição" />
+                        <TableColumn minWidth="0.0" prefWidth="722.0" text="Amostra" />
+                    </columns>
+                  </TableView>
+                  <ScrollBar fx:id="scrollVertical" orientation="VERTICAL" />
+               </children>
+            </HBox>
+            <ScrollBar fx:id="scrollHorizontal" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane onMouseClicked="#voltar" prefHeight="48.0" prefWidth="341.3" style="-fx-background-color: #7ed957;">
+                     <children>
+                        <Label fx:id="inserirAmostra" layoutX="72.0" layoutY="37.0" prefHeight="26.0" prefWidth="186.0" text="Inserir Nova Amostra" textFill="#fefefe">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane onMouseClicked="#voltar" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #7ed957;">
+                     <children>
+                        <Label fx:id="alterarAmostra" layoutX="46.0" layoutY="37.0" prefHeight="26.0" prefWidth="341.3" text="Alterar Amostra Selecionada" textFill="#fefefe">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane onMouseClicked="#voltar" prefHeight="48.0" prefWidth="341.3" style="-fx-background-color: #7ed957;">
+                     <children>
+                        <Label fx:id="excluirAmostra" layoutX="54.0" layoutY="37.0" prefHeight="30.0" prefWidth="226.0" text="Excluir Amostra Selecionada" textFill="#fefefe">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
