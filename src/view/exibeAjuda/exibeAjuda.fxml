@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #2c344b;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.login.Controller">
+   <children>
+      <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #2e354f;">
+         <children>
+            <Label layoutX="131.0" layoutY="14.0" text="Multibit" textFill="#8c90b3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Circle fill="#fa4771" layoutX="16.0" layoutY="24.0" radius="5.0" stroke="#fa4771" strokeType="INSIDE" />
+            <Circle fill="#ffc965" layoutX="30.0" layoutY="24.0" radius="5.0" stroke="#ffc965" strokeType="INSIDE" />
+            <Circle fill="#42cf9b" layoutX="45.0" layoutY="24.0" radius="5.0" stroke="#42cf9b" strokeType="INSIDE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <AnchorPane layoutY="419.0" onMouseClicked="#voltar" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #7ed957;">
+               <children>
+                  <Label fx:id="labelVoltar" layoutX="136.0" layoutY="14.0" text="Voltar" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #666666;">
+               <children>
+                  <Label layoutX="131.0" layoutY="14.0" text="Probest" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Circle fx:id="close" fill="#fa4771" layoutX="16.0" layoutY="24.0" onMouseClicked="#closeclick" radius="5.0" stroke="#fa4771" strokeType="INSIDE" />
+                  <Circle fx:id="min" fill="#ffc965" layoutX="30.0" layoutY="24.0" onMouseClicked="#minclick" radius="5.0" stroke="#ffc965" strokeType="INSIDE" />
+                  <Circle fill="#42cf9b" layoutX="45.0" layoutY="24.0" radius="5.0" stroke="#42cf9b" strokeType="INSIDE" />
+               </children>
+            </AnchorPane>
+            <Label fx:id="labelAjuda" layoutX="31.0" layoutY="63.0" text="Ajuda - Nome da Funcionalidade" textFill="#8c90b3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Text fx:id="txtDescricaoCurta" layoutX="26.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição Curta da Funcionalidade" wrappingWidth="258.6708984375" />
+            <TextArea fx:id="txtAreaConteudoAjuda" layoutX="16.0" layoutY="124.0" prefHeight="274.0" prefWidth="271.0" text="Aqui vai o conteúdo da ajuda e tal&#10;exemplo: &#10;Somatório ou somatória significa &#10;a soma de termos. &#10;Em matemática, um somatório é o&#10;operador matemático da soma de &#10;termos de uma sequência.&#10;&#10;Usualmente, um somatório é &#10;denotado pela letra grega sigma." />
+           
+      
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

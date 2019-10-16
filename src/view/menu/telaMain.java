@@ -1,4 +1,4 @@
-package UI;
+package view.menu;
 
 import java.awt.EventQueue;
 
@@ -13,6 +13,9 @@ import javax.swing.JMenuItem;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import view.cadastraAmostra.adicionarNum;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

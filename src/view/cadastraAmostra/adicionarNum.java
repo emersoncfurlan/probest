@@ -1,4 +1,4 @@
-package UI;
+package view.cadastraAmostra;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
