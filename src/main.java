@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.Scanner;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -17,20 +19,32 @@ public class main {
 	private static final int FATORIAL = 12;
 	private static final int MOSTRAR_AMOSTRA = 13;
 	private static final int SAIR_DO_PROGRAMA = 0;
-
+	private static Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
-		int[] amostra = { 36, 35, 34, 38, 36, 38, 41 };
+		
+		DecimalFormat df = new DecimalFormat("##,###.00");
+		df.format(1234.36); //Exibe apenas 2 números depois da vírgula
+		
+		int tmV = 0;
+		String tm = JOptionPane.showInputDialog(null, "Insira o tamanho da amostra");
+		tmV = Integer.parseInt(tm);
+		
+		int[] amostra = new int [tmV];
 		int[] pesos = { 0, 1, 2, 2, 1, 0, 3, 4 };
 		int possibilidade = 2;
+		
+		inserirNum(amostra, tmV);		
+		
 		Integer opcao = menu();
-
+		
 		while (opcao != SAIR_DO_PROGRAMA) {
 			switch (opcao) {
 			case SOMATORIO:
 				JOptionPane.showConfirmDialog(null, somatorio(amostra));
 				break;
 			case MEDIA_ARITMETICA_SIMPLES:
-				JOptionPane.showConfirmDialog(null, mediaAritmeticaSimples(amostra));
+				JOptionPane.showConfirmDialog(null, df.format(mediaAritmeticaSimples(amostra)));
 				break;
 			case MEDIA_ARITMETICA_PONDERADA:
 				JOptionPane.showConfirmDialog(null, mediaAritmeticaPonderada(amostra, pesos));
@@ -42,16 +56,16 @@ public class main {
 				JOptionPane.showConfirmDialog(null, mediana(amostra));
 				break;
 			case VARIANCIA:
-				JOptionPane.showConfirmDialog(null, variancia(amostra));
+				JOptionPane.showConfirmDialog(null, df.format(variancia(amostra)));
 				break;
 			case DESVIO_PADRAO:
-				JOptionPane.showConfirmDialog(null, desvioPadrao(amostra));
+				JOptionPane.showConfirmDialog(null, df.format(desvioPadrao(amostra)));
 				break;
 			case MEDIA_GEOMETRICA:
-				JOptionPane.showConfirmDialog(null, mediaGeometrica(amostra));
+				JOptionPane.showConfirmDialog(null, df.format(mediaGeometrica(amostra)));
 				break;
 			case MEDIA_HARMONICA:
-				JOptionPane.showConfirmDialog(null, mediaHarmonica(amostra));
+				JOptionPane.showConfirmDialog(null, df.format(mediaHarmonica(amostra)));
 				break;
 			case PRODUTO:
 				JOptionPane.showConfirmDialog(null, produto(amostra));
@@ -99,7 +113,16 @@ public class main {
 
 		return Integer.parseInt(strOpcao);
 	}
-
+	//Insere amostras
+	private static int[] inserirNum (int amostra[], int tmV) {
+		String num = "";
+		for (int i = 0; i < tmV; i++)  {
+			num = JOptionPane.showInputDialog(null, "Insira um número");
+			amostra[i] = Integer.parseInt(num);
+		}
+		
+		return amostra;
+	}
 	private static int somatorio(int[] amostra) {
 		int somatorio = 0;
 		for (int i = 0; i < amostra.length; i++) {
