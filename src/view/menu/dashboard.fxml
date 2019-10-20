@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+      <AnchorPane prefHeight="61.0" prefWidth="1280.0" style="-fx-background-color: #666666;">
+         <children>
+            <Label layoutX="131.0" layoutY="14.0" text="Probest" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Circle fx:id="close" fill="#fa4771" layoutX="16.0" layoutY="24.0" onMouseClicked="#closeclick" radius="5.0" stroke="#fa4771" strokeType="INSIDE" />
+            <Circle fx:id="min" fill="#ffc965" layoutX="30.0" layoutY="24.0" onMouseClicked="#minclick" radius="5.0" stroke="#ffc965" strokeType="INSIDE" />
+            <Circle fill="#42cf9b" layoutX="45.0" layoutY="24.0" radius="5.0" stroke="#42cf9b" strokeType="INSIDE" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </AnchorPane>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Arquivo">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Novo" />
+            <MenuItem mnemonicParsing="false" text="Abrir..." />
+            <Menu mnemonicParsing="false" text="Aberto recentemente..." />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Fechar" />
+            <MenuItem mnemonicParsing="false" text="Salvar" />
+            <MenuItem mnemonicParsing="false" text="Salvar como..." />
+            <MenuItem mnemonicParsing="false" text="Reverter" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferências…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Sair" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Editar">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Voltar" />
+            <MenuItem mnemonicParsing="false" text="Avançar" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cortar" />
+            <MenuItem mnemonicParsing="false" text="Copiar" />
+            <MenuItem mnemonicParsing="false" text="Colar" />
+            <MenuItem mnemonicParsing="false" text="Deletar" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Selecionar Tudo" />
+            <MenuItem mnemonicParsing="false" text="Desselecionar Tudo" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Ajuda">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Sobre Probest V.1" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <items>
+        <AnchorPane>
+               <children>
+                  <VBox layoutX="8.0" layoutY="13.0" prefHeight="723.0" prefWidth="300.0">
+                     <children>
+                        <HBox prefHeight="32.0" prefWidth="300.0">
+                           <children>
+                        <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Insira a Amostra" textAlignment="CENTER" wrapText="false">
+                          <font>
+                            <Font size="18.0" fx:id="x1" />
+                          </font>
+                          <textFill>
+                            <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
+                          </textFill>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                        </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="37.0" prefWidth="300.0">
+                           <children>
+                              <TextField fx:id="txtAmostra" prefHeight="31.0" prefWidth="270.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="37.0" prefWidth="300.0">
+                           <children>
+                              <Button fx:id="btnInserir" mnemonicParsing="false" prefHeight="31.0" prefWidth="116.0" text="INSERIR">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnCarregar" mnemonicParsing="false" prefHeight="31.0" prefWidth="134.0" text="CARREGAR">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="48.0" prefWidth="300.0">
+                           <children>
+                              <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Selecione" textAlignment="CENTER" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" fx:id="x11" />
+                                 </font>
+                                 <textFill>
+                                    <Color blue="0.624" green="0.624" red="0.624" fx:id="x21" />
+                                 </textFill>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Accordion>
+                          <panes>
+                            <TitledPane animated="false" prefHeight="468.0" prefWidth="300.0" text="Estatistica Descritiva">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ScrollPane prefHeight="528.0" prefWidth="300.0">
+                                             <content>
+                                                <VBox prefHeight="989.0" prefWidth="300.0">
+                                                   <children>
+                                                      <CheckBox fx:id="chkTudoDescritiva" mnemonicParsing="false" text="Tudo">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkMedia" mnemonicParsing="false" text="Media">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkMediaAritmetica" mnemonicParsing="false" text="Media Aritmética">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkMediaAritmeticaPonderada" mnemonicParsing="false" text="Media Aritmética Ponderada">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkMediaHarm" mnemonicParsing="false" text="Media Harmônica">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkMediaGeo" mnemonicParsing="false" text="Media Geométrica">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkSomat" mnemonicParsing="false" text="Somátorio">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkModa" mnemonicParsing="false" text="Moda">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkMediana" mnemonicParsing="false" text="Mediana">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkVariancia" mnemonicParsing="false" text="Variância">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkDesvioPadrao" mnemonicParsing="false" text="Desvio Padrão">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkProbabilidade" mnemonicParsing="false" text="Probabilidade">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chkFatorial" mnemonicParsing="false" text="Fatorial">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </TitledPane>
+                              <TitledPane animated="false" prefHeight="607.0" prefWidth="300.0" text="Estatistica Inferêncial">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ScrollPane prefHeight="528.0" prefWidth="300.0">
+                                             <content>
+                                                <VBox prefHeight="989.0" prefWidth="300.0">
+                                                   <children>
+                                                      <CheckBox mnemonicParsing="false" text="Tudo">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Media">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Media Aritmética">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Media Aritmética Ponderada">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Media Harmônica">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Media Geométrica">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Somátorio">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Moda">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Mediana">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Variância">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Desvio Padrão">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Probabilidade">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                      <CheckBox mnemonicParsing="false" text="Fatorial">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </CheckBox>
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                          </panes>
+                        </Accordion>
+                     </children>
+                  </VBox>
+               </children>
+        </AnchorPane>
+        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+          <content>
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="877.0" prefWidth="932.0">
+              <children>
+                        <Label alignment="CENTER" layoutX="370.0" layoutY="14.0" style="&#10;" text="Amostra" textAlignment="CENTER" wrapText="false">
+                           <textFill>
+                              <Color blue="0.624" green="0.624" red="0.624" fx:id="x222" />
+                           </textFill>
+                           <font>
+                              <Font size="18.0" fx:id="x232" />
+                           </font>
+                        </Label>
+                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Resultados" textAlignment="CENTER" wrapText="false">
+                           <textFill>
+                              <Color blue="0.624" green="0.624" red="0.624" fx:id="x22" />
+                           </textFill>
+                           <font>
+                              <Font size="18.0" fx:id="x23" />
+                           </font></Label>
+                        <VBox layoutX="8.0" layoutY="48.0" prefHeight="1208.0" prefWidth="925.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tableResultado" prefHeight="100.0" prefWidth="301.0">
+                                      <columns>
+                                        <TableColumn prefWidth="140.0" text="Funcionalidade" />
+                                        <TableColumn minWidth="4.0" prefWidth="159.0" text="Resultado" />
+                                      </columns>
+                                    </TableView>
+                                    <TableView prefHeight="100.0" prefWidth="573.0">
+                                       <columns>
+                                          <TableColumn fx:id="tableAmostra" prefWidth="572.0" text="Amostra" />
+                                       </columns>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </TableView>
+                                 </children>
+                              </HBox>
+                              <Label alignment="CENTER" style="&#10;" text="Tabela" textAlignment="CENTER" wrapText="false">
+                                 <textFill>
+                                    <Color blue="0.624" green="0.624" red="0.624" fx:id="x2212" />
+                                 </textFill>
+                                 <font>
+                                    <Font size="18.0" fx:id="x2312" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <TableView fx:id="tableClasses" prefHeight="100.0" prefWidth="624.0">
+                                 <columns>
+                                    <TableColumn prefWidth="171.0" text="Classes" />
+                                    <TableColumn minWidth="4.0" prefWidth="182.0" text="Frequência Absoluta" />
+                                    <TableColumn minWidth="4.0" prefWidth="165.0" text="Frequência Relativa" />
+                                    <TableColumn minWidth="4.0" prefWidth="199.0" text="Frequência Acumulada" />
+                                    <TableColumn minWidth="4.0" prefWidth="206.0" text="Frequência Acumulada" />
+                                 </columns>
+                              </TableView>
+                              <Label alignment="CENTER" style="&#10;" text="Grafico de Barras" textAlignment="CENTER" wrapText="false">
+                                 <textFill>
+                                    <Color blue="0.624" green="0.624" red="0.624" fx:id="x221" />
+                                 </textFill>
+                                 <font>
+                                    <Font size="18.0" fx:id="x231" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <BarChart fx:id="graficoDeBarras">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </BarChart>
+                              <Label alignment="CENTER" style="&#10;" text="Grafico de Linhas" textAlignment="CENTER" wrapText="false">
+                                 <textFill>
+                                    <Color blue="0.624" green="0.624" red="0.624" fx:id="x2211" />
+                                 </textFill>
+                                 <font>
+                                    <Font size="18.0" fx:id="x2311" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <LineChart fx:id="graficoDeLinhas">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </LineChart>
+                           </children>
+                        </VBox>
+              </children>
+            </AnchorPane>
+          </content>
+        </ScrollPane>
+      </items>
+    </SplitPane>
+  </children>
+</VBox>

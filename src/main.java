@@ -24,17 +24,29 @@ public class main {
 	public static void main(String[] args) {
 		
 		DecimalFormat df = new DecimalFormat("##,###.00");
-		df.format(1234.36); //Exibe apenas 2 números depois da vírgula
+		df.format(1234.36); //Exibe apenas 2 numeros depois da virgula
 		
 		int tmV = 0;
 		String tm = JOptionPane.showInputDialog(null, "Insira o tamanho da amostra");
 		tmV = Integer.parseInt(tm);
 		
 		int[] amostra = new int [tmV];
-		int[] pesos = { 0, 1, 2, 2, 1, 0, 3, 4 };
+		int[] pesos = new int [tmV];
+		System.out.println(tmV);
 		int possibilidade = 2;
+		String conteudoAmostra;
+		inserirVetor(amostra, tmV);
+		for (int i = 0; i < amostra.length; i++) {
+			conteudoAmostra = " | "+amostra[i];
+			System.out.println("amostra: "+conteudoAmostra);
+		}
 		
-		inserirNum(amostra, tmV);		
+		inserirVetor(pesos, tmV);		
+		String conteudoPesos;
+		for (int i = 0; i < pesos.length; i++) {
+			conteudoPesos = " | "+pesos[i];
+			System.out.println("pesos: "+conteudoPesos);
+		}
 		
 		Integer opcao = menu();
 		
@@ -80,7 +92,7 @@ public class main {
 				JOptionPane.showConfirmDialog(null, vetorToString(amostra));
 				break;
 			case SAIR_DO_PROGRAMA:
-				JOptionPane.showMessageDialog(null, "[Programa será encerado!]");
+				JOptionPane.showMessageDialog(null, "[Programa sera encerado!]");
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Opcao Invalida!");
@@ -113,15 +125,15 @@ public class main {
 
 		return Integer.parseInt(strOpcao);
 	}
-	//Insere amostras
-	private static int[] inserirNum (int amostra[], int tmV) {
+	//Insere amostras e Pesos
+	private static int[] inserirVetor (int vetor[], int tmV) {
 		String num = "";
 		for (int i = 0; i < tmV; i++)  {
 			num = JOptionPane.showInputDialog(null, "Insira um número");
-			amostra[i] = Integer.parseInt(num);
+			vetor[i] = Integer.parseInt(num);
 		}
 		
-		return amostra;
+		return vetor;
 	}
 	private static int somatorio(int[] amostra) {
 		int somatorio = 0;
@@ -394,7 +406,6 @@ public class main {
 		JOptionPane.showConfirmDialog(null, porcent + "%");
 		return porcent;
 	}
-
 	// Fatorial recursivo
 	private static long fatorial(int num) {
 		int anterior = num - 1;
