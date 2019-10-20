@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #2c344b;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.login.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #2c344b;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.exibeAjuda.Controller">
    <children>
       <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #2e354f;">
          <children>
@@ -21,9 +25,9 @@
             <Circle fill="#42cf9b" layoutX="45.0" layoutY="24.0" radius="5.0" stroke="#42cf9b" strokeType="INSIDE" />
          </children>
       </AnchorPane>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #ffffff;">
          <children>
-            <AnchorPane layoutY="419.0" onMouseClicked="#voltar" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #7ed957;">
+            <AnchorPane fx:id="btnVoltar" layoutX="956.0" layoutY="738.0" onMouseClicked="#voltar" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #7ed957;">
                <children>
                   <Label fx:id="labelVoltar" layoutX="136.0" layoutY="14.0" text="Voltar" textFill="WHITE">
                      <font>
@@ -32,7 +36,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #666666;">
+            <AnchorPane prefHeight="48.0" prefWidth="1280.0" style="-fx-background-color: #666666;">
                <children>
                   <Label layoutX="131.0" layoutY="14.0" text="Probest" textFill="WHITE">
                      <font>
@@ -44,13 +48,65 @@
                   <Circle fill="#42cf9b" layoutX="45.0" layoutY="24.0" radius="5.0" stroke="#42cf9b" strokeType="INSIDE" />
                </children>
             </AnchorPane>
-            <Label fx:id="labelAjuda" layoutX="31.0" layoutY="63.0" text="Ajuda - Nome da Funcionalidade" textFill="#8c90b3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Text fx:id="txtDescricaoCurta" layoutX="26.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição Curta da Funcionalidade" wrappingWidth="258.6708984375" />
-            <TextArea fx:id="txtAreaConteudoAjuda" layoutX="16.0" layoutY="124.0" prefHeight="274.0" prefWidth="271.0" text="Aqui vai o conteúdo da ajuda e tal&#10;exemplo: &#10;Somatório ou somatória significa &#10;a soma de termos. &#10;Em matemática, um somatório é o&#10;operador matemático da soma de &#10;termos de uma sequência.&#10;&#10;Usualmente, um somatório é &#10;denotado pela letra grega sigma." />
+            <VBox layoutX="-3.0" layoutY="48.0" prefHeight="683.0" prefWidth="1281.0">
+               <children>
+                  <Canvas height="53.0" width="1281.0" />
+                  <HBox prefHeight="42.0" prefWidth="1281.0">
+                     <children>
+                        <Canvas height="52.0" width="442.0" />
+                        <Label fx:id="labelAjuda" text="Ajuda - Nome da Funcionalidade" textFill="#8c90b3">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Label>
+                        <Canvas height="40.0" width="200.0">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Canvas>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="44.0" prefWidth="1281.0">
+                     <children>
+                        <Canvas height="40.0" width="496.0" />
+                        <Text fx:id="txtDescricaoCurta" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição Curta da Funcionalidade" wrappingWidth="230.6708984375">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <Canvas height="40.0" width="548.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="160.0" prefWidth="1220.0">
+                     <children>
+                        <Canvas height="40.0" width="224.0" />
+                        <Text fx:id="txtDescricaoAjuda" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição Longa da Funcionalidade&quot;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?&quot;" wrappingWidth="852.6708984375" />
+                     </children>
+                  </HBox>
+                  <Canvas height="40.0" width="224.0" />
+                  <HBox prefHeight="44.0" prefWidth="1281.0">
+                     <children>
+                        <Canvas height="40.0" width="540.0" />
+                        <Text fx:id="txtVideo" strokeType="OUTSIDE" strokeWidth="0.0" text="Vídeo Sobre o Contéudo" wrappingWidth="178.6708984375">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <Canvas height="40.0" width="548.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="272.0" prefWidth="1281.0">
+                     <children>
+                        <Canvas height="40.0" width="222.0" />
+                        <WebView fx:id="WebViewVideo" prefHeight="272.0" prefWidth="836.0" />
+                        <Canvas height="40.0" width="224.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
            
       
          </children>
