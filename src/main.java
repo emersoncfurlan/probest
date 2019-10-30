@@ -417,5 +417,9 @@ public class main {
 			return fatorial;
 		}
 	}
+	
+	public static long quadradoDaSoma(int[] amostra) {
+		return (long) Math.pow(somatorio(amostra), 2);
+	}
 
 }
