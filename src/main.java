@@ -6,54 +6,68 @@ import javax.swing.JOptionPane;
 
 public class main {
 	private static final int SOMATORIO = 1;
-	private static final int MEDIA_ARITMETICA_SIMPLES = 2;
-	private static final int MEDIA_ARITMETICA_PONDERADA = 3;
-	private static final int MODA = 4;
-	private static final int MEDIANA = 5;
-	private static final int VARIANCIA = 6;
-	private static final int DESVIO_PADRAO = 7;
-	private static final int MEDIA_GEOMETRICA = 8;
-	private static final int MEDIA_HARMONICA = 9;
-	private static final int PRODUTO = 10;
-	private static final int PROBABILIDADE = 11;
-	private static final int FATORIAL = 12;
-	private static final int MOSTRAR_AMOSTRA = 13;
+	private static final int QUADRADO_DA_SOMA = 2;
+	private static final int SOMA_DE_PRODUTOS = 3;
+	private static final int MEDIA_ARITMETICA_SIMPLES = 4;
+	private static final int MEDIA_ARITMETICA_PONDERADA = 5;
+	private static final int MODA = 6;
+	private static final int MEDIANA = 7;
+	private static final int VARIANCIA = 8;
+	private static final int DESVIO_PADRAO = 9;
+	private static final int MEDIA_GEOMETRICA = 10;
+	private static final int MEDIA_HARMONICA = 11;
+	private static final int PRODUTO = 12;
+	private static final int PROBABILIDADE = 13;
+	private static final int FATORIAL = 14;
+	private static final int MOSTRAR_AMOSTRA = 15;
 	private static final int SAIR_DO_PROGRAMA = 0;
 	private static Scanner sc = new Scanner(System.in);
-	
+
 	public static void main(String[] args) {
-		
+		int[] otaamostra = {1,2,3};
+
 		DecimalFormat df = new DecimalFormat("##,###.00");
 		df.format(1234.36); //Exibe apenas 2 numeros depois da virgula
-		
+
 		int tmV = 0;
 		String tm = JOptionPane.showInputDialog(null, "Insira o tamanho da amostra");
 		tmV = Integer.parseInt(tm);
-		
+
 		int[] amostra = new int [tmV];
 		int[] pesos = new int [tmV];
 		System.out.println(tmV);
 		int possibilidade = 2;
 		String conteudoAmostra;
-		inserirVetor(amostra, tmV);
+		inserirVetor(amostra, "Insira um número:");
 		for (int i = 0; i < amostra.length; i++) {
 			conteudoAmostra = " | "+amostra[i];
 			System.out.println("amostra: "+conteudoAmostra);
 		}
-		
-		inserirVetor(pesos, tmV);		
+
+		inserirVetor(pesos, "Insira o peso:");
 		String conteudoPesos;
 		for (int i = 0; i < pesos.length; i++) {
 			conteudoPesos = " | "+pesos[i];
 			System.out.println("pesos: "+conteudoPesos);
 		}
-		
+
 		Integer opcao = menu();
-		
+
 		while (opcao != SAIR_DO_PROGRAMA) {
 			switch (opcao) {
 			case SOMATORIO:
 				JOptionPane.showConfirmDialog(null, somatorio(amostra));
+				break;
+			case QUADRADO_DA_SOMA: 
+				JOptionPane.showConfirmDialog(null, quadradoDaSoma(amostra));
+				break;
+			case SOMA_DE_PRODUTOS :
+				try {
+					int aux = somadeprodutos(amostra, otaamostra);
+					JOptionPane.showConfirmDialog(null, aux);
+				}catch(ArrayIndexOutOfBoundsException e) {
+					JOptionPane.showConfirmDialog(null, "As amostras tem tamanhos diferentes");
+				}
 				break;
 			case MEDIA_ARITMETICA_SIMPLES:
 				JOptionPane.showConfirmDialog(null, df.format(mediaAritmeticaSimples(amostra)));
@@ -105,18 +119,20 @@ public class main {
 	private static Integer menu() {
 		String menu = "[-------- Menu ---------]";
 		menu += "\n[1]  - Somatorio";
-		menu += "\n[2]  - Media Aritmetica Simples";
-		menu += "\n[3]  - Media Aritmetica Ponderada";
-		menu += "\n[4]  - Moda";
-		menu += "\n[5]  - Mediana";
-		menu += "\n[6]  - Variancia";
-		menu += "\n[7]  - Desvio Padrao";
-		menu += "\n[8]  - Media Geometrica";
-		menu += "\n[9]  - Media Harmonica";
-		menu += "\n[10] - Produto";
-		menu += "\n[11] - Probabilidade";
-		menu += "\n[12] - Fatorial";
-		menu += "\n[13] - Mostrar Amostra";
+		menu += "\n[2]  - Quadrado da Soma";
+		menu += "\n[3]  - Soma De Produtos";
+		menu += "\n[4]  - Media Aritmetica Simples";
+		menu += "\n[5]  - Media Aritmetica Ponderada";
+		menu += "\n[6]  - Moda";
+		menu += "\n[7]  - Mediana";
+		menu += "\n[8]  - Variancia";
+		menu += "\n[9]  - Desvio Padrao";
+		menu += "\n[10]  - Media Geometrica";
+		menu += "\n[11]  - Media Harmonica";
+		menu += "\n[12] - Produto";
+		menu += "\n[13] - Probabilidade";
+		menu += "\n[14] - Fatorial";
+		menu += "\n[15] - Mostrar Amostra";
 		menu += "\n[0] - Sair";
 		menu += "\n[ ------------------------- ]";
 		menu += "\nInforme sua opcao: ";
@@ -126,13 +142,13 @@ public class main {
 		return Integer.parseInt(strOpcao);
 	}
 	//Insere amostras e Pesos
-	private static int[] inserirVetor (int vetor[], int tmV) {
+	private static int[] inserirVetor (int vetor[], String mensagem) {
 		String num = "";
-		for (int i = 0; i < tmV; i++)  {
-			num = JOptionPane.showInputDialog(null, "Insira um número");
+		for (int i = 0; i < vetor.length; i++)  {
+			num = JOptionPane.showInputDialog(null, mensagem);
 			vetor[i] = Integer.parseInt(num);
 		}
-		
+
 		return vetor;
 	}
 	private static int somatorio(int[] amostra) {
@@ -141,6 +157,14 @@ public class main {
 			somatorio += amostra[i];
 		}
 		return somatorio;
+	}
+
+	private static int somadeprodutos(int[] amostra, int [] amostra2) {
+		int somadeprodutos = 0;
+		for (int i = 0; i < amostra.length ; i++) {
+			somadeprodutos += amostra[i] * amostra2[i];
+		}
+		return somadeprodutos;
 	}
 
 	private static double mediaHarmonica(int[] amostra) {
@@ -325,7 +349,7 @@ public class main {
 	 */
 	private static double mediana(int[] amostra) {
 		int amostraOrdenada[] = ordenarAmostra(amostra);
-		
+
 		if (amostra.length % 2 == 0) { // par
 			return (double)(amostraOrdenada[(amostra.length / 2)] + amostra[(amostra.length / 2) - 1]) / 2;
 		} else { // impar
@@ -417,7 +441,7 @@ public class main {
 			return fatorial;
 		}
 	}
-	
+
 	public static long quadradoDaSoma(int[] amostra) {
 		return (long) Math.pow(somatorio(amostra), 2);
 	}
