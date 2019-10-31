@@ -5,4 +5,6 @@ Este tem como intuito ser um software para gerar e solucionar equações, resolv
 
 Interface utilizada desenvolvida com a inicalmente com a biblioteca JOptionPane, porém estamos atualizando o projeto e criando telas utilizando JavaFX 2. 
 
-É importante ressaltar que grande parte dos alunos que estão contribuindo para com o projeto estão cursando o segundo período do curso, portanto estão adquirindo o conhecimento da linguagem bem como de novos frameworks com o projeto, caso desejar contribuir para com o projeto entre em contato conosco.
+É importante ressaltar que grande parte dos alunos que estão contribuindo para com o projeto estão cursando o segundo período do curso, portanto estão adquirindo o conhecimento da linguagem, bem como de novos frameworks com o projeto.
+
+Caso deseje contribuir para com o projeto entre em contato conosco.
