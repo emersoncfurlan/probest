@@ -8,7 +8,7 @@ public class main {
 	private static final int SOMATORIO = 1;
 	private static final int QUADRADO_DA_SOMA = 2;
 	private static final int SOMA_DE_PRODUTOS = 3;
-	private static final int PRODUTO_DAS_SOMAS=4;
+	private static final int PRODUTO_DAS_SOMAS = 4;
 	private static final int MEDIA_ARITMETICA_SIMPLES = 5;
 	private static final int MEDIA_ARITMETICA_PONDERADA = 6;
 	private static final int MODA = 7;
@@ -21,35 +21,36 @@ public class main {
 	private static final int PROBABILIDADE = 14;
 	private static final int FATORIAL = 15;
 	private static final int MOSTRAR_AMOSTRA = 16;
+	private static final int SOMA_DOS_QUADRADOS = 17;
 	private static final int SAIR_DO_PROGRAMA = 0;
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		int[] otaamostra = {1,2,3};
+		int[] otaamostra = { 1, 2, 3 };
 
 		DecimalFormat df = new DecimalFormat("##,###.00");
-		df.format(1234.36); //Exibe apenas 2 numeros depois da virgula
+		df.format(1234.36); // Exibe apenas 2 numeros depois da virgula
 
 		int tmV = 0;
 		String tm = JOptionPane.showInputDialog(null, "Insira o tamanho da amostra");
 		tmV = Integer.parseInt(tm);
 
-		int[] amostra = new int [tmV];
-		int[] pesos = new int [tmV];
+		int[] amostra = new int[tmV];
+		int[] pesos = new int[tmV];
 		System.out.println(tmV);
 		int possibilidade = 2;
 		String conteudoAmostra;
 		inserirVetor(amostra, "Insira um número:");
 		for (int i = 0; i < amostra.length; i++) {
-			conteudoAmostra = " | "+amostra[i];
-			System.out.println("amostra: "+conteudoAmostra);
+			conteudoAmostra = " | " + amostra[i];
+			System.out.println("amostra: " + conteudoAmostra);
 		}
 
 		inserirVetor(pesos, "Insira o peso:");
 		String conteudoPesos;
 		for (int i = 0; i < pesos.length; i++) {
-			conteudoPesos = " | "+pesos[i];
-			System.out.println("pesos: "+conteudoPesos);
+			conteudoPesos = " | " + pesos[i];
+			System.out.println("pesos: " + conteudoPesos);
 		}
 
 		Integer opcao = menu();
@@ -59,19 +60,19 @@ public class main {
 			case SOMATORIO:
 				JOptionPane.showConfirmDialog(null, somatorio(amostra));
 				break;
-			case QUADRADO_DA_SOMA: 
+			case QUADRADO_DA_SOMA:
 				JOptionPane.showConfirmDialog(null, quadradoDaSoma(amostra));
 				break;
-			case SOMA_DE_PRODUTOS :
+			case SOMA_DE_PRODUTOS:
 				try {
 					int aux = somadeprodutos(amostra, otaamostra);
 					JOptionPane.showConfirmDialog(null, aux);
-				}catch(ArrayIndexOutOfBoundsException e) {
+				} catch (ArrayIndexOutOfBoundsException e) {
 					JOptionPane.showConfirmDialog(null, "As amostras tem tamanhos diferentes");
 				}
 				break;
 			case PRODUTO_DAS_SOMAS:
-				JOptionPane.showMessageDialog(null,produtoDasSomas(amostra,otaamostra));
+				JOptionPane.showMessageDialog(null, produtoDasSomas(amostra, otaamostra));
 				break;
 			case MEDIA_ARITMETICA_SIMPLES:
 				JOptionPane.showConfirmDialog(null, df.format(mediaAritmeticaSimples(amostra)));
@@ -109,6 +110,9 @@ public class main {
 			case MOSTRAR_AMOSTRA:
 				JOptionPane.showConfirmDialog(null, vetorToString(amostra));
 				break;
+			case SOMA_DOS_QUADRADOS:
+				JOptionPane.showConfirmDialog(null, calcularSomaQuadrados(amostra));
+				break;
 			case SAIR_DO_PROGRAMA:
 				JOptionPane.showMessageDialog(null, "[Programa sera encerado!]");
 				break;
@@ -138,6 +142,7 @@ public class main {
 		menu += "\n[14] - Probabilidade";
 		menu += "\n[15] - Fatorial";
 		menu += "\n[16] - Mostrar Amostra";
+		menu += "\n[17] - Soma Dos Quadrados";
 		menu += "\n[0] - Sair";
 		menu += "\n[ ------------------------- ]";
 		menu += "\nInforme sua opcao: ";
@@ -146,16 +151,18 @@ public class main {
 
 		return Integer.parseInt(strOpcao);
 	}
-	//Insere amostras e Pesos
-	private static int[] inserirVetor (int vetor[], String mensagem) {
+
+	// Insere amostras e Pesos
+	private static int[] inserirVetor(int vetor[], String mensagem) {
 		String num = "";
-		for (int i = 0; i < vetor.length; i++)  {
+		for (int i = 0; i < vetor.length; i++) {
 			num = JOptionPane.showInputDialog(null, mensagem);
 			vetor[i] = Integer.parseInt(num);
 		}
 
 		return vetor;
 	}
+
 	private static int somatorio(int[] amostra) {
 		int somatorio = 0;
 		for (int i = 0; i < amostra.length; i++) {
@@ -164,16 +171,17 @@ public class main {
 		return somatorio;
 	}
 
-	private static int somadeprodutos(int[] amostra, int [] amostra2) {
+	private static int somadeprodutos(int[] amostra, int[] amostra2) {
 		int somadeprodutos = 0;
-		for (int i = 0; i < amostra.length ; i++) {
+		for (int i = 0; i < amostra.length; i++) {
 			somadeprodutos += amostra[i] * amostra2[i];
 		}
 		return somadeprodutos;
 	}
-	private static int  produtoDasSomas(int []amostra,int [] amostra2) {
-		int produtoDasSomas=somatorio(amostra)*somatorio(amostra2);
-	return produtoDasSomas;
+
+	private static int produtoDasSomas(int[] amostra, int[] amostra2) {
+		int produtoDasSomas = somatorio(amostra) * somatorio(amostra2);
+		return produtoDasSomas;
 	}
 
 	private static double mediaHarmonica(int[] amostra) {
@@ -216,7 +224,7 @@ public class main {
 				somaPesos += pesos[i];
 			}
 			mAPonderada = mAPonderada / somaPesos;
-			return  mAPonderada;
+			return mAPonderada;
 		} else
 			return 0;
 	}
@@ -360,9 +368,9 @@ public class main {
 		int amostraOrdenada[] = ordenarAmostra(amostra);
 
 		if (amostra.length % 2 == 0) { // par
-			return (double)(amostraOrdenada[(amostra.length / 2)] + amostra[(amostra.length / 2) - 1]) / 2;
+			return (double) (amostraOrdenada[(amostra.length / 2)] + amostra[(amostra.length / 2) - 1]) / 2;
 		} else { // impar
-			return amostraOrdenada[amostra.length / 2]; 
+			return amostraOrdenada[amostra.length / 2];
 		}
 	}
 
@@ -439,6 +447,7 @@ public class main {
 		JOptionPane.showConfirmDialog(null, porcent + "%");
 		return porcent;
 	}
+
 	// Fatorial recursivo
 	private static long fatorial(int num) {
 		int anterior = num - 1;
@@ -455,4 +464,15 @@ public class main {
 		return (long) Math.pow(somatorio(amostra), 2);
 	}
 
+	public static double calcularSomaQuadrados(int[] vetor) {
+		double somaTotal;
+		somaTotal = 0;
+
+		for (int i = 0; i < vetor.length; i++) {
+
+			somaTotal += Math.pow(vetor[i], 2);
+		}
+
+		return somaTotal;
+	}
 }
