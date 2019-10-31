@@ -8,18 +8,19 @@ public class main {
 	private static final int SOMATORIO = 1;
 	private static final int QUADRADO_DA_SOMA = 2;
 	private static final int SOMA_DE_PRODUTOS = 3;
-	private static final int MEDIA_ARITMETICA_SIMPLES = 4;
-	private static final int MEDIA_ARITMETICA_PONDERADA = 5;
-	private static final int MODA = 6;
-	private static final int MEDIANA = 7;
-	private static final int VARIANCIA = 8;
-	private static final int DESVIO_PADRAO = 9;
-	private static final int MEDIA_GEOMETRICA = 10;
-	private static final int MEDIA_HARMONICA = 11;
-	private static final int PRODUTO = 12;
-	private static final int PROBABILIDADE = 13;
-	private static final int FATORIAL = 14;
-	private static final int MOSTRAR_AMOSTRA = 15;
+	private static final int PRODUTO_DAS_SOMAS=4;
+	private static final int MEDIA_ARITMETICA_SIMPLES = 5;
+	private static final int MEDIA_ARITMETICA_PONDERADA = 6;
+	private static final int MODA = 7;
+	private static final int MEDIANA = 8;
+	private static final int VARIANCIA = 9;
+	private static final int DESVIO_PADRAO = 10;
+	private static final int MEDIA_GEOMETRICA = 11;
+	private static final int MEDIA_HARMONICA = 12;
+	private static final int PRODUTO = 13;
+	private static final int PROBABILIDADE = 14;
+	private static final int FATORIAL = 15;
+	private static final int MOSTRAR_AMOSTRA = 16;
 	private static final int SAIR_DO_PROGRAMA = 0;
 	private static Scanner sc = new Scanner(System.in);
 
@@ -68,6 +69,9 @@ public class main {
 				}catch(ArrayIndexOutOfBoundsException e) {
 					JOptionPane.showConfirmDialog(null, "As amostras tem tamanhos diferentes");
 				}
+				break;
+			case PRODUTO_DAS_SOMAS:
+				JOptionPane.showMessageDialog(null,produtoDasSomas(amostra,otaamostra));
 				break;
 			case MEDIA_ARITMETICA_SIMPLES:
 				JOptionPane.showConfirmDialog(null, df.format(mediaAritmeticaSimples(amostra)));
@@ -121,18 +125,19 @@ public class main {
 		menu += "\n[1]  - Somatorio";
 		menu += "\n[2]  - Quadrado da Soma";
 		menu += "\n[3]  - Soma De Produtos";
-		menu += "\n[4]  - Media Aritmetica Simples";
-		menu += "\n[5]  - Media Aritmetica Ponderada";
-		menu += "\n[6]  - Moda";
-		menu += "\n[7]  - Mediana";
-		menu += "\n[8]  - Variancia";
-		menu += "\n[9]  - Desvio Padrao";
-		menu += "\n[10]  - Media Geometrica";
-		menu += "\n[11]  - Media Harmonica";
-		menu += "\n[12] - Produto";
-		menu += "\n[13] - Probabilidade";
-		menu += "\n[14] - Fatorial";
-		menu += "\n[15] - Mostrar Amostra";
+		menu += "\n[4]  - Produto da Soma";
+		menu += "\n[5]  - Media Aritmetica Simples";
+		menu += "\n[6]  - Media Aritmetica Ponderada";
+		menu += "\n[7]  - Moda";
+		menu += "\n[8]  - Mediana";
+		menu += "\n[9]  - Variancia";
+		menu += "\n[10]  - Desvio Padrao";
+		menu += "\n[11]  - Media Geometrica";
+		menu += "\n[12]  - Media Harmonica";
+		menu += "\n[13] - Produto";
+		menu += "\n[14] - Probabilidade";
+		menu += "\n[15] - Fatorial";
+		menu += "\n[16] - Mostrar Amostra";
 		menu += "\n[0] - Sair";
 		menu += "\n[ ------------------------- ]";
 		menu += "\nInforme sua opcao: ";
@@ -165,6 +170,10 @@ public class main {
 			somadeprodutos += amostra[i] * amostra2[i];
 		}
 		return somadeprodutos;
+	}
+	private static int  produtoDasSomas(int []amostra,int [] amostra2) {
+		int produtoDasSomas=somatorio(amostra)*somatorio(amostra2);
+	return produtoDasSomas;
 	}
 
 	private static double mediaHarmonica(int[] amostra) {
