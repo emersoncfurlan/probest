@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class main {
+public class mainOld {
 	private static final int SOMATORIO = 1;
 	private static final int QUADRADO_DA_SOMA = 2;
 	private static final int SOMA_DE_PRODUTOS = 3;
@@ -26,7 +26,7 @@ public class main {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		int[] otaamostra = { 1, 2, 3 };
+		int[] otaamostra = { 2, 4, 6, 8, 10 };
 
 		DecimalFormat df = new DecimalFormat("##,###.00");
 		df.format(1234.36); // Exibe apenas 2 numeros depois da virgula

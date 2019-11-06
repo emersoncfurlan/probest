@@ -41,7 +41,7 @@ public class Controller implements Initializable {
 	private double yOffset = 0;
 
 	private void btnLogin(ActionEvent event) {
-		// Quando o botão for clicado...
+		// Quando o botao for clicado...
 		System.out.println("Login Efetuado!");
 	}
 

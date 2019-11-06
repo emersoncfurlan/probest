@@ -1,4 +1,4 @@
-package view.menu;
+package view.menu.old;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;

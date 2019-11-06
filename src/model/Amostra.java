@@ -7,9 +7,9 @@ public class Amostra {
 	private String nome;
 	private ArrayList<Double> dados = new ArrayList<Double>();
 
-	public Amostra(int codAmostra, String nome, ArrayList<Double> dados) {
+	public Amostra(String nome, ArrayList<Double> dados) {
 		super();
-		this.codAmostra = codAmostra;
+		this.codAmostra = codAmostra+1;
 		this.nome = nome;
 		this.dados = dados;
 	}
