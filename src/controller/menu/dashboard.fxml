@@ -13,10 +13,12 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -105,11 +107,34 @@
                         </HBox>
                         <HBox prefHeight="37.0" prefWidth="300.0">
                            <children>
-                              <TextField fx:id="txtAmostra" prefHeight="31.0" prefWidth="270.0" />
+                              <TextField fx:id="txtAmostra" onAction="#txtAreaAmostra" prefHeight="31.0" prefWidth="270.0" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
+                        </HBox>
+                        <HBox prefHeight="32.0" prefWidth="300.0">
+                           <children>
+                              <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Insira o Peso" textAlignment="CENTER" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" fx:id="x12" />
+                                 </font>
+                                 <textFill>
+                                    <Color blue="0.624" green="0.624" red="0.624" fx:id="x24" />
+                                 </textFill>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="37.0" prefWidth="300.0">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <TextField fx:id="txtPeso" onAction="#txtAreaAmostra" prefHeight="31.0" prefWidth="270.0" />
+                           </children>
                         </HBox>
                         <HBox prefHeight="57.0" prefWidth="300.0">
                            <children>
@@ -229,87 +254,6 @@
                                     </AnchorPane>
                               </content>
                             </TitledPane>
-                              <TitledPane animated="false" prefHeight="607.0" prefWidth="300.0" text="Estatistica Inferêncial">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <ScrollPane prefHeight="528.0" prefWidth="300.0">
-                                             <content>
-                                                <VBox prefHeight="989.0" prefWidth="300.0">
-                                                   <children>
-                                                      <CheckBox mnemonicParsing="false" text="Tudo">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Media">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Media Aritmética">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Media Aritmética Ponderada">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Media Harmônica">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Media Geométrica">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Somátorio">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Moda">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Mediana">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Variância">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Desvio Padrão">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Probabilidade">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" text="Fatorial">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </padding>
-                                                      </CheckBox>
-                                                   </children>
-                                                </VBox>
-                                             </content>
-                                          </ScrollPane>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
                           </panes>
                         </Accordion>
                      </children>
@@ -320,7 +264,7 @@
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="877.0" prefWidth="932.0">
               <children>
-                        <Label alignment="CENTER" layoutX="370.0" layoutY="14.0" style="&#10;" text="Amostra" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="lblAmostra" alignment="CENTER" layoutX="370.0" layoutY="14.0" style="&#10;" text="Amostra" textAlignment="CENTER" wrapText="false">
                            <textFill>
                               <Color blue="0.624" green="0.624" red="0.624" fx:id="x222" />
                            </textFill>
@@ -335,24 +279,22 @@
                            <font>
                               <Font size="18.0" fx:id="x23" />
                            </font></Label>
-                        <VBox layoutX="8.0" layoutY="48.0" prefHeight="1208.0" prefWidth="925.0">
+                        <VBox layoutX="8.0" layoutY="48.0">
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="tableResultado" prefHeight="100.0" prefWidth="301.0">
+                                    <TableView fx:id="tableResultado">
                                       <columns>
-                                        <TableColumn prefWidth="140.0" text="Funcionalidade" />
-                                        <TableColumn minWidth="4.0" prefWidth="159.0" text="Resultado" />
+                                        <TableColumn fx:id="funcionalidadeCol" prefWidth="140.0" text="Funcionalidade" />
+                                        <TableColumn fx:id="resultadoCol" minWidth="4.0" prefWidth="159.0" text="Resultado" />
                                       </columns>
                                     </TableView>
-                                    <TableView fx:id="tableAmostra" prefHeight="100.0" prefWidth="573.0">
-                                       <columns>
-                                          <TableColumn fx:id="colunaDados" prefWidth="572.0" text="Amostra" />
-                                       </columns>
+                                    <Separator orientation="VERTICAL" prefHeight="100.0" prefWidth="36.0" />
+                                    <TextArea fx:id="txtAreaAmostra" editable="false">
                                        <HBox.margin>
-                                          <Insets left="50.0" />
+                                          <Insets />
                                        </HBox.margin>
-                                    </TableView>
+                                    </TextArea>
                                  </children>
                               </HBox>
                               <Label alignment="CENTER" style="&#10;" text="Tabela" textAlignment="CENTER" wrapText="false">
@@ -366,13 +308,13 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <TableView fx:id="tableClasses" prefHeight="100.0" prefWidth="624.0">
+                              <TableView fx:id="tableClasses">
                                  <columns>
-                                    <TableColumn prefWidth="171.0" text="Classes" />
-                                    <TableColumn minWidth="4.0" prefWidth="182.0" text="Frequência Absoluta" />
-                                    <TableColumn minWidth="4.0" prefWidth="165.0" text="Frequência Relativa" />
-                                    <TableColumn minWidth="4.0" prefWidth="199.0" text="Frequência Acumulada" />
-                                    <TableColumn minWidth="4.0" prefWidth="206.0" text="Frequência Acumulada" />
+                                    <TableColumn fx:id="classesCol" editable="false" prefWidth="171.0" text="Classes" />
+                                    <TableColumn fx:id="freqAbsCol" editable="false" minWidth="4.0" prefWidth="182.0" text="Frequência Absoluta" />
+                                    <TableColumn fx:id="freqRelCol" editable="false" minWidth="4.0" prefWidth="165.0" text="Frequência Relativa" />
+                                    <TableColumn fx:id="freqAcumuladaCol" editable="false" minWidth="4.0" prefWidth="199.0" text="Frequência Acumulada" />
+                                    <TableColumn editable="false" minWidth="4.0" prefWidth="206.0" text="Frequência Acumulada" />
                                  </columns>
                               </TableView>
                               <Label alignment="CENTER" style="&#10;" text="Grafico de Barras" textAlignment="CENTER" wrapText="false">

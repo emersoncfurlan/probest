@@ -16,7 +16,7 @@ public class Amostra {
 	
 	@Override
 	public String toString() {
-		return "Amostra [codAmostra=" + codAmostra + ", nome=" + nome + ", dados=" + dados + "]";
+		return "Amostra" + nome + " | Dados:" + dados;
 	}
 	
 	public int getCodAmostra() {
