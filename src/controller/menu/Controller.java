@@ -3,7 +3,7 @@ package controller.menu;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
+import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import java.io.BufferedReader;
@@ -13,9 +13,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -27,7 +24,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -131,6 +127,7 @@ public class Controller {
 	
 	@FXML
 	private CheckBox chkDuasAmostras;
+	
 	// fim checkBox
 
 	@FXML
@@ -326,17 +323,24 @@ public class Controller {
 	@FXML
 	private void btnInserir(ActionEvent event) throws IOException, InterruptedException {
 		System.out.println("btnIserir click:" + txtAmostra.getText());
-		String[] conteudoDados = txtAmostra.getText().split(";");
-		amostra = txtDados(conteudoDados);
-		String[] conteudoPesos = txtPeso.getText().split(";");
-		Amostra amostraPesos = new Amostra();
-		amostraPesos = txtDados(conteudoPesos);
-		amostra.setPesos(amostraPesos.getDados());
-		amostra.result();
-		System.out.println("Amostra do txtAmostra: " + amostra.toString());
-		setTextAreaAmostra(amostra.toString());
-
-		atualizarGraficosTabelas();
+		String[] conteudoDados = null;
+		String[] conteudoPesos = null;
+		while(true) {
+			conteudoDados = txtAmostra.getText().split(";");
+			conteudoPesos = txtPeso.getText().split(";");
+			if(conteudoDados.length != conteudoPesos.length) {
+				JOptionPane.showMessageDialog(null, "Você inseriu uma quantidade diferente de valores para pesos");
+			}else {
+				amostra = txtDados(conteudoDados);
+				Amostra amostraPesos = new Amostra();
+				amostraPesos = txtDados(conteudoPesos);
+				amostra.setPesos(amostraPesos.getDados());
+				amostra.result();
+			}
+			System.out.println("Amostra do txtAmostra: " + amostra.toString());
+			setTextAreaAmostra(amostra.toString());
+			atualizarGraficosTabelas();
+		}
 	}
 
 	private void atualizarGraficosTabelas() throws InterruptedException {
