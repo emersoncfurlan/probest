@@ -330,10 +330,10 @@
                               </Label>
                               <BarChart fx:id="graficoDeBarras">
                                 <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
+                                  <CategoryAxis fx:id="BarChartCategoryAxis" side="BOTTOM" />
                                 </xAxis>
                                 <yAxis>
-                                  <NumberAxis side="LEFT" />
+                                  <NumberAxis fx:id="BarChartNumberAxis" side="LEFT" />
                                 </yAxis>
                                  <padding>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
