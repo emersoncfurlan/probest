@@ -3,7 +3,7 @@ package controller.menu;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.omg.CORBA.INITIALIZE;
+import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
 
 import javafx.event.ActionEvent;
 import java.io.BufferedReader;
@@ -13,8 +13,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +26,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -83,8 +88,8 @@ public class Controller {
 
 	@FXML
 	private Color x21;
-	
-	//inicio checkBox
+
+	// inicio checkBox
 	@FXML
 	private CheckBox chkTudoDescritiva;
 
@@ -123,7 +128,7 @@ public class Controller {
 
 	@FXML
 	private CheckBox chkFatorial;
-	//fim checkBox
+	// fim checkBox
 
 	@FXML
 	private Label lblAmostra;
@@ -161,39 +166,53 @@ public class Controller {
 	@FXML
 	private Font x2311;
 
+	// grafico de linhas
 	@FXML
-	private LineChart<?, ?> graficoDeLinhas;
-	
+	private LineChart<String, Integer> graficoDeLinhas;
+
 	@FXML
-	private BarChart<?, ?> graficoDeBarras;
+	private CategoryAxis LinhaCategoryAxis;
+
+	@FXML
+	private NumberAxis LinhaNumberAxis;
+
+	// grafico de barras
+	@FXML
+	private BarChart<String, Integer> graficoDeBarras;
 
 	@FXML
 	private CategoryAxis BarChartCategoryAxis;
 
 	@FXML
 	private NumberAxis BarChartNumberAxis;
-	
-	//table classes
+
+	// table classes
 
 	@FXML
-	private TableView<resultadoTabela> tableClasses;
+	private TableView<Classe> tableClasses;
 
 	@FXML
-	private TableColumn<?, ?> classesCol;
+	private TableColumn<Classe, SimpleDoubleProperty> limiteInf;
 
 	@FXML
-	private TableColumn<?, ?> freqAbsCol;
+	private TableColumn<Classe, SimpleDoubleProperty> limiteSup;
 
 	@FXML
-	private TableColumn<?, ?> freqRelCol;
+	private TableColumn<Classe, SimpleIntegerProperty> freqAbsoluta;
 
 	@FXML
-	private TableColumn<?, ?> freqAcumuladaCol;
-	
-	//table resultados
+	private TableColumn<Classe, SimpleIntegerProperty> freqAcumulada;
+
+	@FXML
+	private TableColumn<Classe, SimpleDoubleProperty> freqRelativa;
+
+	@FXML
+	private TableColumn<Classe, SimpleDoubleProperty> freqRelativaAcm;
+
+	// table resultados
 	@FXML
 	private TableView<resultadoTabela> tableResultado;
-	
+
 	@FXML
 	private TableColumn<resultadoTabela, SimpleStringProperty> funcionalidadeCol;
 
@@ -202,17 +221,6 @@ public class Controller {
 
 	@FXML
 	void initialize() {
-//		// inicializa a tabela de funcionalidade/resultado
-//		funcionalidadeCol.setCellValueFactory(new PropertyValueFactory<>("funcionalidade"));
-//		resultadoCol.setCellValueFactory(new PropertyValueFactory<>("resultado"));
-//		tableResultado.setItems((ObservableList<resultadoTabela>) listaResultados());
-//
-//		// incializa a tabela classes
-//		classesCol.setCellValueFactory(new PropertyValueFactory<>("classes"));
-//		freqAbsCol.setCellValueFactory(new PropertyValueFactory<>("frequenciaAbsoluta"));
-//		freqAcumuladaCol.setCellValueFactory(new PropertyValueFactory<>("frequenciaAcumulada"));
-//		freqRelCol.setCellValueFactory(new PropertyValueFactory<>("frequenciaRelativa"));
-//		tableClasses.setItems((ObservableList<resultadoTabela>) listaResultados());
 	}
 
 	/**** selecionar arquivo ****/
@@ -269,9 +277,13 @@ public class Controller {
 
 	}
 
-	/**** btnInserir - Inserir amostra ****/
+	/****
+	 * btnInserir - Inserir amostra
+	 * 
+	 * @throws InterruptedException
+	 ****/
 	@FXML
-	private void btnInserir(ActionEvent event) throws IOException {
+	private void btnInserir(ActionEvent event) throws IOException, InterruptedException {
 		System.out.println("btnIserir click:" + txtAmostra.getText());
 		String[] conteudoDados = txtAmostra.getText().split(";");
 		amostra = txtDados(conteudoDados);
@@ -282,9 +294,16 @@ public class Controller {
 		amostra.result();
 		System.out.println("Amostra do txtAmostra: " + amostra.toString());
 		setTextAreaAmostra(amostra.toString());
-		listaResultados();
 
-	};
+		atualizarGraficosTabelas();
+	}
+
+	private void atualizarGraficosTabelas() throws InterruptedException {
+		listaResultados();
+		listaClasses();
+		listGraficoBarras();
+		listGraficoLinha();
+	}
 
 	public static Amostra txtDados(String[] conteudo) {
 		ArrayList<Double> dados = new ArrayList<Double>();
@@ -312,13 +331,83 @@ public class Controller {
 	}
 
 	/****
+	 * tableResultados - Preenche o grafico de barras com resultados
+	 ****/
+	private static ObservableList<String> listGraficoDeBarrasX = FXCollections.observableArrayList();
+
+	private void listGraficoBarras() throws InterruptedException {
+		Tabeleiro classeTabela = new Tabeleiro(amostra);
+		ArrayList<Classe> listClasses = new ArrayList<Classe>();
+		listClasses = classeTabela.getElementos();
+		// Adicionei a lista de Frequencia Media e Defini a categoria
+		for (Classe classe : listClasses) {
+			listGraficoDeBarrasX.add("" + classe.getlimiteMed());
+		}
+		BarChartCategoryAxis.setCategories(listGraficoDeBarrasX);
+		XYChart.Series<String, Integer> series = new XYChart.Series<>();
+		for (int i = 0; i < listClasses.size(); i++) {
+//			String conteudo = ""+listClasses.get(i).getlimiteMed(); 
+			series.getData().add(
+					new XYChart.Data<>("" + listClasses.get(i).getlimiteMed(), listClasses.get(i).getfreqAbsoluta()));
+		}
+		graficoDeBarras.getData().add(series);
+	}
+
+	/****
+	 * tableResultados - Preenche o grafico de linhas com resultados
+	 ****/
+	// grafico de linhas
+	private static ObservableList<String> listGraficoDeLinha = FXCollections.observableArrayList();
+
+	private void listGraficoLinha() throws InterruptedException {
+		Tabeleiro classeTabela = new Tabeleiro(amostra);
+		ArrayList<Classe> listClasses = new ArrayList<Classe>();
+		listClasses = classeTabela.getElementos();
+		// Adicionei a lista de Frequencia Media e Defini a categoria
+		for (Classe classe : listClasses) {
+			listGraficoDeLinha.add("" + classe.getlimiteMed());
+		}
+		LinhaCategoryAxis.setCategories(listGraficoDeLinha);
+		XYChart.Series<String, Integer> series = new XYChart.Series<>();
+		for (int i = 0; i < listClasses.size(); i++) {
+//			String conteudo = ""+listClasses.get(i).getlimiteMed(); 
+			series.getData().add(
+					new XYChart.Data<>("" + listClasses.get(i).getlimiteMed(), listClasses.get(i).getfreqAbsoluta()));
+		}
+		graficoDeLinhas.getData().add(series);
+	}
+
+	/****
+	 * tableResultados - Preenche a tabela de classes com resultados
+	 ****/
+
+	private ObservableList<Classe> listClassesTabela = FXCollections.observableArrayList();
+
+	private void listaClasses() throws InterruptedException {
+		Tabeleiro classeTabela = new Tabeleiro(amostra);
+		ArrayList<Classe> listClasses = new ArrayList<Classe>();
+		listClasses = classeTabela.getElementos();
+
+		for (Classe classe : listClasses) {
+			System.out.println("Adicionada: \n" + classe.toString());
+			Classe obj = new Classe(classe.getlimiteInf(), classe.getlimiteSup(), classe.getlimiteMed(),
+					classe.getfreqAbsoluta(), classe.getfreqAcumulada(), classe.getfreqRelativa(),
+					classe.getfreqRelativaAcm());
+			System.out.println("Objeto:\n" + obj.toString());
+			listClassesTabela.add(obj);
+		}
+		limiteInf.setCellValueFactory(new PropertyValueFactory<>("limiteInf"));
+		limiteSup.setCellValueFactory(new PropertyValueFactory<>("limiteSup"));
+		freqAbsoluta.setCellValueFactory(new PropertyValueFactory<>("freqAbsoluta"));
+		freqAcumulada.setCellValueFactory(new PropertyValueFactory<>("freqAcumulada"));
+		freqRelativa.setCellValueFactory(new PropertyValueFactory<>("freqRelativa"));
+		freqRelativaAcm.setCellValueFactory(new PropertyValueFactory<>("freqRelativaAcm"));
+		tableClasses.setItems(listClassesTabela);
+	}
+
+	/****
 	 * tableResultados - Preenche a tabela de funcionalidades com resultados
 	 ****/
-//	private void setTableResultado(ObservableList<?> checkBoxList) {
-//		funcionalidadeCol.setCellValueFactory(new PropertyValueFactory<>("funcionalidade"));
-//		resultadoCol.setCellValueFactory(new PropertyValueFactory<>("resultado"));
-//		tableResultado.setItems((ObservableList<resultadoTabela>) listaResultados());
-//	}
 
 	private ObservableList<resultadoTabela> listResultadoTabela = FXCollections.observableArrayList();
 
@@ -366,26 +455,22 @@ public class Controller {
 		}
 		if (chkModa.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkModa: " + chkModa.selectedProperty().getValue());
-			resultadoTabela moda = new resultadoTabela("MODA",
-					amostra.getResultadoMEDIA_ARITMETICA_SIMPLES());
+			resultadoTabela moda = new resultadoTabela("MODA", amostra.getResultadoMEDIA_ARITMETICA_SIMPLES());
 			listResultadoTabela.add(moda);
 		}
 		if (chkMediana.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkMediana: " + chkMediana.selectedProperty().getValue());
-			resultadoTabela MEDIANA = new resultadoTabela("MEDIANA",
-					amostra.getResultadoMEDIANA());
+			resultadoTabela MEDIANA = new resultadoTabela("MEDIANA", amostra.getResultadoMEDIANA());
 			listResultadoTabela.add(MEDIANA);
 		}
 		if (chkVariancia.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkVariancia: " + chkVariancia.selectedProperty().getValue());
-			resultadoTabela VARIANCIA = new resultadoTabela("VARIANCIA",
-		amostra.getResultadoVARIANCIA());
+			resultadoTabela VARIANCIA = new resultadoTabela("VARIANCIA", amostra.getResultadoVARIANCIA());
 			listResultadoTabela.add(VARIANCIA);
 		}
 		if (chkDesvioPadrao.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkDesvioPadrao: " + chkDesvioPadrao.selectedProperty().getValue());
-			resultadoTabela DESVIO_PADRAO = new resultadoTabela("DESVIO_PADRAO",
-					amostra.getResultadoDESVIO_PADRAO());
+			resultadoTabela DESVIO_PADRAO = new resultadoTabela("DESVIO_PADRAO", amostra.getResultadoDESVIO_PADRAO());
 			listResultadoTabela.add(DESVIO_PADRAO);
 		}
 		if (chkMediaGeo.selectedProperty().getValue() || tudoDescritiva) {
@@ -408,16 +493,14 @@ public class Controller {
 //    	}
 		if (chkProbabilidade.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkProbabilidade: " + chkProbabilidade.selectedProperty().getValue());
-			resultadoTabela PROBABILIDADE = new resultadoTabela("PROBABILIDADE",
-					amostra.getResultadoPROBABILIDADE());
+			resultadoTabela PROBABILIDADE = new resultadoTabela("PROBABILIDADE", amostra.getResultadoPROBABILIDADE());
 			listResultadoTabela.add(PROBABILIDADE);
 		}
-		if (chkFatorial.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkFatorial: " + chkFatorial.selectedProperty().getValue());
-			resultadoTabela FATORIAL = new resultadoTabela("FATORIAL",
-					amostra.getResultadoFATORIAL());
-			listResultadoTabela.add(FATORIAL);
-		}
+//		if (chkFatorial.selectedProperty().getValue() || tudoDescritiva) {
+//			System.out.println("chkFatorial: " + chkFatorial.selectedProperty().getValue());
+//			resultadoTabela FATORIAL = new resultadoTabela("FATORIAL", amostra.getResultadoFATORIAL());
+//			listResultadoTabela.add(FATORIAL);
+//		}
 //    	if(chkSomaQuadrados.selectedProperty().getValue() || tudoDescritiva) {
 //			System.out.println("chkSomaQuadrados: "+ chkSomaQuadrados.selectedProperty().getValue());
 //			resultadoTabela SOMA_DOS_QUADRADOS = new resultadoTabela("SOMA_DOS_QUADRADOS",
@@ -429,8 +512,3 @@ public class Controller {
 		tableResultado.setItems(listResultadoTabela);
 	}
 }
-//		resultadoTabela somatorio = new resultadoTabela(new SimpleStringProperty("Somatório"), new SimpleDoubleProperty(amostra.getResultadoSOMATORIO()));
-//		listResultadoTabela.add(somatorio);
-//		funcionalidadeCol.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionalidade"));
-//		resultadoCol.setCellValueFactory(new PropertyValueFactory<>("resultado"));
-//		tableResultado.setItems(listResultadoTabela);

@@ -14,8 +14,6 @@ public class resultadoTabela {
 		super();
 		setNomeFuncionalidade(nomeFuncionalidade);
 		setResultado(resultado);
-//		this.nomeFuncionalidade = new SimpleStringProperty(nomeFuncionalidade);
-//		this.resultado = new SimpleDoubleProperty(resultado);
 	}
 
 	public StringProperty nomeFuncionalidadeProperty() {

@@ -308,13 +308,14 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <TableView fx:id="tableClasses">
+                              <TableView fx:id="tableClasses" prefHeight="400.0" prefWidth="900.0">
                                  <columns>
-                                    <TableColumn fx:id="classesCol" editable="false" prefWidth="171.0" text="Classes" />
-                                    <TableColumn fx:id="freqAbsCol" editable="false" minWidth="4.0" prefWidth="182.0" text="Frequência Absoluta" />
-                                    <TableColumn fx:id="freqRelCol" editable="false" minWidth="4.0" prefWidth="165.0" text="Frequência Relativa" />
-                                    <TableColumn fx:id="freqAcumuladaCol" editable="false" minWidth="4.0" prefWidth="199.0" text="Frequência Acumulada" />
-                                    <TableColumn editable="false" minWidth="4.0" prefWidth="206.0" text="Frequência Acumulada" />
+                                    <TableColumn fx:id="limiteInf" editable="false" maxWidth="90.0" prefWidth="90.0" text="Limite Inf" />
+                                    <TableColumn fx:id="limiteSup" editable="false" maxWidth="90.0" prefWidth="90.0" text="Limite Sup" />
+                                    <TableColumn fx:id="freqAbsoluta" editable="false" maxWidth="150.0" minWidth="4.0" prefWidth="155.0" text="Frequência Absoluta" />
+                                    <TableColumn fx:id="freqAcumulada" editable="false" maxWidth="170.0" minWidth="4.0" prefWidth="175.0" text="Frequência Acumulada" />
+                                    <TableColumn fx:id="freqRelativa" editable="false" minWidth="4.0" prefWidth="178.0" text="Frequência Relativa" />
+                                    <TableColumn fx:id="freqRelativaAcm" editable="false" maxWidth="200.0" minWidth="4.0" prefWidth="200.0" text="Frequência Relativa Acumulada" />
                                  </columns>
                               </TableView>
                               <Label alignment="CENTER" style="&#10;" text="Grafico de Barras" textAlignment="CENTER" wrapText="false">
@@ -352,10 +353,10 @@
                               </Label>
                               <LineChart fx:id="graficoDeLinhas">
                                 <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
+                                  <CategoryAxis fx:id="LinhaCategoryAxis" side="BOTTOM" />
                                 </xAxis>
                                 <yAxis>
-                                  <NumberAxis side="LEFT" />
+                                  <NumberAxis fx:id="LinhaNumberAxis" side="LEFT" />
                                 </yAxis>
                                  <padding>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
