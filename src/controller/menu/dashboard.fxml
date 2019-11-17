@@ -103,6 +103,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                         </Label>
+                              <CheckBox fx:id="chkDuasAmostras" mnemonicParsing="false" prefHeight="47.0" prefWidth="152.0" text="Duas Amostras" />
                            </children>
                         </HBox>
                         <HBox prefHeight="37.0" prefWidth="300.0">
@@ -254,6 +255,34 @@
                                     </AnchorPane>
                               </content>
                             </TitledPane>
+                              <TitledPane animated="false" prefHeight="468.0" prefWidth="300.0" text="Ajuda">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ScrollPane prefHeight="528.0" prefWidth="300.0">
+                                             <content>
+                                                <VBox prefHeight="989.0" prefWidth="300.0">
+                                                   <children>
+                                                      <Button fx:id="btnAjudaMedia" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media" />
+                                                      <Button fx:id="btnAjudaMediaAritm" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media Aritmética" />
+                                                      <Button fx:id="btnAjudaMediaAritmPond" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media Aritmética Ponderada" />
+                                                      <Button fx:id="btnAjudaMediaHarm" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media Harmônica" />
+                                                      <Button fx:id="btnAjudaMediaGeo" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media Geométrica" />
+                                                      <Button fx:id="btnAjudaSomat" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Somátorio" />
+                                                      <Button fx:id="btnAjudaModa" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Moda" />
+                                                      <Button fx:id="btnAjudaMediana" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Mediana" />
+                                                      <Button fx:id="btnAjudaVariancia" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Variância" />
+                                                      <Button fx:id="btnAjudaDesvioPadrao" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Desvio Padrão" />
+                                                      <Button fx:id="btnAjudaProbabilidade" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Probabilidade" />
+                                                      <Button fx:id="btnAjudaFatorial" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Fatorial" />
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
                           </panes>
                         </Accordion>
                      </children>

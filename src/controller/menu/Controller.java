@@ -128,6 +128,9 @@ public class Controller {
 
 	@FXML
 	private CheckBox chkFatorial;
+	
+	@FXML
+	private CheckBox chkDuasAmostras;
 	// fim checkBox
 
 	@FXML
@@ -165,6 +168,45 @@ public class Controller {
 
 	@FXML
 	private Font x2311;
+	
+	//buttons de ajuda
+
+    @FXML
+    private Button btnAjudaMedia;
+
+    @FXML
+    private Button btnAjudaMediaAritm;
+
+    @FXML
+    private Button btnAjudaMediaAritmPond;
+
+    @FXML
+    private Button btnAjudaMediaHarm;
+
+    @FXML
+    private Button btnAjudaMediaGeo;
+
+    @FXML
+    private Button btnAjudaSomat;
+
+    @FXML
+    private Button btnAjudaModa;
+
+    @FXML
+    private Button btnAjudaMediana;
+
+    @FXML
+    private Button btnAjudaVariancia;
+
+    @FXML
+    private Button btnAjudaDesvioPadrao;
+
+    @FXML
+    private Button btnAjudaProbabilidade;
+
+    @FXML
+    private Button btnAjudaFatorial;
+
 
 	// grafico de linhas
 	@FXML
@@ -253,7 +295,6 @@ public class Controller {
 			if (linha != null) {
 				System.out.println(linha);
 				conteudo = linha.split(";");
-				ArrayList<Double> dados = new ArrayList<Double>();
 				amostra = txtDados(conteudo);
 				System.out.println("Amostra do txtAmostra: " + amostra.toString());
 			} else {
