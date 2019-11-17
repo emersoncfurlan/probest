@@ -8,9 +8,11 @@ public class Amostra {
 
 	private int codAmostra;
 	private ArrayList<Double> dados = new ArrayList<Double>();
+	private ArrayList<Double> dadosPesados = new ArrayList<Double>();
 	private ArrayList<Double> pesos = new ArrayList<Double>();
 	private double possibilidade;
 
+	///////////////////////////////////////////////////////////////////////////////////
 	public double getPossibilidade() {
 		return possibilidade;
 	}
@@ -147,6 +149,36 @@ public class Amostra {
 		ResultadoSOMA_DOS_QUADRADOS = resultadoSOMA_DOS_QUADRADOS;
 	}
 
+	public ArrayList<Double> getPesos() {
+		return pesos;
+	}
+
+	public void setPesos(ArrayList<Double> pesos) {
+		this.pesos = pesos;
+	}
+
+	public int getCodAmostra() {
+		return codAmostra;
+	}
+
+	public void setCodAmostra(int codAmostra) {
+		this.codAmostra = codAmostra;
+	}
+
+	public ArrayList<Double> getDados() {
+		return dados;
+	}
+
+	public void setDados(ArrayList<Double> dados) {
+		this.dados = dados;
+	}
+
+	@Override
+	public String toString() {
+		return "Dados=" + dados + "\n pesos=" + pesos + "\n possibilidade=" + possibilidade;
+	}
+	///////////////////////////////////////////////////////////////////////////////////
+
 	// Resultados
 	private Double ResultadoSOMATORIO;
 	private Double ResultadoQUADRADO_DA_SOMA;
@@ -173,44 +205,65 @@ public class Amostra {
 		super();
 		this.codAmostra = codAmostra + 1;
 		this.dados = dados;
+		this.pesos = pesoDefault(dados);
 	}
 
 	public Amostra(ArrayList<Double> dados, ArrayList<Double> pesos) {
 		super();
 		this.codAmostra = codAmostra + 1;
 		this.dados = dados;
+		this.dadosPesados = dadosPesados(dados, pesos);
 		this.pesos = pesos;
 	}
 
-	@Override
-	public String toString() {
-		return "Dados=" + dados + "\n pesos=" + pesos + "\n possibilidade="
-				+ possibilidade;
+	private static ArrayList<Double> pesoDefault(ArrayList<Double> dados) {
+		ArrayList<Double> peso = new ArrayList<>();
+
+		for (int i = 0; i < dados.size(); i++) {
+			peso.add(1.0);
+		}
+
+		return peso;
 	}
 
-	public ArrayList<Double> getPesos() {
-		return pesos;
+	private static ArrayList<Double> pesoDefault(ArrayList<Double> dados, ArrayList<Double> pesos) {
+		ArrayList<Double> pesosAux = (ArrayList<Double>) pesos.clone();
+		if (dados.size() > pesosAux.size()) {
+			while (dados.size() > pesosAux.size()) {
+				pesosAux.add(1.0);
+			}
+		} else {
+			if (dados.size() < pesosAux.size()) {
+				while (dados.size() > pesosAux.size()) {
+					pesosAux.remove(pesosAux.size() - 1);
+				}
+			}
+		}
+
+		return pesosAux;
 	}
 
-	public void setPesos(ArrayList<Double> pesos) {
-		this.pesos = pesos;
+	private static ArrayList<Double> dadosPesados(ArrayList<Double> dados, ArrayList<Double> pesos) {
+		ArrayList<Double> aux = new ArrayList<>();
+		pesos = pesoDefault(dados, pesos);
+
+		for (int i = 0; i < dados.size(); i++) {
+			for (int j = 0; j < pesos.get(i); j++) {
+				aux.add(dados.get(i));
+			}
+		}
+
+		return aux;
 	}
 
-	public int getCodAmostra() {
-		return codAmostra;
-	}
-
-	public void setCodAmostra(int codAmostra) {
-		this.codAmostra = codAmostra;
-	}
 	public void result() {
 		this.ResultadoSOMATORIO = somatorio(dados);
 		this.ResultadoQUADRADO_DA_SOMA = (double) quadradoDaSoma(dados);
-		this.ResultadoSOMA_DE_PRODUTOS = somadeprodutos(dados, pesos);
-//		this.ResultadoPRODUTO_DAS_SOMAS =  ;
-		this.ResultadoMEDIA_ARITMETICA_SIMPLES = mediaAritmeticaSimples(dados);
-		this.ResultadoMEDIA_ARITMETICA_PONDERADA = mediaAritmeticaPonderada(dados, pesos);
-		this.ResultadoMODA = moda(dados); //da erro caso não tenha repetido
+		// this.ResultadoSOMA_DE_PRODUTOS = ; USA DUAS AMOSTRAS
+		// this.ResultadoPRODUTO_DAS_SOMAS = ; USA DUAS AMOSTRAS
+		this.ResultadoMEDIA_ARITMETICA_SIMPLES = mediaAritmetica(dadosPesados);
+		this.ResultadoMEDIA_ARITMETICA_PONDERADA = mediaAritmetica(dadosPesados);
+		this.ResultadoMODA = moda(dados); // da erro caso não tenha repetido
 		this.ResultadoMEDIANA = mediana(dados);
 		this.ResultadoVARIANCIA = variancia(dados);
 		this.ResultadoDESVIO_PADRAO = desvioPadrao(dados);
@@ -218,15 +271,8 @@ public class Amostra {
 		this.ResultadoMEDIA_HARMONICA = mediaHarmonica(dados);
 		this.ResultadoPRODUTO = produto(dados);
 		this.ResultadoPROBABILIDADE = probabilidade(dados, possibilidade);
-//		this.ResultadoFATORIAL = fatorial();
+		// this.ResultadoFATORIAL = fatorial();
 		this.ResultadoSOMA_DOS_QUADRADOS = (double) quadradoDaSoma(dados);
-	}
-	public ArrayList<Double> getDados() {
-		return dados;
-	}
-
-	public void setDados(ArrayList<Double> dados) {
-		this.dados = dados;
 	}
 
 	public static double somatorio(ArrayList<Double> dados) {
@@ -234,74 +280,81 @@ public class Amostra {
 		for (Double dado : dados) {
 			somatorio += dado;
 		}
+
 		return somatorio;
 	}
 
-	public static double somadeprodutos(ArrayList<Double> dados, ArrayList<Double> pesos) {
-
+	public static double somaDeProdutos(ArrayList<Double> dados, ArrayList<Double> dados2) {
 		double somadeprodutos = 0;
+
 		for (int i = 0; i < dados.size(); i++) {
-			somadeprodutos += dados.get(i) * pesos.get(i);
+			somadeprodutos += dados.get(i) * dados2.get(i);
 		}
+
 		return somadeprodutos;
 	}
 
-	public static double mediaHarmonica(ArrayList<Double> dados) {
-		double[] amostra = new double[dados.size()];
-		for (int i = 0; i < dados.size(); i++) {
-			amostra[i] = dados.get(i);
-		}
-		double mediaHarm = amostra.length;
-		double somat = 0;
-		for (int i = 1; i < amostra.length; i++) {
-			somat += Math.pow(amostra[i], -1);
-		}
-		return mediaHarm / somat;
+	public static double produtoDasSomas(ArrayList<Double> dados, ArrayList<Double> dados2) {
+		return somatorio(dados) * somatorio(dados2);
 	}
 
-	public static double mediaAritmeticaSimples(ArrayList<Double> dados) {
-		double amostraAux = dados.size();
-		double somatorio = somatorio(dados);
-		return somatorio / amostraAux;
+	public static double somaDeQuadrados(ArrayList<Double> dados) {
+		double somaTotal = 0;
+		for (Double dado : dados) {
+			somaTotal += Math.pow(dado, 2);
+		}
+		return somaTotal;
+	}
+
+	public static long quadradoDaSoma(ArrayList<Double> dados) {
+		return (long) Math.pow(somatorio(dados), 2);
+	}
+
+	public static double mediaAritmetica(ArrayList<Double> dados) {
+		return (double) somatorio(dados) / dados.size();
 	}
 
 	public static double mediaAritmeticaPonderada(ArrayList<Double> amostra, ArrayList<Double> pesos) {
-		double mAPonderada = 0;
-		double somaPesos = 0;
-		if (amostra.size() == pesos.size()) {
-			for (int i = 0; i < amostra.size(); i++) {
-				mAPonderada += amostra.get(i) * pesos.get(i);
-			}
-			for (int i = 0; i < pesos.size(); i++) {
-				somaPesos += pesos.get(i);
-			}
-			mAPonderada = mAPonderada / somaPesos;
-			return mAPonderada;
-		} else
-			return 0;
+		ArrayList<Double> amostraPesada = dadosPesados(amostra, pesos);
+		return mediaAritmetica(amostraPesada);
 	}
 
-	public static double[] ordenarAmostra(ArrayList<Double> amostraDados) {
-		double[] dados = new double[amostraDados.size()];
-		int count = 0;
-		for (double dado : dados) {
-			dados[count] = dado;
-			count++;
+	public static double mediaGeometrica(ArrayList<Double> dados) {
+		double mg = 0;
+		double produto = 0;
+		produto = produto(dados);
+		mg = Math.pow(produto, (1 / dados.size()));
+		return mg;
+	}
+
+	public static double mediaHarmonica(ArrayList<Double> dados) {
+		double somat = 0;
+
+		for (double elemento : dados) {
+			somat += (1 / elemento);
 		}
-		boolean resp = false;
-		double x = 0;
-		while (!resp) {
-			resp = true;
-			for (int i = 0; i < dados.length - 1; i++) {
-				if (dados[i] > dados[i + 1]) {
-					resp = false;
-					x = dados[i + 1];
-					dados[i + 1] = dados[i];
-					dados[i] = x;
+
+		return dados.size() / somat;
+	}
+
+	public static ArrayList<Double> ordenarAmostra(ArrayList<Double> dados) {
+		ArrayList<Double> aux = new ArrayList<>();
+
+		for (int i = 0; i < dados.size(); i++) {
+			boolean added = false;
+			for (int j = 0; j < aux.size(); j++) {
+				if (dados.get(i) <= aux.get(j)) {
+					aux.add(j, dados.get(i));
+					added = true;
+					break;
 				}
 			}
+			if (!added) {
+				aux.add(dados.get(i));
+			}
 		}
-		return dados;
+
+		return aux;
 	}
 
 	public static double[] tiraRepetidos(double[] amostra) {
@@ -374,7 +427,8 @@ public class Amostra {
 
 		// Se o elemento com mais frequência se repete em todas as vezes não há moda
 		if (freq.length == contaNoVetor(freq, moda)) {
-			return null; // Se já não tem moda, retorna null
+			double[] vazio = {};
+			return vazio; // Se já não tem moda, retorna null
 		}
 
 		// Lista de modas (em ArrayList), pode ter mais de uma e ir adicionando
@@ -416,20 +470,21 @@ public class Amostra {
 
 	/*
 	 * Quando o número elementos de um conjunto é par, a mediana é encontrada pela
-	 * média dos dois valores centrais. Assim, esses valores sÃ£o somados e
+	 * média dos dois valores centrais. Assim, esses valores são somados e
 	 * divididos por dois.
 	 */
 	public static double mediana(ArrayList<Double> dados) {
-		double amostraOrdenada[] = ordenarAmostra(dados);
+		ArrayList<Double> amostraOrdenada = ordenarAmostra(dados);
 		if (dados.size() % 2 == 0) { // par
-			return (double) (amostraOrdenada[(dados.size() / 2)] + dados.get((dados.size() / 2) - 1)) / 2;
+			return (double) (amostraOrdenada.get((int) dados.size() / 2)
+					+ amostraOrdenada.get(((int) dados.size() / 2) - 1)) / 2;
 		} else { // impar
-			return amostraOrdenada[dados.size() / 2];
+			return amostraOrdenada.get((int) dados.size() / 2);
 		}
 	}
 
 	public static double variancia(ArrayList<Double> dados) {
-		double ma = mediaAritmeticaSimples(dados);
+		double ma = mediaAritmetica(dados);
 		double somat = 0;
 		// prepara os valores
 		for (Double dado : dados) {
@@ -438,25 +493,15 @@ public class Amostra {
 		return somat / dados.size();
 	}
 
-	// Desvio PadrÃ£o
+	// Desvio Padrão
 	public static double desvioPadrao(ArrayList<Double> dados) {
-		double variancia = variancia(dados);
-		return Math.sqrt(variancia);
-	}
-
-	// Media Geométrica
-	public static double mediaGeometrica(ArrayList<Double> dados) {
-		double mg = 0;
-		double produto = 0;
-		produto = produto(dados);
-		mg = Math.pow(produto, Math.pow(dados.size(), -1));
-		return mg;
+		return Math.sqrt(variancia(dados));
 	}
 
 	public static double produto(ArrayList<Double> dados) {
 		double valor = dados.get(0);
-		for (Double dado : dados) {
-			valor *= dado;
+		for (int i = 1; i < dados.size(); i++) {
+			valor *= dados.get(i);
 		}
 		return valor;
 	}
@@ -471,13 +516,13 @@ public class Amostra {
 
 	// Coeficiente de Variação
 	public static double coeficienteDeVariacao(ArrayList<Double> dados) {
-		double cv = (desvioPadrao(dados) * 100) / mediaAritmeticaSimples(dados);
+		double cv = (desvioPadrao(dados) * 100) / mediaAritmetica(dados);
 		return cv;
 	}
 
 	// Formula da Probabilidade
 	/*
-	 * Em um fenómeno aleatÃ³rio, as possibilidades de ocorrÃªncia de um evento sÃ£o
+	 * Em um fenómeno aleatório, as possibilidades de ocorrÃªncia de um evento sÃ£o
 	 * igualmente prováveis. p(A): probabilidade da ocorrÃªncia de um evento A n(A):
 	 * número de casos que nos doubleeressam (evento A) n(Î©): número total de casos
 	 * possÃ­veis
@@ -507,16 +552,25 @@ public class Amostra {
 		}
 	}
 
-	public static long quadradoDaSoma(ArrayList<Double> dados) {
-		return (long) Math.pow(somatorio(dados), 2);
+	public ArrayList<Double> criaSegundaAmostra() {
+		ArrayList<Double> dados = new ArrayList<Double>();
+		ArrayList<Double> pesos = new ArrayList<Double>();
+		String[] dadosInseridos = JOptionPane
+				.showInputDialog("Informe os dados da segunda amostra separados por ponto e virgula ';'").split(";");
+		String[] pesosInseridos = JOptionPane
+				.showInputDialog("Informe os pesos da segunda amostra separados por ponto e virgula ';'").split(";");
+		dados = txtDados(dadosInseridos);
+		pesos = txtDados(pesosInseridos);
+		// Chama e retorna os valores do seu método monstro para calcular tudo pesado já
+		return dadosPesados(dados, pesos);
+		// Amostra segundaAmostra = new Amostra(dados, pesos);
 	}
 
-	public static double calcularSomaQuadrados(ArrayList<Double> dados) {
-		double somaTotal;
-		somaTotal = 0;
-		for (Double dado : dados) {
-			somaTotal += Math.pow(dado, 2);
+	public static ArrayList<Double> txtDados(String[] conteudo) {
+		ArrayList<Double> dados = new ArrayList<Double>();
+		for (int i = 0; i < conteudo.length; i++) {
+			dados.add(Double.parseDouble(conteudo[i]));
 		}
-		return somaTotal;
+		return dados;
 	}
 }
