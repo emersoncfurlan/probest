@@ -124,10 +124,10 @@ public class Controller {
 
 	@FXML
 	private CheckBox chkFatorial;
-	
+
 	@FXML
 	private CheckBox chkDuasAmostras;
-	
+
 	// fim checkBox
 
 	@FXML
@@ -165,45 +165,44 @@ public class Controller {
 
 	@FXML
 	private Font x2311;
-	
-	//buttons de ajuda
 
-    @FXML
-    private Button btnAjudaMedia;
+	// buttons de ajuda
 
-    @FXML
-    private Button btnAjudaMediaAritm;
+	@FXML
+	private Button btnAjudaMedia;
 
-    @FXML
-    private Button btnAjudaMediaAritmPond;
+	@FXML
+	private Button btnAjudaMediaAritm;
 
-    @FXML
-    private Button btnAjudaMediaHarm;
+	@FXML
+	private Button btnAjudaMediaAritmPond;
 
-    @FXML
-    private Button btnAjudaMediaGeo;
+	@FXML
+	private Button btnAjudaMediaHarm;
 
-    @FXML
-    private Button btnAjudaSomat;
+	@FXML
+	private Button btnAjudaMediaGeo;
 
-    @FXML
-    private Button btnAjudaModa;
+	@FXML
+	private Button btnAjudaSomat;
 
-    @FXML
-    private Button btnAjudaMediana;
+	@FXML
+	private Button btnAjudaModa;
 
-    @FXML
-    private Button btnAjudaVariancia;
+	@FXML
+	private Button btnAjudaMediana;
 
-    @FXML
-    private Button btnAjudaDesvioPadrao;
+	@FXML
+	private Button btnAjudaVariancia;
 
-    @FXML
-    private Button btnAjudaProbabilidade;
+	@FXML
+	private Button btnAjudaDesvioPadrao;
 
-    @FXML
-    private Button btnAjudaFatorial;
+	@FXML
+	private Button btnAjudaProbabilidade;
 
+	@FXML
+	private Button btnAjudaFatorial;
 
 	// grafico de linhas
 	@FXML
@@ -325,25 +324,28 @@ public class Controller {
 		System.out.println("btnIserir click:" + txtAmostra.getText());
 		String[] conteudoDados = null;
 		String[] conteudoPesos = null;
-		while(true) {
+		boolean valoresCorretos = true;
+		while (valoresCorretos) {
 			conteudoDados = txtAmostra.getText().split(";");
 			conteudoPesos = txtPeso.getText().split(";");
-			if(conteudoDados.length != conteudoPesos.length) {
+			if (conteudoDados.length != conteudoPesos.length) {
 				JOptionPane.showMessageDialog(null, "Você inseriu uma quantidade diferente de valores para pesos");
-			}else {
-				amostra = txtDados(conteudoDados);
-				Amostra amostraPesos = new Amostra();
-				amostraPesos = txtDados(conteudoPesos);
-				amostra.setPesos(amostraPesos.getDados());
-				amostra.result();
+			} else {
+				valoresCorretos = false;
 			}
-			System.out.println("Amostra do txtAmostra: " + amostra.toString());
-			setTextAreaAmostra(amostra.toString());
-			atualizarGraficosTabelas();
+			
 		}
+		amostra = txtDados(conteudoDados);
+		Amostra amostraPesos = new Amostra();
+		amostraPesos = txtDados(conteudoPesos);
+		amostra.setPesos(amostraPesos.getDados());
+		System.out.println("Amostra do txtAmostra: " + amostra.toString());
+		amostra.result();
+		atualizarGraficosTabelas();
 	}
 
 	private void atualizarGraficosTabelas() throws InterruptedException {
+		setTextAreaAmostra("Dados:"+amostra.getDados()+"\nPesos: "+amostra.getPesos()+"\n Dados Pesados"+amostra.getDadosPesados());
 		listaResultados();
 		listaClasses();
 		listGraficoBarras();
@@ -536,11 +538,11 @@ public class Controller {
 //				amostra.getResultadoPRODUTO());
 //		listResultadoTabela.add(PRODUTO);
 //    	}
-		if (chkProbabilidade.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkProbabilidade: " + chkProbabilidade.selectedProperty().getValue());
-			resultadoTabela PROBABILIDADE = new resultadoTabela("PROBABILIDADE", amostra.getResultadoPROBABILIDADE());
-			listResultadoTabela.add(PROBABILIDADE);
-		}
+//		if (chkProbabilidade.selectedProperty().getValue() || tudoDescritiva) {
+//			System.out.println("chkProbabilidade: " + chkProbabilidade.selectedProperty().getValue());
+//			resultadoTabela PROBABILIDADE = new resultadoTabela("PROBABILIDADE", amostra.getResultadoPROBABILIDADE());
+//			listResultadoTabela.add(PROBABILIDADE);
+//		}
 //		if (chkFatorial.selectedProperty().getValue() || tudoDescritiva) {
 //			System.out.println("chkFatorial: " + chkFatorial.selectedProperty().getValue());
 //			resultadoTabela FATORIAL = new resultadoTabela("FATORIAL", amostra.getResultadoFATORIAL());

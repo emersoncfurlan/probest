@@ -11,8 +11,67 @@ public class Amostra {
 	private ArrayList<Double> dadosPesados = new ArrayList<Double>();
 	private ArrayList<Double> pesos = new ArrayList<Double>();
 	private double possibilidade;
+// Resultados
+	private Double ResultadoSOMATORIO;
+	private Double ResultadoQUADRADO_DA_SOMA;
+	private Double ResultadoSOMA_DE_PRODUTOS;
+	private Double ResultadoPRODUTO_DAS_SOMAS;
+	private Double ResultadoMEDIA_ARITMETICA_SIMPLES;
+	private Double ResultadoMEDIA_ARITMETICA_PONDERADA;
+	private double[] ResultadoMODA;
+	private Double ResultadoMEDIANA;
+	private Double ResultadoVARIANCIA;
+	private Double ResultadoDESVIO_PADRAO;
+	private Double ResultadoMEDIA_GEOMETRICA;
+	private Double ResultadoMEDIA_HARMONICA;
+	private Double ResultadoPRODUTO;
+	private Double ResultadoPROBABILIDADE;
+	private Double ResultadoFATORIAL;
+	private Double ResultadoSOMA_DOS_QUADRADOS;
 
-	///////////////////////////////////////////////////////////////////////////////////
+	public Amostra() {
+
+	}
+
+	public Amostra(ArrayList<Double> dados) {
+		super();
+		this.codAmostra = codAmostra + 1;
+		this.dados = dados;
+		this.pesos = pesoDefault(dados);
+	}
+
+	public Amostra(ArrayList<Double> dados, ArrayList<Double> pesos) {
+		super();
+		this.codAmostra = codAmostra + 1;
+		this.dados = dados;
+		this.pesos = pesos;
+		this.dadosPesados = dadosPesados(dados, pesos);
+	}
+
+	@Override
+	public String toString() {
+		return "Dados=" + dados + "\n pesos=" + pesos + "\n possibilidade=" + possibilidade;
+	}
+
+	public void result() {
+		this.ResultadoSOMATORIO = somatorio(dados);
+		this.ResultadoQUADRADO_DA_SOMA = (double) quadradoDaSoma(dados);
+		// this.ResultadoSOMA_DE_PRODUTOS = ; USA DUAS AMOSTRAS
+		// this.ResultadoPRODUTO_DAS_SOMAS = ; USA DUAS AMOSTRAS
+		this.ResultadoMEDIA_ARITMETICA_SIMPLES = mediaAritmetica(dadosPesados(dados, pesos));
+		this.ResultadoMEDIA_ARITMETICA_PONDERADA = mediaAritmetica(dadosPesados(dados, pesos));
+		this.ResultadoMODA = moda(dados); // da erro caso não tenha repetido
+		this.ResultadoMEDIANA = mediana(dados);
+		this.ResultadoVARIANCIA = variancia(dados);
+		this.ResultadoDESVIO_PADRAO = desvioPadrao(dados);
+		this.ResultadoMEDIA_GEOMETRICA = mediaGeometrica(dados);
+		this.ResultadoMEDIA_HARMONICA = mediaHarmonica(dados);
+		this.ResultadoPRODUTO = produto(dados);
+		this.ResultadoPROBABILIDADE = probabilidade(dados, possibilidade);
+		// this.ResultadoFATORIAL = fatorial();
+		this.ResultadoSOMA_DOS_QUADRADOS = (double) quadradoDaSoma(dados);
+	}
+
 	public double getPossibilidade() {
 		return possibilidade;
 	}
@@ -173,47 +232,12 @@ public class Amostra {
 		this.dados = dados;
 	}
 
-	@Override
-	public String toString() {
-		return "Dados=" + dados + "\n pesos=" + pesos + "\n possibilidade=" + possibilidade;
-	}
-	///////////////////////////////////////////////////////////////////////////////////
-
-	// Resultados
-	private Double ResultadoSOMATORIO;
-	private Double ResultadoQUADRADO_DA_SOMA;
-	private Double ResultadoSOMA_DE_PRODUTOS;
-	private Double ResultadoPRODUTO_DAS_SOMAS;
-	private Double ResultadoMEDIA_ARITMETICA_SIMPLES;
-	private Double ResultadoMEDIA_ARITMETICA_PONDERADA;
-	private double[] ResultadoMODA;
-	private Double ResultadoMEDIANA;
-	private Double ResultadoVARIANCIA;
-	private Double ResultadoDESVIO_PADRAO;
-	private Double ResultadoMEDIA_GEOMETRICA;
-	private Double ResultadoMEDIA_HARMONICA;
-	private Double ResultadoPRODUTO;
-	private Double ResultadoPROBABILIDADE;
-	private Double ResultadoFATORIAL;
-	private Double ResultadoSOMA_DOS_QUADRADOS;
-
-	public Amostra() {
-
+	public ArrayList<Double> getDadosPesados() {
+		return dadosPesados(this.dados, this.pesos);
 	}
 
-	public Amostra(ArrayList<Double> dados) {
-		super();
-		this.codAmostra = codAmostra + 1;
-		this.dados = dados;
-		this.pesos = pesoDefault(dados);
-	}
-
-	public Amostra(ArrayList<Double> dados, ArrayList<Double> pesos) {
-		super();
-		this.codAmostra = codAmostra + 1;
-		this.dados = dados;
-		this.dadosPesados = dadosPesados(dados, pesos);
-		this.pesos = pesos;
+	public void setDadosPesados(ArrayList<Double> dadosPesados) {
+		this.dadosPesados = dadosPesados;
 	}
 
 	private static ArrayList<Double> pesoDefault(ArrayList<Double> dados) {
@@ -254,25 +278,6 @@ public class Amostra {
 		}
 
 		return aux;
-	}
-
-	public void result() {
-		this.ResultadoSOMATORIO = somatorio(dados);
-		this.ResultadoQUADRADO_DA_SOMA = (double) quadradoDaSoma(dados);
-		// this.ResultadoSOMA_DE_PRODUTOS = ; USA DUAS AMOSTRAS
-		// this.ResultadoPRODUTO_DAS_SOMAS = ; USA DUAS AMOSTRAS
-		this.ResultadoMEDIA_ARITMETICA_SIMPLES = mediaAritmetica(dadosPesados);
-		this.ResultadoMEDIA_ARITMETICA_PONDERADA = mediaAritmetica(dadosPesados);
-		this.ResultadoMODA = moda(dados); // da erro caso não tenha repetido
-		this.ResultadoMEDIANA = mediana(dados);
-		this.ResultadoVARIANCIA = variancia(dados);
-		this.ResultadoDESVIO_PADRAO = desvioPadrao(dados);
-		this.ResultadoMEDIA_GEOMETRICA = mediaGeometrica(dados);
-		this.ResultadoMEDIA_HARMONICA = mediaHarmonica(dados);
-		this.ResultadoPRODUTO = produto(dados);
-		this.ResultadoPROBABILIDADE = probabilidade(dados, possibilidade);
-		// this.ResultadoFATORIAL = fatorial();
-		this.ResultadoSOMA_DOS_QUADRADOS = (double) quadradoDaSoma(dados);
 	}
 
 	public static double somatorio(ArrayList<Double> dados) {
@@ -470,8 +475,8 @@ public class Amostra {
 
 	/*
 	 * Quando o número elementos de um conjunto é par, a mediana é encontrada pela
-	 * média dos dois valores centrais. Assim, esses valores são somados e
-	 * divididos por dois.
+	 * média dos dois valores centrais. Assim, esses valores são somados e divididos
+	 * por dois.
 	 */
 	public static double mediana(ArrayList<Double> dados) {
 		ArrayList<Double> amostraOrdenada = ordenarAmostra(dados);

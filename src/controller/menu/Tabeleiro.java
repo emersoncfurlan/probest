@@ -15,7 +15,7 @@ public class Tabeleiro extends Thread{
 	private double tamanhoIntervalo;
 
 	public Tabeleiro(Amostra amostra) {
-		this.amostra = ordenador(amostra.getDados());
+		this.amostra = ordenador(amostra.getDadosPesados());
 		this.amplitude = getAmplitude();
 		this.numClassesAux = Math.sqrt(amostra.getDados().size());
 		this.numClassesAux = arredonda(this.numClassesAux, 4);
@@ -72,7 +72,6 @@ public class Tabeleiro extends Thread{
 				aux.add(amostra.get(i));
 			}
 		}
-
 		return aux;
 	}
 	
