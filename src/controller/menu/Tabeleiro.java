@@ -84,11 +84,17 @@ public class Tabeleiro extends Thread{
 	}
 	
 	
-	private int geraFreqAbs(double limiteInf, double limiteSup) {
+	private int geraFreqAbs(double limiteInf, double limiteSup, int classeDoTermo) {
 		int freq = 0;
 		for (double i : this.amostra) {
 			if (i >= limiteInf && i < limiteSup) {
 				freq++;
+			} else {
+				if (classeDoTermo == (this.numClasses-1)) {
+					if (i >= limiteInf && i <= limiteSup) {
+						freq++;
+					}
+				}
 			}
 		}
 		
@@ -108,7 +114,7 @@ public class Tabeleiro extends Thread{
 			double limiteMed = (limiteInf + limiteSup) / 2;
 			limiteMed = arredonda(limiteMed, 4);
 			
-			int freqAbsoluta = geraFreqAbs(limiteInf, limiteSup);
+			int freqAbsoluta = geraFreqAbs(limiteInf, limiteSup, i);
 			acumulador += freqAbsoluta;
 			int freqAcumulada = acumulador;
 			
