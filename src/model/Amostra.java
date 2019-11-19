@@ -67,7 +67,7 @@ public class Amostra {
 		this.ResultadoMEDIA_GEOMETRICA = mediaGeometrica(dados);
 		this.ResultadoMEDIA_HARMONICA = mediaHarmonica(dados);
 		this.ResultadoPRODUTO = produto(dados);
-		this.ResultadoPROBABILIDADE = probabilidade(dados, possibilidade);
+//		this.ResultadoPROBABILIDADE = probabilidade(dados, possibilidade);
 		// this.ResultadoFATORIAL = fatorial();
 		this.ResultadoSOMA_DOS_QUADRADOS = (double) quadradoDaSoma(dados);
 	}

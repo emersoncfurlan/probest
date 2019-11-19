@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,12 +15,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javafx.application.Application;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -33,6 +41,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -42,6 +51,7 @@ import model.Amostra;
 
 public class Controller {
 	private static Amostra amostra = null;
+	public static int botaoSelecionado;
 
 	@FXML
 	private ResourceBundle resources;
@@ -279,7 +289,7 @@ public class Controller {
 			System.out.println("Nenhum arquivo foi selecionado");
 		}
 		System.out.println("Arquivo selecionado:\n" + url);
-		setTextAreaAmostra(amostra.toString());
+//		setTextAreaAmostra(amostra.toString());
 	}
 
 	// leitor de linhas do arquivo carregado
@@ -287,18 +297,99 @@ public class Controller {
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		String linha = "";
 		String[] conteudo = null;
+		String[] conteudoDados = new String[0];
+		String[] conteudoPesos = new String[0];
+		Amostra amostraPesos = new Amostra();
+		boolean dados = false, pesos = false, forDados = false, forPesos = false;
+		int qtdDados = 0, qtdLinhas = 0; // define quantidade dados/pesos
+		int auxDados = 0, auxPesos = 0; // variavel auxiliar para gerenciar amostra irregular
 		while (true) {
 			if (linha != null) {
-				System.out.println(linha);
-				conteudo = linha.split(";");
-				amostra = txtDados(conteudo);
-				System.out.println("Amostra do txtAmostra: " + amostra.toString());
+				System.out.println("Linha " + qtdLinhas + " contém os elementos : " + linha);
+				conteudo = linha.split(";"); // quebro a linha em um array separando por ";"
+				// preenchendo o conteudo dados
+				if (!dados) { // se dados ainda não foi encontrado logo é false
+					for (int i = 0; i < conteudo.length || forDados; i++, qtdDados++) {
+						// se peso for encontrado, armazeno o index de peso na variavel aux e saio do
+						// for de dados
+						if (conteudo[i].equalsIgnoreCase("peso") || conteudo[i].equalsIgnoreCase("pesos")) {
+							auxDados = i; // defino ponto de inicio dos pesos
+							break; // sai do for
+						}
+						if ((conteudo[i].equalsIgnoreCase("dado") || conteudo[i].equalsIgnoreCase("dados")) || dados) {
+							if (!dados) {
+								dados = true;
+								System.out.println("Os dados foram encontrados? " + dados);
+								conteudoDados = new String[linha.length() - auxPesos];
+							}
+							// se já encontrei os dados preencho o vetor de dados
+							if (dados) {
+								if (conteudo[i] == null) {
+									break;
+								} else {
+									System.out.println("ConteudoDados adicionado: " + conteudo[i]);
+									conteudoDados[i] = conteudo[i];
+								}
+
+							}
+						}
+					}
+				}
+			}
+			// após encontrar todos os dados da amostra na linha, preencho conteudo pesos
+			// com os dados encontrados
+			if (!pesos) { // se peso ainda não encontrado logo é false
+				for (int j = auxDados; j < conteudo.length; j++) {
+					if (conteudo[j].equalsIgnoreCase("dado") || conteudo[j].equalsIgnoreCase("dados")) {
+						auxPesos = j; // defino ponto de inicio dos dados
+						dados = true; // seta a flag de dados como true
+						break; //// sai do for
+					}
+					if (((conteudo[j].equalsIgnoreCase("peso")) || (conteudo[j].equalsIgnoreCase("pesos"))) || pesos) {
+						if (!pesos) {
+							pesos = true;
+							System.out.println("Os Pesos foram encontrados? " + pesos);
+							conteudoPesos = new String[qtdDados];
+						}
+						// se já encontrei os pesos preencho o vetor de pesos
+						if (pesos) {
+							if (conteudo[j] == null) {
+								break;
+							} else {
+								System.out.println("ConteudoPesos adicionado: " + conteudo[j]);
+								conteudoPesos[j] = conteudo[j];
+							}
+
+						}
+					}
+				}
 			} else {
 				break;
 			}
+			if (linha.equalsIgnoreCase("")) {
+				System.out.println("Linha " + qtdLinhas + "está vazia...");
+			}
+			qtdLinhas++; // contador de linhas
 			linha = buffRead.readLine();
 		}
+		amostraPesos = txtDados(limpaAmostraCarregada(conteudoPesos));
+		System.out.println("conteudoDados: " + amostraPesos.toString());
+		amostra.setPesos(amostraPesos.getDados());
+		System.out.println("Amostra do txtAmostra: " + amostra.toString());
+		amostra.result();
 		buffRead.close();
+	}
+
+	public static String[] limpaAmostraCarregada(String[] valores) {
+		String[] limpo = new String[valores.length-1];
+		for (int i = 0, j =1; j < valores.length-1; i++, j++) {
+			System.out.println("valor:"+valores[j]);
+			limpo[i] = valores[j];
+		}
+		for (int i = 0; i < limpo.length; i++) {
+			System.out.println("limpos:"+valores[i]);
+		}
+		return limpo;
 	}
 
 	public static void salvarResultados(String path) throws IOException {
@@ -324,28 +415,24 @@ public class Controller {
 		System.out.println("btnIserir click:" + txtAmostra.getText());
 		String[] conteudoDados = null;
 		String[] conteudoPesos = null;
-		boolean valoresCorretos = true;
-		while (valoresCorretos) {
-			conteudoDados = txtAmostra.getText().split(";");
+		Amostra amostraPesos = new Amostra();
+		conteudoDados = txtAmostra.getText().split(";");
+		if ("".equals(txtPeso.getText())) {
+			System.out.println("Entrada de Peso Vazia, será preenchido com 1 para cada dado\n");
+		} else {
 			conteudoPesos = txtPeso.getText().split(";");
-			if (conteudoDados.length != conteudoPesos.length) {
-				JOptionPane.showMessageDialog(null, "Você inseriu uma quantidade diferente de valores para pesos");
-			} else {
-				valoresCorretos = false;
-			}
-			
+			amostraPesos = txtDados(conteudoPesos);
+			amostra.setPesos(amostraPesos.getDados());
 		}
 		amostra = txtDados(conteudoDados);
-		Amostra amostraPesos = new Amostra();
-		amostraPesos = txtDados(conteudoPesos);
-		amostra.setPesos(amostraPesos.getDados());
 		System.out.println("Amostra do txtAmostra: " + amostra.toString());
 		amostra.result();
 		atualizarGraficosTabelas();
 	}
 
 	private void atualizarGraficosTabelas() throws InterruptedException {
-		setTextAreaAmostra("Dados:"+amostra.getDados()+"\nPesos: "+amostra.getPesos()+"\n Dados Pesados"+amostra.getDadosPesados());
+		setTextAreaAmostra("Dados:" + amostra.getDados() + "\nPesos: " + amostra.getPesos() + "\n Dados Pesados"
+				+ amostra.getDadosPesados());
 		listaResultados();
 		listaClasses();
 		listGraficoBarras();
@@ -538,11 +625,6 @@ public class Controller {
 //				amostra.getResultadoPRODUTO());
 //		listResultadoTabela.add(PRODUTO);
 //    	}
-//		if (chkProbabilidade.selectedProperty().getValue() || tudoDescritiva) {
-//			System.out.println("chkProbabilidade: " + chkProbabilidade.selectedProperty().getValue());
-//			resultadoTabela PROBABILIDADE = new resultadoTabela("PROBABILIDADE", amostra.getResultadoPROBABILIDADE());
-//			listResultadoTabela.add(PROBABILIDADE);
-//		}
 //		if (chkFatorial.selectedProperty().getValue() || tudoDescritiva) {
 //			System.out.println("chkFatorial: " + chkFatorial.selectedProperty().getValue());
 //			resultadoTabela FATORIAL = new resultadoTabela("FATORIAL", amostra.getResultadoFATORIAL());
@@ -558,4 +640,230 @@ public class Controller {
 		resultadoCol.setCellValueFactory(new PropertyValueFactory<>("resultado"));
 		tableResultado.setItems(listResultadoTabela);
 	}
+
+	// Ajuda
+	/****
+	 * btnAjudaSomat
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaSomat(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 1;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaQuadradoDaSoma
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaQuadradoDaSoma(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 2;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaSomaDeProdutos
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaSomaDeProdutos(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 3;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaSomaDeProdutos
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaProdutoDaSomas(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 4;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaMediaAritm
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaMediaAritm(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 5;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaMediaAritmPond
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaMediaAritmPond(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 6;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaModa
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaModa(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 7;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaMediana
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaMediana(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 8;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaVariancia
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaVariancia(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 9;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaDesvioPadrao
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaDesvioPadrao(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 10;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaMediaGeo
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaMediaGeo(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 11;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaMediaHarm
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaMediaHarm(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 12;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaProduto
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaProduto(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 13;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaProbabilidade
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaProbabilidade(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 14;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaFatorial
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaFatorial(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 15;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
+	/****
+	 * btnAjudaSomaDosQuadrados
+	 * 
+	 * @throws InterruptedException
+	 ****/
+	@FXML
+	private void btnAjudaSomaDosQuadrados(ActionEvent event) throws IOException, InterruptedException {
+		botaoSelecionado = 16;
+		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
+		Stage stage = new Stage(); // Fill stage with content
+		stage.setScene(new Scene(telaLogin));
+		stage.show();
+	}
+
 }

@@ -13,7 +13,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -28,7 +27,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.menu.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.menu.Controller">
   <children>
       <AnchorPane prefHeight="61.0" prefWidth="1280.0" style="-fx-background-color: #666666;">
          <children>
@@ -84,15 +83,15 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.20275344180225283, 0.7158948685857321" focusTraversable="true" prefHeight="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane>
+        <AnchorPane maxHeight="900.0" maxWidth="320.0" minHeight="900.0" minWidth="320.0" prefHeight="900.0" prefWidth="320.0" SplitPane.resizableWithParent="false">
                <children>
-                  <VBox layoutX="8.0" layoutY="13.0" prefHeight="723.0" prefWidth="300.0">
+                  <VBox layoutX="8.0" layoutY="13.0" prefHeight="919.0" prefWidth="300.0">
                      <children>
                         <HBox prefHeight="32.0" prefWidth="300.0">
                            <children>
-                        <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Insira a Amostra" textAlignment="CENTER" wrapText="false">
+                        <Label alignment="CENTER" layoutY="18.0" minWidth="60.0" prefHeight="47.0" prefWidth="302.0" style="&#10;" text="Insira a Amostra" textAlignment="CENTER" wrapText="false">
                           <font>
                             <Font size="18.0" fx:id="x1" />
                           </font>
@@ -103,12 +102,11 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                         </Label>
-                              <CheckBox fx:id="chkDuasAmostras" mnemonicParsing="false" prefHeight="47.0" prefWidth="152.0" text="Duas Amostras" />
                            </children>
                         </HBox>
                         <HBox prefHeight="37.0" prefWidth="300.0">
                            <children>
-                              <TextField fx:id="txtAmostra" onAction="#txtAreaAmostra" prefHeight="31.0" prefWidth="270.0" />
+                              <TextField fx:id="txtAmostra" onAction="#txtAreaAmostra" prefHeight="31.0" prefWidth="310.0" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -116,7 +114,7 @@
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="300.0">
                            <children>
-                              <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Insira o Peso" textAlignment="CENTER" wrapText="false">
+                              <Label alignment="CENTER" minWidth="60.0" prefHeight="47.0" prefWidth="333.0" style="&#10;" text="Insira o Peso" textAlignment="CENTER" wrapText="false">
                                  <font>
                                     <Font size="18.0" fx:id="x12" />
                                  </font>
@@ -134,12 +132,12 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                            <children>
-                              <TextField fx:id="txtPeso" onAction="#txtAreaAmostra" prefHeight="31.0" prefWidth="270.0" />
+                              <TextField fx:id="txtPeso" onAction="#txtAreaAmostra" prefHeight="31.0" prefWidth="299.0" />
                            </children>
                         </HBox>
                         <HBox prefHeight="57.0" prefWidth="300.0">
                            <children>
-                              <Button fx:id="btnInserir" mnemonicParsing="false" onAction="#btnInserir" prefHeight="29.0" prefWidth="116.0" text="INSERIR">
+                              <Button fx:id="btnInserir" mnemonicParsing="false" onAction="#btnInserir" prefHeight="29.0" prefWidth="134.0" text="INSERIR">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
@@ -176,11 +174,11 @@
                           <panes>
                             <TitledPane animated="false" prefHeight="468.0" prefWidth="300.0" text="Estatistica Descritiva">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane maxHeight="-Infinity" maxWidth="300.0" minHeight="-Infinity" minWidth="300.0" prefHeight="500.0" prefWidth="300.0">
                                        <children>
                                           <ScrollPane prefHeight="528.0" prefWidth="300.0">
                                              <content>
-                                                <VBox prefHeight="989.0" prefWidth="300.0">
+                                                <VBox maxWidth="300.0" minWidth="300.0" prefWidth="300.0">
                                                    <children>
                                                       <CheckBox fx:id="chkTudoDescritiva" mnemonicParsing="false" text="Tudo">
                                                          <padding>
@@ -257,24 +255,24 @@
                             </TitledPane>
                               <TitledPane animated="false" prefHeight="468.0" prefWidth="300.0" text="Ajuda">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="300.0">
                                        <children>
-                                          <ScrollPane prefHeight="528.0" prefWidth="300.0">
+                                          <ScrollPane hbarPolicy="NEVER" prefHeight="442.0" prefWidth="316.0" vbarPolicy="ALWAYS">
                                              <content>
-                                                <VBox prefHeight="989.0" prefWidth="300.0">
+                                                <VBox prefHeight="439.0" prefWidth="296.0">
                                                    <children>
                                                       <Button fx:id="btnAjudaMedia" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media" />
-                                                      <Button fx:id="btnAjudaMediaAritm" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media Aritmética" />
-                                                      <Button fx:id="btnAjudaMediaAritmPond" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media Aritmética Ponderada" />
-                                                      <Button fx:id="btnAjudaMediaHarm" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media Harmônica" />
-                                                      <Button fx:id="btnAjudaMediaGeo" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media Geométrica" />
-                                                      <Button fx:id="btnAjudaSomat" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Somátorio" />
-                                                      <Button fx:id="btnAjudaModa" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Moda" />
-                                                      <Button fx:id="btnAjudaMediana" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Mediana" />
-                                                      <Button fx:id="btnAjudaVariancia" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Variância" />
-                                                      <Button fx:id="btnAjudaDesvioPadrao" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Desvio Padrão" />
-                                                      <Button fx:id="btnAjudaProbabilidade" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Probabilidade" />
-                                                      <Button fx:id="btnAjudaFatorial" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Fatorial" />
+                                                      <Button fx:id="btnAjudaMediaAritm" mnemonicParsing="false" onAction="#btnAjudaMediaAritm" prefHeight="30.0" prefWidth="299.0" text="Media Aritmética" />
+                                                      <Button fx:id="btnAjudaMediaAritmPond" mnemonicParsing="false" onAction="#btnAjudaMediaAritmPond" prefHeight="30.0" prefWidth="299.0" text="Media Aritmética Ponderada" />
+                                                      <Button fx:id="btnAjudaMediaHarm" mnemonicParsing="false" onAction="#btnAjudaMediaHarm" prefHeight="30.0" prefWidth="299.0" text="Media Harmônica" />
+                                                      <Button fx:id="btnAjudaMediaGeo" mnemonicParsing="false" onAction="#btnAjudaMediaGeo" prefHeight="30.0" prefWidth="299.0" text="Media Geométrica" />
+                                                      <Button fx:id="btnAjudaSomat" mnemonicParsing="false" onAction="#btnAjudaSomat" prefHeight="30.0" prefWidth="299.0" text="Somátorio" />
+                                                      <Button fx:id="btnAjudaModa" mnemonicParsing="false" onAction="#btnAjudaModa" prefHeight="30.0" prefWidth="299.0" text="Moda" />
+                                                      <Button fx:id="btnAjudaMediana" mnemonicParsing="false" onAction="#btnAjudaMediana" prefHeight="30.0" prefWidth="299.0" text="Mediana" />
+                                                      <Button fx:id="btnAjudaVariancia" mnemonicParsing="false" onAction="#btnAjudaVariancia" prefHeight="30.0" prefWidth="299.0" text="Variância" />
+                                                      <Button fx:id="btnAjudaDesvioPadrao" mnemonicParsing="false" onAction="#btnAjudaDesvioPadrao" prefHeight="30.0" prefWidth="299.0" text="Desvio Padrão" />
+                                                      <Button fx:id="btnAjudaProbabilidade" mnemonicParsing="false" onAction="#btnAjudaProbabilidade" prefHeight="30.0" prefWidth="300.0" text="Probabilidade" />
+                                                      <Button fx:id="btnAjudaFatorial" mnemonicParsing="false" onAction="#btnAjudaFatorial" prefHeight="30.0" prefWidth="299.0" text="Fatorial" />
                                                    </children>
                                                 </VBox>
                                              </content>
@@ -291,9 +289,9 @@
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="877.0" prefWidth="932.0">
+            <AnchorPane id="Content" maxWidth="810.0" minWidth="810.0" prefHeight="853.0" prefWidth="810.0">
               <children>
-                        <Label fx:id="lblAmostra" alignment="CENTER" layoutX="370.0" layoutY="14.0" style="&#10;" text="Amostra" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="lblAmostra" alignment="CENTER" layoutX="372.0" layoutY="18.0" style="&#10;" text="Amostra" textAlignment="CENTER" wrapText="false">
                            <textFill>
                               <Color blue="0.624" green="0.624" red="0.624" fx:id="x222" />
                            </textFill>
@@ -301,25 +299,11 @@
                               <Font size="18.0" fx:id="x232" />
                            </font>
                         </Label>
-                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Resultados" textAlignment="CENTER" wrapText="false">
-                           <textFill>
-                              <Color blue="0.624" green="0.624" red="0.624" fx:id="x22" />
-                           </textFill>
-                           <font>
-                              <Font size="18.0" fx:id="x23" />
-                           </font></Label>
-                        <VBox layoutX="8.0" layoutY="48.0">
+                        <VBox layoutX="8.0" layoutY="48.0" prefWidth="780.0">
                            <children>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="100.0" prefWidth="737.0">
                                  <children>
-                                    <TableView fx:id="tableResultado">
-                                      <columns>
-                                        <TableColumn fx:id="funcionalidadeCol" prefWidth="140.0" text="Funcionalidade" />
-                                        <TableColumn fx:id="resultadoCol" minWidth="4.0" prefWidth="159.0" text="Resultado" />
-                                      </columns>
-                                    </TableView>
-                                    <Separator orientation="VERTICAL" prefHeight="100.0" prefWidth="36.0" />
-                                    <TextArea fx:id="txtAreaAmostra" editable="false">
+                                    <TextArea fx:id="txtAreaAmostra" editable="false" prefHeight="100.0" prefWidth="780.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -337,14 +321,14 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <TableView fx:id="tableClasses" prefHeight="400.0" prefWidth="900.0">
+                              <TableView fx:id="tableClasses" maxWidth="780.0" minWidth="780.0" prefWidth="780.0">
                                  <columns>
-                                    <TableColumn fx:id="limiteInf" editable="false" maxWidth="90.0" prefWidth="90.0" text="Limite Inf" />
-                                    <TableColumn fx:id="limiteSup" editable="false" maxWidth="90.0" prefWidth="90.0" text="Limite Sup" />
-                                    <TableColumn fx:id="freqAbsoluta" editable="false" maxWidth="150.0" minWidth="4.0" prefWidth="155.0" text="Frequência Absoluta" />
-                                    <TableColumn fx:id="freqAcumulada" editable="false" maxWidth="170.0" minWidth="4.0" prefWidth="175.0" text="Frequência Acumulada" />
-                                    <TableColumn fx:id="freqRelativa" editable="false" minWidth="4.0" prefWidth="178.0" text="Frequência Relativa" />
-                                    <TableColumn fx:id="freqRelativaAcm" editable="false" maxWidth="200.0" minWidth="4.0" prefWidth="200.0" text="Frequência Relativa Acumulada" />
+                                    <TableColumn fx:id="limiteInf" editable="false" maxWidth="90.0" prefWidth="86.0" text="Limite Inf" />
+                                    <TableColumn fx:id="limiteSup" editable="false" maxWidth="103.33334350585938" prefWidth="94.0" text="Limite Sup" />
+                                    <TableColumn fx:id="freqAbsoluta" editable="false" maxWidth="150.0" minWidth="4.0" prefWidth="135.33331298828125" text="Frequência Absoluta" />
+                                    <TableColumn fx:id="freqAcumulada" editable="false" maxWidth="194.0" minWidth="4.0" prefWidth="138.3333740234375" text="Frequência Acumulada" />
+                                    <TableColumn fx:id="freqRelativa" editable="false" minWidth="4.0" prefWidth="130.66668701171875" text="Frequência Relativa" />
+                                    <TableColumn fx:id="freqRelativaAcm" editable="false" maxWidth="338.6666259765625" minWidth="4.0" prefWidth="193.0" text="Frequência Relativa Acumulada" />
                                  </columns>
                               </TableView>
                               <Label alignment="CENTER" style="&#10;" text="Grafico de Barras" textAlignment="CENTER" wrapText="false">
@@ -358,7 +342,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <BarChart fx:id="graficoDeBarras">
+                              <BarChart fx:id="graficoDeBarras" maxHeight="400.0" maxWidth="780.0" minHeight="400.0" minWidth="780.0" prefHeight="400.0" prefWidth="780.0">
                                 <xAxis>
                                   <CategoryAxis fx:id="BarChartCategoryAxis" side="BOTTOM" />
                                 </xAxis>
@@ -380,7 +364,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <LineChart fx:id="graficoDeLinhas">
+                              <LineChart fx:id="graficoDeLinhas" maxHeight="400.0" maxWidth="780.0" minHeight="400.0" minWidth="780.0" prefHeight="400.0" prefWidth="780.0">
                                 <xAxis>
                                   <CategoryAxis fx:id="LinhaCategoryAxis" side="BOTTOM" />
                                 </xAxis>
@@ -397,6 +381,24 @@
             </AnchorPane>
           </content>
         </ScrollPane>
+            <AnchorPane maxHeight="948.0" maxWidth="450.0" minHeight="900.0" minWidth="450.0" prefHeight="948.0" prefWidth="450.0" SplitPane.resizableWithParent="false">
+               <children>
+          <Label alignment="CENTER" layoutX="185.0" layoutY="18.0" style="&#10;" text="Resultados" textAlignment="CENTER" wrapText="false">
+                     <textFill>
+                        <Color blue="0.624" green="0.624" red="0.624" fx:id="x22" />
+                     </textFill>
+                     <font>
+                        <Font size="18.0" fx:id="x23" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tableResultado" layoutX="21.0" layoutY="82.0" prefHeight="715.0" prefWidth="430.0" AnchorPane.rightAnchor="10.0">
+                    <columns>
+                      <TableColumn fx:id="funcionalidadeCol" prefWidth="240.0" text="Funcionalidade" />
+                      <TableColumn fx:id="resultadoCol" minWidth="0.0" prefWidth="215.0" text="Resultado" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
       </items>
     </SplitPane>
   </children>
