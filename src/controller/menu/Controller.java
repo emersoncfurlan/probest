@@ -50,7 +50,7 @@ import javafx.stage.Stage;
 import model.Amostra;
 
 public class Controller {
-	private static Amostra amostra = null;
+	private static Amostra amostra = new Amostra();
 	public static int botaoSelecionado;
 
 	@FXML
@@ -373,7 +373,8 @@ public class Controller {
 			linha = buffRead.readLine();
 		}
 		amostraPesos = txtDados(limpaAmostraCarregada(conteudoPesos));
-		System.out.println("conteudoDados: " + amostraPesos.toString());
+//		amostra = txtDados(limpaAmostraCarregada(conteudoDados), amostraPesos.getDados());
+//		System.out.println("conteudoDados: " + amostraPesos.toString());
 		amostra.setPesos(amostraPesos.getDados());
 		System.out.println("Amostra do txtAmostra: " + amostra.toString());
 		amostra.result();
@@ -381,13 +382,12 @@ public class Controller {
 	}
 
 	public static String[] limpaAmostraCarregada(String[] valores) {
-		String[] limpo = new String[valores.length-1];
-		for (int i = 0, j =1; j < valores.length-1; i++, j++) {
-			System.out.println("valor:"+valores[j]);
+		String[] limpo = new String[valores.length-2];
+		System.out.println("valores.length"+limpo.length);
+		for (int i = 0, j = 1; i < limpo.length ; i++, j++) {
+			System.out.println("valores[j]: "+valores[j]);
 			limpo[i] = valores[j];
-		}
-		for (int i = 0; i < limpo.length; i++) {
-			System.out.println("limpos:"+valores[i]);
+			System.out.println("limpo[i]: "+limpo[i]);
 		}
 		return limpo;
 	}

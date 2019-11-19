@@ -225,7 +225,7 @@ public class Amostra {
 	}
 
 	public ArrayList<Double> getDados() {
-		return dados;
+		return this.dados;
 	}
 
 	public void setDados(ArrayList<Double> dados) {
