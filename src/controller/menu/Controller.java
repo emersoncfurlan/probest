@@ -271,9 +271,10 @@ public class Controller {
 	void initialize() {
 	}
 
-	/**** selecionar arquivo ****/
+	/**** selecionar arquivo 
+	 * @throws InterruptedException ****/
 	@FXML
-	public void btnCarregar(ActionEvent event) throws IOException {
+	public void btnCarregar(ActionEvent event) throws IOException, InterruptedException {
 		System.out.println("btnCarregar click");
 		FileChooser fc = new FileChooser();
 		fc.setInitialDirectory(new File(System.getProperty("user.home"))); // defino caminho inicial
@@ -289,6 +290,7 @@ public class Controller {
 			System.out.println("Nenhum arquivo foi selecionado");
 		}
 		System.out.println("Arquivo selecionado:\n" + url);
+		atualizarGraficosTabelas();
 //		setTextAreaAmostra(amostra.toString());
 	}
 
@@ -300,16 +302,16 @@ public class Controller {
 		String[] conteudoDados = new String[0];
 		String[] conteudoPesos = new String[0];
 		Amostra amostraPesos = new Amostra();
-		boolean dados = false, pesos = false, forDados = false, forPesos = false;
-		int qtdDados = 0, qtdLinhas = 0; // define quantidade dados/pesos
+		boolean dados = false, pesos = false, forDados = false;
+		int qtdLinhas = 0; // define quantidade de linhas para exibição e armazenagem de histórico
 		int auxDados = 0, auxPesos = 0; // variavel auxiliar para gerenciar amostra irregular
 		while (true) {
 			if (linha != null) {
-				System.out.println("Linha " + qtdLinhas + " contém os elementos : " + linha);
+				System.out.println("Linha " + qtdLinhas + " contém os elementos : " + linha + "tamanho linha: "+linha.length());
 				conteudo = linha.split(";"); // quebro a linha em um array separando por ";"
 				// preenchendo o conteudo dados
 				if (!dados) { // se dados ainda não foi encontrado logo é false
-					for (int i = 0; i < conteudo.length || forDados; i++, qtdDados++) {
+					for (int i = 0; i < conteudo.length || forDados; i++) {
 						// se peso for encontrado, armazeno o index de peso na variavel aux e saio do
 						// for de dados
 						if (conteudo[i].equalsIgnoreCase("peso") || conteudo[i].equalsIgnoreCase("pesos")) {
@@ -320,7 +322,8 @@ public class Controller {
 							if (!dados) {
 								dados = true;
 								System.out.println("Os dados foram encontrados? " + dados);
-								conteudoDados = new String[linha.length() - auxPesos];
+								conteudoDados = new String[conteudo.length - auxPesos]; // tamanho atual menos o tamanho
+																						// já percorrido da linha
 							}
 							// se já encontrei os dados preencho o vetor de dados
 							if (dados) {
@@ -335,31 +338,33 @@ public class Controller {
 						}
 					}
 				}
-			}
-			// após encontrar todos os dados da amostra na linha, preencho conteudo pesos
-			// com os dados encontrados
-			if (!pesos) { // se peso ainda não encontrado logo é false
-				for (int j = auxDados; j < conteudo.length; j++) {
-					if (conteudo[j].equalsIgnoreCase("dado") || conteudo[j].equalsIgnoreCase("dados")) {
-						auxPesos = j; // defino ponto de inicio dos dados
-						dados = true; // seta a flag de dados como true
-						break; //// sai do for
-					}
-					if (((conteudo[j].equalsIgnoreCase("peso")) || (conteudo[j].equalsIgnoreCase("pesos"))) || pesos) {
-						if (!pesos) {
-							pesos = true;
-							System.out.println("Os Pesos foram encontrados? " + pesos);
-							conteudoPesos = new String[qtdDados];
+				// após encontrar todos os dados da amostra na linha, preencho conteudo pesos
+				// com os dados encontrados
+				if (!pesos) { // se peso ainda não encontrado logo é false
+					for (int j = auxDados; j < conteudo.length; j++) {
+						if (conteudo[j].equalsIgnoreCase("dado") || conteudo[j].equalsIgnoreCase("dados")) {
+							auxPesos = j; // defino ponto de inicio dos dados
+							dados = true; // seta a flag de dados como true
+							break; //// sai do for
 						}
-						// se já encontrei os pesos preencho o vetor de pesos
-						if (pesos) {
-							if (conteudo[j] == null) {
-								break;
-							} else {
-								System.out.println("ConteudoPesos adicionado: " + conteudo[j]);
-								conteudoPesos[j] = conteudo[j];
+						if (((conteudo[j].equalsIgnoreCase("peso")) || (conteudo[j].equalsIgnoreCase("pesos")))
+								|| pesos) {
+							if (!pesos) {
+								pesos = true;
+								System.out.println("Os Pesos foram encontrados? " + pesos);
+								conteudoPesos = new String[conteudo.length];
 							}
+							// se já encontrei os pesos preencho o vetor de pesos
+							if (pesos) {
+								if (conteudo[j] == null) {
+									System.out.println("quebra");
+									break;
+								} else {
+									System.out.println("ConteudoPesos adicionado: " + conteudo[j]);
+									conteudoPesos[j] = conteudo[j];
+								}
 
+							}
 						}
 					}
 				}
@@ -372,6 +377,13 @@ public class Controller {
 			qtdLinhas++; // contador de linhas
 			linha = buffRead.readLine();
 		}
+		for (int j = 0; j < conteudoDados.length; j++) {
+			System.out.println("Dados: " + conteudoDados[j]);
+		}
+		for (int j = 0; j < conteudoPesos.length; j++) {
+			System.out.println("Pesos: " + conteudoPesos[j]);
+		}
+		amostra = txtDados(limpaAmostraCarregada(conteudoDados));
 		amostraPesos = txtDados(limpaAmostraCarregada(conteudoPesos));
 //		amostra = txtDados(limpaAmostraCarregada(conteudoDados), amostraPesos.getDados());
 //		System.out.println("conteudoDados: " + amostraPesos.toString());
@@ -382,12 +394,12 @@ public class Controller {
 	}
 
 	public static String[] limpaAmostraCarregada(String[] valores) {
-		String[] limpo = new String[valores.length-2];
-		System.out.println("valores.length"+limpo.length);
-		for (int i = 0, j = 1; i < limpo.length ; i++, j++) {
-			System.out.println("valores[j]: "+valores[j]);
+		String[] limpo = new String[valores.length - 2];
+		System.out.println("valores.length" + limpo.length);
+		for (int i = 0, j = 1; i < limpo.length; i++, j++) {
+			System.out.println("valores[j]: " + valores[j]);
 			limpo[i] = valores[j];
-			System.out.println("limpo[i]: "+limpo[i]);
+			System.out.println("limpo[i]: " + limpo[i]);
 		}
 		return limpo;
 	}
@@ -440,8 +452,11 @@ public class Controller {
 	}
 
 	public static Amostra txtDados(String[] conteudo) {
+		for (int i = 0; i < conteudo.length / 2; i++) {
+			System.out.println("conteudo: " + conteudo[i]);
+		}
 		ArrayList<Double> dados = new ArrayList<Double>();
-		for (int i = 0; i < conteudo.length; i++) {
+		for (int i = 0; i < conteudo.length / 2; i++) {
 			dados.add(Double.parseDouble(conteudo[i]));
 		}
 		Amostra novaAmostra = new Amostra(dados);
