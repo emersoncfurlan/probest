@@ -80,14 +80,13 @@ public class ControllerAjuda implements Initializable {
 		String txt;
 		switch (codBotao) {
 		case 1: // somatorio simples
-			
 			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
 			return txt;
 		case 2: // quadrado da soma
-			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
+			txt = "https://www.youtube-nocookie.com/embed/Vf7qfYX1Fck";
 			return txt;
 		case 3: // produto das somas
-			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
+			txt = "https://www.youtube-nocookie.com/embed/JtHS7GdcIMs";
 			return txt;
 		case 4: // media aritmetica simples
 			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
@@ -96,10 +95,10 @@ public class ControllerAjuda implements Initializable {
 			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
 			return txt;
 		case 6: // moda
-			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
+			txt = "https://www.youtube-nocookie.com/embed/vDqCrYmXfIk";
 			return txt;
 		case 7: // mediana
-			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
+			txt = "https://www.youtube-nocookie.com/embed/RICaIF5q2FQ";
 			return txt;
 		case 8: // variancia
 			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
@@ -108,10 +107,10 @@ public class ControllerAjuda implements Initializable {
 			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
 			return txt;
 		case 10: // media geometrica
-			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
+			txt = "https://www.youtube-nocookie.com/embed/yiApPbh1VDM";
 			return txt;
 		case 11: // media harmonica
-			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
+			txt = "https://www.youtube-nocookie.com/embed/byDVo4inbvI";
 			return txt;
 		case 12: // produto
 			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
@@ -123,7 +122,7 @@ public class ControllerAjuda implements Initializable {
 			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
 			return txt;
 		case 15: // soma de quadrados
-			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
+			txt = "https://www.youtube-nocookie.com/embed/Vf7qfYX1Fck";
 			return txt;
 		default:
 			break;
@@ -164,7 +163,7 @@ public class ControllerAjuda implements Initializable {
 					+ "n: número de dados";
 			return txt;
 		case 5: // media aritmetica ponderada
-			txt = "A média aritmética ponderada é calculada multiplicando cada valor do conjunto de dados pelo seu peso.\r\n"
+			txt = "A m�dia aritm�tica ponderada � calculada multiplicando cada valor do conjunto de dados pelo seu peso.\r\n"
 					+ "Depois, encontra-se a soma desses valores que será dividida pela soma dos pesos.\r\n" + "\r\n"
 					+ "Sendo:\r\n" + "Mp: Média aritmética ponderada\r\n" + "p1, p2,..., Pn: pesos\r\n"
 					+ "x1, x2,...,Xn: valores dos dados\r\n" + "";
@@ -179,7 +178,7 @@ public class ControllerAjuda implements Initializable {
 					+ "Quando o número de elementos de um conjunto é ímpar, basta retirar o valor do meio, lembrando que os valores devem estar em ordem.";
 			return txt;
 		case 8: // variancia
-			txt = "Variância é uma medida de dispersão e é usada também para expressar o quanto um conjunto de dados se desvia da média.\r\n"
+			txt = "Vari�ncia � uma medida de dispers�oo e � usada tamb�m para expressar o quanto um conjunto de dados se desvia da média.\r\n"
 					+ "O desvio padrão (DP) é definido como a raiz quadrada da variância (V).\r\n" + "\r\n" + "\r\n"
 					+ "Sendo:\r\n"
 					+ "∑: símbolo de somatório. Indica que temos que somar todos os termos, desde a primeira posição (i=1) até a posição n\r\n"
@@ -217,7 +216,7 @@ public class ControllerAjuda implements Initializable {
 					+ "n(Ω): número total de casos possíveis";
 			return txt;
 		case 14: // fatorial
-			txt = "Fatorial é um número natural inteiro positivo, o qual é representado por n!\r\n"
+			txt = "Fatorial � um n�mero natural inteiro positivo, o qual � representado por n!\r\n"
 					+ "O fatorial de um número é calculado pela multiplicação desse número por todos os seus antecessores até chegar ao número 1. Note que nesses produtos, o zero (0) é excluído.\r\n"
 					+ "O fatorial é representado por:\r\n" + "n!= n.(n-1) . (n-2) . (n-3) …. (n-3)!\r\n" + "\r\n"
 					+ "Sendo:\r\n" + "\r\n" + "N → é o número inteiro que determina o fatorial;";
