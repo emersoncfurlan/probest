@@ -261,17 +261,18 @@
                                              <content>
                                                 <VBox prefHeight="439.0" prefWidth="296.0">
                                                    <children>
-                                                      <Button fx:id="btnAjudaMedia" mnemonicParsing="false" prefHeight="30.0" prefWidth="299.0" text="Media" />
+                                                      <Button fx:id="btnAjudaSomat" mnemonicParsing="false" onAction="#btnAjudaSomat" prefHeight="30.0" prefWidth="299.0" text="Somátorio" />
+                                                      <Button fx:id="btnAjudaSomaDosQuadrados" mnemonicParsing="false" onAction="#btnAjudaSomaDosQuadrados" prefHeight="30.0" prefWidth="299.0" text="Soma dos Quadrados" />
+                                                      <Button fx:id="btnAjudaProdutoDaSoma" mnemonicParsing="false" onAction="#btnAjudaProdutoDaSomas" prefHeight="30.0" prefWidth="299.0" text="Produto da Soma" />
+                                                      <Button fx:id="btnAjudaSomaDeProdutos" mnemonicParsing="false" onAction="#btnAjudaSomaDeProdutos" prefHeight="30.0" prefWidth="299.0" text="Soma de Produtos" />
                                                       <Button fx:id="btnAjudaMediaAritm" mnemonicParsing="false" onAction="#btnAjudaMediaAritm" prefHeight="30.0" prefWidth="299.0" text="Media Aritmética" />
                                                       <Button fx:id="btnAjudaMediaAritmPond" mnemonicParsing="false" onAction="#btnAjudaMediaAritmPond" prefHeight="30.0" prefWidth="299.0" text="Media Aritmética Ponderada" />
                                                       <Button fx:id="btnAjudaMediaHarm" mnemonicParsing="false" onAction="#btnAjudaMediaHarm" prefHeight="30.0" prefWidth="299.0" text="Media Harmônica" />
                                                       <Button fx:id="btnAjudaMediaGeo" mnemonicParsing="false" onAction="#btnAjudaMediaGeo" prefHeight="30.0" prefWidth="299.0" text="Media Geométrica" />
-                                                      <Button fx:id="btnAjudaSomat" mnemonicParsing="false" onAction="#btnAjudaSomat" prefHeight="30.0" prefWidth="299.0" text="Somátorio" />
                                                       <Button fx:id="btnAjudaModa" mnemonicParsing="false" onAction="#btnAjudaModa" prefHeight="30.0" prefWidth="299.0" text="Moda" />
                                                       <Button fx:id="btnAjudaMediana" mnemonicParsing="false" onAction="#btnAjudaMediana" prefHeight="30.0" prefWidth="299.0" text="Mediana" />
                                                       <Button fx:id="btnAjudaVariancia" mnemonicParsing="false" onAction="#btnAjudaVariancia" prefHeight="30.0" prefWidth="299.0" text="Variância" />
                                                       <Button fx:id="btnAjudaDesvioPadrao" mnemonicParsing="false" onAction="#btnAjudaDesvioPadrao" prefHeight="30.0" prefWidth="299.0" text="Desvio Padrão" />
-                                                      <Button fx:id="btnAjudaProbabilidade" mnemonicParsing="false" onAction="#btnAjudaProbabilidade" prefHeight="30.0" prefWidth="300.0" text="Probabilidade" />
                                                       <Button fx:id="btnAjudaFatorial" mnemonicParsing="false" onAction="#btnAjudaFatorial" prefHeight="30.0" prefWidth="299.0" text="Fatorial" />
                                                    </children>
                                                 </VBox>
