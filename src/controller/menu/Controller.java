@@ -479,18 +479,15 @@ public class Controller {
 		}
 //		amostra = new Amostra(dados, pesos);
 //		amostra = txtDados(conteudoDados);
-	System.out.println("Amostra do txtAmostra: "+amostra.toString());amostra.result();
+		System.out.println("Amostra do txtAmostra: " + amostra.toString());
+		amostra.result();
 
-	atualizarGraficosTabelas();
+		atualizarGraficosTabelas();
 
 	}
 
 	private void atualizarGraficosTabelas() throws InterruptedException {
-		listGraficoDeBarrasX.clear();
-		listClassesTabela.clear();
-		listGraficoDeLinha.clear();
-		listResultadoTabela.clear();
-		
+		clear(); //limpa para inserir a nova amostra
 		setTextAreaAmostra("Dados:" + amostra.getDados() + "\nPesos: " + amostra.getPesos() + "\n Dados Pesados"
 				+ amostra.getDadosPesados());
 		listaResultados();
@@ -499,7 +496,14 @@ public class Controller {
 		listGraficoLinha();
 	}
 	
-		public static Amostra txtDados(String[] conteudo) {
+	public void clear() {
+		listResultadoTabela.clear();
+		listClassesTabela.clear();
+		graficoDeLinhas.getData().clear();
+		graficoDeBarras.getData().clear();
+	}
+
+	public static Amostra txtDados(String[] conteudo) {
 		for (int i = 0; i < conteudo.length / 2; i++) {
 			System.out.println("conteudo: " + conteudo[i]);
 		}
@@ -532,7 +536,6 @@ public class Controller {
 	 ****/
 	private static ObservableList<String> listGraficoDeBarrasX = FXCollections.observableArrayList();
 
-	@SuppressWarnings("unchecked")
 	private void listGraficoBarras() throws InterruptedException {
 		Tabeleiro classeTabela = new Tabeleiro(amostra);
 		ArrayList<Classe> listClasses = new ArrayList<Classe>();
