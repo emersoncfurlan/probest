@@ -56,8 +56,8 @@ public class Amostra {
 	public void result() {
 		this.ResultadoSOMATORIO = somatorio(dados);
 		this.ResultadoQUADRADO_DA_SOMA = (double) quadradoDaSoma(dados);
-		// this.ResultadoSOMA_DE_PRODUTOS = ; USA DUAS AMOSTRAS
-		// this.ResultadoPRODUTO_DAS_SOMAS = ; USA DUAS AMOSTRAS
+		this.ResultadoSOMA_DE_PRODUTOS = 5.0; // USA DUAS AMOSTRAS
+		this.ResultadoPRODUTO_DAS_SOMAS = 5.0; // USA DUAS AMOSTRAS
 		this.ResultadoMEDIA_ARITMETICA_SIMPLES = mediaAritmetica(dadosPesados(dados, pesos));
 		this.ResultadoMEDIA_ARITMETICA_PONDERADA = mediaAritmetica(dadosPesados(dados, pesos));
 		this.ResultadoMODA = moda(dados); // da erro caso não tenha repetido
@@ -69,7 +69,7 @@ public class Amostra {
 		this.ResultadoPRODUTO = produto(dados);
 //		this.ResultadoPROBABILIDADE = probabilidade(dados, possibilidade);
 		// this.ResultadoFATORIAL = fatorial();
-		this.ResultadoSOMA_DOS_QUADRADOS = (double) quadradoDaSoma(dados);
+		this.ResultadoSOMA_DOS_QUADRADOS = (double) somaDeQuadrados(dados);
 	}
 
 	public double getPossibilidade() {
@@ -328,7 +328,7 @@ public class Amostra {
 		double mg = 0;
 		double produto = 0;
 		produto = produto(dados);
-		mg = Math.pow(produto, (1 / dados.size()));
+		mg = Math.pow(produto, ((double) 1 / dados.size()));
 		return mg;
 	}
 
@@ -495,7 +495,7 @@ public class Amostra {
 		for (Double dado : dados) {
 			somat += Math.pow((double) dado - ma, 2);
 		}
-		return somat / dados.size();
+		return somat / (dados.size()-1);
 	}
 
 	// Desvio Padrão
