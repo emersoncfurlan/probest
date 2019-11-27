@@ -1,4 +1,4 @@
-package controller.menu;
+package utils;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;

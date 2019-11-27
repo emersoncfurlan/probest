@@ -1,7 +1,9 @@
-package controller.menu;
+package controller.ajuda;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import controller.menu.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -313,6 +315,7 @@ public class ControllerAjuda implements Initializable {
 		double videoX = WebViewVideo.getLayoutX();
 		double videoY = WebViewVideo.getLayoutY();
 		// preenche a tela com as informações
+		labelAjuda.setText(descCurta(codBotao));
 		txtDescricaoCurta.setText(descCurta(codBotao));
 		txtDescricaoAjuda.setText(descLonga(codBotao));
 		WebViewVideo = carregaVideo(defineUrl(codBotao));

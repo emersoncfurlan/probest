@@ -3,10 +3,8 @@ package controller.menu;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javafx.application.Application;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,7 +21,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -41,13 +37,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Amostra;
+import utils.Classe;
+import utils.Tabeleiro;
+import utils.resultadoTabela;
 
 public class Controller {
 	private static Amostra amostra = new Amostra();
@@ -153,8 +151,6 @@ public class Controller {
 	@FXML
 	private CheckBox chkSomaQuadrados;
 
-	// fim checkBox
-
 	@FXML
 	private Label lblAmostra;
 
@@ -192,7 +188,6 @@ public class Controller {
 	private Font x2311;
 
 	// buttons de ajuda
-
 	@FXML
 	private Button btnAjudaMedia;
 
@@ -259,7 +254,6 @@ public class Controller {
 	private NumberAxis BarChartNumberAxis;
 
 	// table classes
-
 	@FXML
 	private TableView<Classe> tableClasses;
 
@@ -290,6 +284,43 @@ public class Controller {
 
 	@FXML
 	private TableColumn<resultadoTabela, SimpleDoubleProperty> resultadoCol;
+	
+    @FXML
+    void gerenciaCheckBox(ActionEvent event) {
+    	if(chkTudoDescritiva.selectedProperty().getValue()) {
+    		chkMediaAritmetica.setSelected(true);
+    		chkMediaAritmeticaPonderada.setSelected(true);
+    		chkMediaHarm.setSelected(true);
+    		chkMediaGeo.setSelected(true);
+    		chkSomat.setSelected(true);
+    		chkModa.setSelected(true);
+    		chkMediana.setSelected(true);
+    		chkVariancia.setSelected(true);
+    		chkDesvioPadrao.setSelected(true);
+    		chkProduto.setSelected(true);
+    		chkProduto.setSelected(true);
+    		chkQuadradoSoma.setSelected(true);
+    		chkSomaProdutos.setSelected(true);
+    		chkSomaQuadrados.setSelected(true);
+    		chkProdutoSoma.setSelected(true);
+    	}else {
+    		chkMediaAritmetica.setSelected(false);
+    		chkMediaAritmeticaPonderada.setSelected(false);
+    		chkMediaHarm.setSelected(false);
+    		chkMediaGeo.setSelected(false);
+    		chkSomat.setSelected(false);
+    		chkModa.setSelected(false);
+    		chkMediana.setSelected(false);
+    		chkVariancia.setSelected(false);
+    		chkDesvioPadrao.setSelected(false);
+    		chkProduto.setSelected(false);
+    		chkProduto.setSelected(false);
+    		chkQuadradoSoma.setSelected(false);
+    		chkSomaProdutos.setSelected(false);
+    		chkSomaQuadrados.setSelected(false);
+    		chkProdutoSoma.setSelected(false);
+    	}
+    }
 
 	@FXML
 	void initialize() {
@@ -310,7 +341,6 @@ public class Controller {
 		File arquivoSelecionado = fc.showOpenDialog(null);
 		String url = null;
 		if (arquivoSelecionado != null) {
-//			openFile(arquivoSelecionado);
 			System.out.println("Endereco do arquivo: " + arquivoSelecionado.getAbsolutePath());
 			leitor(arquivoSelecionado.getAbsolutePath());
 		} else {
@@ -318,7 +348,6 @@ public class Controller {
 		}
 		System.out.println("Arquivo selecionado:\n" + url);
 		atualizarGraficosTabelas();
-//		setTextAreaAmostra(amostra.toString());
 	}
 
 	// leitor de linhas do arquivo carregado
@@ -413,8 +442,6 @@ public class Controller {
 		}
 		amostra = txtDados(limpaAmostraCarregada(conteudoDados));
 		amostraPesos = txtDados(limpaAmostraCarregada(conteudoPesos));
-//		amostra = txtDados(limpaAmostraCarregada(conteudoDados), amostraPesos.getDados());
-//		System.out.println("conteudoDados: " + amostraPesos.toString());
 		amostra.setPesos(amostraPesos.getDados());
 		System.out.println("Amostra do txtAmostra: " + amostra.toString());
 		amostra.result();
@@ -440,11 +467,6 @@ public class Controller {
 		buffWrite.close();
 	}
 
-	@FXML
-	void txtAreaAmostra(ActionEvent event) {
-
-	}
-
 	/****
 	 * btnInserir - Inserir amostra
 	 * 
@@ -455,7 +477,6 @@ public class Controller {
 		System.out.println("btnIserir click:" + txtAmostra.getText());
 		String[] conteudoDados = null;
 		String[] conteudoPesos = null;
-		Amostra amostraPesos;
 		ArrayList<Double> pesos = new ArrayList<Double>();
 		ArrayList<Double> dados = new ArrayList<Double>();
 		conteudoDados = txtAmostra.getText().split(";");
@@ -466,28 +487,21 @@ public class Controller {
 			amostra = null;
 		}
 		if ("".equals(txtPeso.getText())) {
-//				System.out.println("Entrada de Peso Vazia, será preenchido com 1 para cada dado\n");
 			amostra = new Amostra(dados);
 		} else {
 			conteudoPesos = txtPeso.getText().split(";");
-//				amostraPesos = txtDados(conteudoPesos);
-//				amostra.setPesos(amostraPesos.getDados());
 			for (int i = 0; i < conteudoPesos.length; i++) {
 				pesos.add(Double.valueOf(conteudoPesos[i]));
 			}
 			amostra = new Amostra(dados, pesos);
 		}
-//		amostra = new Amostra(dados, pesos);
-//		amostra = txtDados(conteudoDados);
 		System.out.println("Amostra do txtAmostra: " + amostra.toString());
 		amostra.result();
-
 		atualizarGraficosTabelas();
-
 	}
 
 	private void atualizarGraficosTabelas() throws InterruptedException {
-		clear(); //limpa para inserir a nova amostra
+		clear(); // limpa para inserir a nova amostra
 		setTextAreaAmostra("Dados:" + amostra.getDados() + "\nPesos: " + amostra.getPesos() + "\n Dados Pesados"
 				+ amostra.getDadosPesados());
 		listaResultados();
@@ -495,7 +509,7 @@ public class Controller {
 		listGraficoBarras();
 		listGraficoLinha();
 	}
-	
+
 	public void clear() {
 		listResultadoTabela.clear();
 		listClassesTabela.clear();
@@ -718,9 +732,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaSomat(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 1;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -732,9 +746,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaQuadradoDaSoma(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 2;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -746,9 +760,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaSomaDeProdutos(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 3;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -760,9 +774,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaProdutoDaSomas(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 4;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -774,9 +788,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaMediaAritm(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 5;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -788,9 +802,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaMediaAritmPond(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 6;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -802,9 +816,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaModa(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 7;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -816,9 +830,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaMediana(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 8;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -830,9 +844,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaVariancia(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 9;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -844,9 +858,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaDesvioPadrao(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 10;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -858,9 +872,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaMediaGeo(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 11;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -872,9 +886,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaMediaHarm(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 12;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -886,25 +900,11 @@ public class Controller {
 	@FXML
 	private void btnAjudaProduto(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 13;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
-
-//	/****
-//	 * btnAjudaProbabilidade
-//	 * 
-//	 * @throws InterruptedException
-//	 ****/
-//	@FXML
-//	private void btnAjudaProbabilidade(ActionEvent event) throws IOException, InterruptedException {
-//		botaoSelecionado = 14;
-//		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-//		Stage stage = new Stage(); // Fill stage with content
-//		stage.setScene(new Scene(telaLogin));
-//		stage.show();
-//	}
 
 	/****
 	 * btnAjudaFatorial
@@ -914,9 +914,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaFatorial(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 15;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
@@ -928,9 +928,9 @@ public class Controller {
 	@FXML
 	private void btnAjudaSomaDosQuadrados(ActionEvent event) throws IOException, InterruptedException {
 		botaoSelecionado = 16;
-		Parent telaLogin = FXMLLoader.load(getClass().getResource("exibeAjuda.fxml"));
-		Stage stage = new Stage(); // Fill stage with content
-		stage.setScene(new Scene(telaLogin));
+		Parent telaAjuda = FXMLLoader.load(getClass().getResource("/view/ajuda/exibeAjuda.fxml"));
+		Stage stage = new Stage();
+		stage.setScene(new Scene(telaAjuda));
 		stage.show();
 	}
 
