@@ -283,7 +283,6 @@
                                                       <Button fx:id="btnAjudaMediana" mnemonicParsing="false" onAction="#btnAjudaMediana" prefHeight="30.0" prefWidth="299.0" text="Mediana" />
                                                       <Button fx:id="btnAjudaVariancia" mnemonicParsing="false" onAction="#btnAjudaVariancia" prefHeight="30.0" prefWidth="299.0" text="Variância" />
                                                       <Button fx:id="btnAjudaDesvioPadrao" mnemonicParsing="false" onAction="#btnAjudaDesvioPadrao" prefHeight="30.0" prefWidth="299.0" text="Desvio Padrão" />
-                                                      <Button fx:id="btnAjudaFatorial" mnemonicParsing="false" onAction="#btnAjudaFatorial" prefHeight="30.0" prefWidth="299.0" text="Fatorial" />
                                                    </children>
                                                 </VBox>
                                              </content>
