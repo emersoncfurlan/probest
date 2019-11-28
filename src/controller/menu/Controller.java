@@ -502,7 +502,7 @@ public class Controller {
 
 	private void atualizarGraficosTabelas() throws InterruptedException {
 		clear(); // limpa para inserir a nova amostra
-		setTextAreaAmostra("Dados:" + amostra.getDados() + "\nPesos: " + amostra.getPesos() + "\n Dados Pesados"
+		setTextAreaAmostra("Dados:" + amostra.getDados() + "\nPesos: " + amostra.getPesos() + "\nRol: "
 				+ amostra.getDadosPesados());
 		listaResultados();
 		listaClasses();
@@ -632,29 +632,6 @@ public class Controller {
 			System.out.println("chkTudoDescritiva: " + chkTudoDescritiva.selectedProperty().getValue());
 			tudoDescritiva = true;
 		}
-		if (chkSomat.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkSomat: " + chkSomat.selectedProperty().getValue());
-			resultadoTabela somatorio = new resultadoTabela("SOMATÓRIO", amostra.getResultadoSOMATORIO());
-			listResultadoTabela.add(somatorio);
-		}
-		if (chkQuadradoSoma.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkQuadradoSoma: " + chkQuadradoSoma.selectedProperty().getValue());
-			resultadoTabela quadradoDaSoma = new resultadoTabela("QUADRADO_DA_SOMA",
-					amostra.getResultadoQUADRADO_DA_SOMA());
-			listResultadoTabela.add(quadradoDaSoma);
-		}
-		if (chkSomaProdutos.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkSomaProdutos: " + chkSomaProdutos.selectedProperty().getValue());
-			resultadoTabela somaDeProdutos = new resultadoTabela("Soma de Produtos",
-					amostra.getResultadoSOMA_DE_PRODUTOS());
-			listResultadoTabela.add(somaDeProdutos);
-		}
-		if (chkProdutoSoma.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkProdutoSoma: " + chkProdutoSoma.selectedProperty().getValue());
-			resultadoTabela produtoDasSomas = new resultadoTabela("PRODUTO_DAS_SOMAS",
-					amostra.getResultadoPRODUTO_DAS_SOMAS());
-			listResultadoTabela.add(produtoDasSomas);
-		}
 		if (chkMediaAritmetica.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkMediaAritmetica: " + chkMediaAritmetica.selectedProperty().getValue());
 			resultadoTabela mediaAritm = new resultadoTabela("MEDIA_ARITMETICA_SIMPLES",
@@ -666,6 +643,23 @@ public class Controller {
 			resultadoTabela mediaAritmPond = new resultadoTabela("MEDIA_ARITMETICA_PONDERADA",
 					amostra.getResultadoMEDIA_ARITMETICA_SIMPLES());
 			listResultadoTabela.add(mediaAritmPond);
+		}
+		if (chkMediaHarm.selectedProperty().getValue() || tudoDescritiva) {
+			System.out.println("chkMediaHarm: " + chkMediaHarm.selectedProperty().getValue());
+			resultadoTabela MEDIA_HARMONICA = new resultadoTabela("MEDIA_HARMONICA",
+					amostra.getResultadoMEDIA_HARMONICA());
+			listResultadoTabela.add(MEDIA_HARMONICA);
+		}
+		if (chkMediaGeo.selectedProperty().getValue() || tudoDescritiva) {
+			System.out.println("chkMediaGeo: " + chkMediaGeo.selectedProperty().getValue());
+			resultadoTabela MEDIA_GEOMETRICA = new resultadoTabela("MEDIA_GEOMETRICA",
+					amostra.getResultadoMEDIA_GEOMETRICA());
+			listResultadoTabela.add(MEDIA_GEOMETRICA);
+		}
+		if (chkSomat.selectedProperty().getValue() || tudoDescritiva) {
+			System.out.println("chkSomat: " + chkSomat.selectedProperty().getValue());
+			resultadoTabela somatorio = new resultadoTabela("SOMATÓRIO", amostra.getResultadoSOMATORIO());
+			listResultadoTabela.add(somatorio);
 		}
 		if (chkModa.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkModa: " + chkModa.selectedProperty().getValue());
@@ -690,33 +684,34 @@ public class Controller {
 			resultadoTabela DESVIO_PADRAO = new resultadoTabela("DESVIO_PADRAO", amostra.getResultadoDESVIO_PADRAO());
 			listResultadoTabela.add(DESVIO_PADRAO);
 		}
-		if (chkMediaGeo.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkMediaGeo: " + chkMediaGeo.selectedProperty().getValue());
-			resultadoTabela MEDIA_GEOMETRICA = new resultadoTabela("MEDIA_GEOMETRICA",
-					amostra.getResultadoMEDIA_GEOMETRICA());
-			listResultadoTabela.add(MEDIA_GEOMETRICA);
-		}
-		if (chkMediaHarm.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkMediaHarm: " + chkMediaHarm.selectedProperty().getValue());
-			resultadoTabela MEDIA_HARMONICA = new resultadoTabela("MEDIA_HARMONICA",
-					amostra.getResultadoMEDIA_HARMONICA());
-			listResultadoTabela.add(MEDIA_HARMONICA);
-		}
 		if (chkProduto.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkProduto: " + chkProduto.selectedProperty().getValue());
 			resultadoTabela PRODUTO = new resultadoTabela("PRODUTO", amostra.getResultadoPRODUTO());
 			listResultadoTabela.add(PRODUTO);
 		}
-//		if (chkFatorial.selectedProperty().getValue() || tudoDescritiva) {
-//			System.out.println("chkFatorial: " + chkFatorial.selectedProperty().getValue());
-//			resultadoTabela FATORIAL = new resultadoTabela("FATORIAL", amostra.getResultadoFATORIAL());
-//			listResultadoTabela.add(FATORIAL);
-//		}
+		if (chkQuadradoSoma.selectedProperty().getValue() || tudoDescritiva) {
+			System.out.println("chkQuadradoSoma: " + chkQuadradoSoma.selectedProperty().getValue());
+			resultadoTabela quadradoDaSoma = new resultadoTabela("QUADRADO_DA_SOMA",
+					amostra.getResultadoQUADRADO_DA_SOMA());
+			listResultadoTabela.add(quadradoDaSoma);
+		}
+		if (chkSomaProdutos.selectedProperty().getValue() || tudoDescritiva) {
+			System.out.println("chkSomaProdutos: " + chkSomaProdutos.selectedProperty().getValue());
+			resultadoTabela somaDeProdutos = new resultadoTabela("SOMA_DE_PRODUTOS",
+					amostra.getResultadoSOMA_DE_PRODUTOS());
+			listResultadoTabela.add(somaDeProdutos);
+		}
 		if (chkSomaQuadrados.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkSomaQuadrados: " + chkSomaQuadrados.selectedProperty().getValue());
 			resultadoTabela SOMA_DOS_QUADRADOS = new resultadoTabela("SOMA_DOS_QUADRADOS",
 					amostra.getResultadoSOMA_DOS_QUADRADOS());
 			listResultadoTabela.add(SOMA_DOS_QUADRADOS);
+		}
+		if (chkProdutoSoma.selectedProperty().getValue() || tudoDescritiva) {
+			System.out.println("chkProdutoSoma: " + chkProdutoSoma.selectedProperty().getValue());
+			resultadoTabela produtoDasSomas = new resultadoTabela("PRODUTO_DAS_SOMAS",
+					amostra.getResultadoPRODUTO_DAS_SOMAS());
+			listResultadoTabela.add(produtoDasSomas);
 		}
 		funcionalidadeCol.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionalidade"));
 		resultadoCol.setCellValueFactory(new PropertyValueFactory<>("resultado"));
