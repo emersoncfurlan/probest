@@ -51,7 +51,9 @@ import utils.resultadoTabela;
 
 public class Controller {
 	private static Amostra amostra = new Amostra();
+	private static Amostra segundaAmostra = new Amostra();
 	public static int botaoSelecionado;
+	boolean segAmostra = false;
 
 	@FXML
 	private ResourceBundle resources;
@@ -519,11 +521,11 @@ public class Controller {
 	public void listDadosTabela() {
 		Tabeleiro tabela = new Tabeleiro(amostra);
 		DadosTabela dadosTabela = new DadosTabela(tabela);
-		String conteudo = "Média: \t"+dadosTabela.getMediaT()+"\n";
-		conteudo += "Moda: \t"+dadosTabela.getModaT()+"\n";
-		conteudo += "Mediana: \t"+dadosTabela.getMedianaT()+"\n";
-		conteudo += "Quartil: \t"+dadosTabela.getQuartilT()+"\n";
-		conteudo += "Decil: \t"+dadosTabela.getDecilT()+"\n";
+		String conteudo = "Média: \t" + dadosTabela.getMediaT() + "\n";
+		conteudo += "Moda: \t" + dadosTabela.getModaT() + "\n";
+		conteudo += "Mediana: \t" + dadosTabela.getMedianaT() + "\n";
+		conteudo += "Quartil: \t" + dadosTabela.getQuartilT() + "\n";
+		conteudo += "Decil: \t" + dadosTabela.getDecilT() + "\n";
 		txtDadosTabela.setText(conteudo);
 	}
 
@@ -714,18 +716,11 @@ public class Controller {
 					amostra.getResultadoQUADRADO_DA_SOMA());
 			listResultadoTabela.add(quadradoDaSoma);
 		}
-		String vet[] = new String[1];
+
 		if (chkSomaProdutos.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkSomaProdutos: " + chkSomaProdutos.selectedProperty().getValue());
-			String entrada = JOptionPane.showInputDialog("Informe a segunda amostra: ");
-			vet[0] = entrada;
-			if (vet[0].equalsIgnoreCase("")) {
-				vet[0] = "0";
-			}
-			String[] conteudo = vet[0].split(";");
-			Amostra amostraDado = txtDados(conteudo);
+			segAmostra = setSegundaAmostra(segAmostra);
 			amostra.setResultadoSOMA_DE_PRODUTOS(
-					(amostraDado.somaDeProdutos(amostra.getDados(), amostraDado.getDados())));
+					(segundaAmostra.somaDeProdutos(amostra.getDados(), segundaAmostra.getDados())));
 			resultadoTabela somaDeProdutos = new resultadoTabela("SOMA_DE_PRODUTOS",
 					amostra.getResultadoSOMA_DE_PRODUTOS());
 			listResultadoTabela.add(somaDeProdutos);
@@ -738,18 +733,9 @@ public class Controller {
 		}
 		if (chkProdutoSoma.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkProdutoSoma: " + chkProdutoSoma.selectedProperty().getValue());
-			if (!chkSomaProdutos.selectedProperty().getValue()) {
-				String entrada = JOptionPane.showInputDialog("Informe a segunda amostra: ");
-				vet[0] = entrada;
-			}
-			if (vet[0].equalsIgnoreCase("")) {
-				vet[0] = "0";
-			}
-
-			String[] conteudo = vet[0].split(";");
-			Amostra amostraDado = txtDados(conteudo);
+			segAmostra = setSegundaAmostra(segAmostra);
 			amostra.setResultadoPRODUTO_DAS_SOMAS(
-					amostraDado.produtoDasSomas(amostra.getDados(), amostraDado.getDados()));
+					segundaAmostra.produtoDasSomas(amostra.getDados(), segundaAmostra.getDados()));
 			resultadoTabela produtoDasSomas = new resultadoTabela("PRODUTO_DAS_SOMAS",
 					amostra.getResultadoPRODUTO_DAS_SOMAS());
 			listResultadoTabela.add(produtoDasSomas);
@@ -757,6 +743,28 @@ public class Controller {
 		funcionalidadeCol.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionalidade"));
 		resultadoCol.setCellValueFactory(new PropertyValueFactory<>("resultado"));
 		tableResultado.setItems(listResultadoTabela);
+	}
+
+	private boolean setSegundaAmostra(boolean segAmostra) {
+		if (segAmostra == false) {
+			String vetDado[] = new String[1];
+			String vetPeso[] = new String[1];
+			System.out.println("chkSomaProdutos: " + chkSomaProdutos.selectedProperty().getValue());
+			String entradaDados = JOptionPane.showInputDialog("Informe a segunda amostra: ");
+			vetDado[0] = entradaDados;
+			if (vetDado[0].equalsIgnoreCase("")) {
+				vetDado[0] = "0";
+			}
+			String[] conteudoDado = vetDado[0].split(";");
+			String entradaPeso = JOptionPane.showInputDialog("Informe o peso da segunda amostra: ");
+			vetPeso[0] = entradaPeso;
+			if (vetPeso[0].equalsIgnoreCase("")) {
+				vetPeso[0] = "0";
+			}
+			String[] conteudoPeso = vetPeso[0].split(";");
+			segundaAmostra = new Amostra(txtDados(conteudoDado).getDados(), txtDados(conteudoPeso).getDados());
+		}
+		return true;
 	}
 
 	// Ajuda
