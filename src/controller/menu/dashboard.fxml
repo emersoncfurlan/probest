@@ -401,12 +401,13 @@
                         <Font size="18.0" fx:id="x23" />
                      </font>
                   </Label>
-                  <TableView fx:id="tableResultado" layoutX="21.0" layoutY="82.0" prefHeight="715.0" prefWidth="430.0" AnchorPane.rightAnchor="10.0">
+                  <TableView fx:id="tableResultado" layoutX="21.0" layoutY="82.0" prefHeight="555.0" prefWidth="430.0" AnchorPane.rightAnchor="10.0">
                     <columns>
                       <TableColumn fx:id="funcionalidadeCol" prefWidth="240.0" text="Funcionalidade" />
                       <TableColumn fx:id="resultadoCol" minWidth="0.0" prefWidth="215.0" text="Resultado" />
                     </columns>
                   </TableView>
+                  <TextArea fx:id="txtDadosTabela" layoutX="10.0" layoutY="649.0" prefHeight="200.0" prefWidth="430.0" />
                </children>
             </AnchorPane>
       </items>
