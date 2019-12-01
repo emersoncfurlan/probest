@@ -45,6 +45,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Amostra;
 import utils.Classe;
+import utils.DadosTabela;
 import utils.Tabeleiro;
 import utils.resultadoTabela;
 
@@ -285,43 +286,46 @@ public class Controller {
 
 	@FXML
 	private TableColumn<resultadoTabela, SimpleDoubleProperty> resultadoCol;
-	
-    @FXML
-    void gerenciaCheckBox(ActionEvent event) {
-    	if(chkTudoDescritiva.selectedProperty().getValue()) {
-    		chkMediaAritmetica.setSelected(true);
-    		chkMediaAritmeticaPonderada.setSelected(true);
-    		chkMediaHarm.setSelected(true);
-    		chkMediaGeo.setSelected(true);
-    		chkSomat.setSelected(true);
-    		chkModa.setSelected(true);
-    		chkMediana.setSelected(true);
-    		chkVariancia.setSelected(true);
-    		chkDesvioPadrao.setSelected(true);
-    		chkProduto.setSelected(true);
-    		chkProduto.setSelected(true);
-    		chkQuadradoSoma.setSelected(true);
-    		chkSomaProdutos.setSelected(true);
-    		chkSomaQuadrados.setSelected(true);
-    		chkProdutoSoma.setSelected(true);
-    	}else {
-    		chkMediaAritmetica.setSelected(false);
-    		chkMediaAritmeticaPonderada.setSelected(false);
-    		chkMediaHarm.setSelected(false);
-    		chkMediaGeo.setSelected(false);
-    		chkSomat.setSelected(false);
-    		chkModa.setSelected(false);
-    		chkMediana.setSelected(false);
-    		chkVariancia.setSelected(false);
-    		chkDesvioPadrao.setSelected(false);
-    		chkProduto.setSelected(false);
-    		chkProduto.setSelected(false);
-    		chkQuadradoSoma.setSelected(false);
-    		chkSomaProdutos.setSelected(false);
-    		chkSomaQuadrados.setSelected(false);
-    		chkProdutoSoma.setSelected(false);
-    	}
-    }
+
+	@FXML
+	private TextArea txtDadosTabela;
+
+	@FXML
+	void gerenciaCheckBox(ActionEvent event) {
+		if (chkTudoDescritiva.selectedProperty().getValue()) {
+			chkMediaAritmetica.setSelected(true);
+			chkMediaAritmeticaPonderada.setSelected(true);
+			chkMediaHarm.setSelected(true);
+			chkMediaGeo.setSelected(true);
+			chkSomat.setSelected(true);
+			chkModa.setSelected(true);
+			chkMediana.setSelected(true);
+			chkVariancia.setSelected(true);
+			chkDesvioPadrao.setSelected(true);
+			chkProduto.setSelected(true);
+			chkProduto.setSelected(true);
+			chkQuadradoSoma.setSelected(true);
+			chkSomaProdutos.setSelected(true);
+			chkSomaQuadrados.setSelected(true);
+			chkProdutoSoma.setSelected(true);
+		} else {
+			chkMediaAritmetica.setSelected(false);
+			chkMediaAritmeticaPonderada.setSelected(false);
+			chkMediaHarm.setSelected(false);
+			chkMediaGeo.setSelected(false);
+			chkSomat.setSelected(false);
+			chkModa.setSelected(false);
+			chkMediana.setSelected(false);
+			chkVariancia.setSelected(false);
+			chkDesvioPadrao.setSelected(false);
+			chkProduto.setSelected(false);
+			chkProduto.setSelected(false);
+			chkQuadradoSoma.setSelected(false);
+			chkSomaProdutos.setSelected(false);
+			chkSomaQuadrados.setSelected(false);
+			chkProdutoSoma.setSelected(false);
+		}
+	}
 
 	@FXML
 	void initialize() {
@@ -452,7 +456,7 @@ public class Controller {
 	public static String[] limpaAmostraCarregada(String[] valores) {
 		String[] limpo = new String[valores.length];
 		for (int i = 0, j = 1; j < valores.length; i++, j++) {
-			if(valores[i] != null) {
+			if (valores[i] != null) {
 				limpo[i] = valores[j];
 			}
 			System.out.println("limpo[i]: " + limpo[i]);
@@ -505,10 +509,22 @@ public class Controller {
 		clear(); // limpa para inserir a nova amostra
 		setTextAreaAmostra("Dados:" + amostra.getDados() + "\nPesos: " + amostra.getPesos() + "\nRol: "
 				+ amostra.getDadosPesados());
+		listDadosTabela();
 		listaResultados();
 		listaClasses();
 		listGraficoBarras();
 		listGraficoLinha();
+	}
+
+	public void listDadosTabela() {
+		Tabeleiro tabela = new Tabeleiro(amostra);
+		DadosTabela dadosTabela = new DadosTabela(tabela);
+		String conteudo = "Média: \t"+dadosTabela.getMediaT()+"\n";
+		conteudo += "Moda: \t"+dadosTabela.getModaT()+"\n";
+		conteudo += "Mediana: \t"+dadosTabela.getMedianaT()+"\n";
+		conteudo += "Quartil: \t"+dadosTabela.getQuartilT()+"\n";
+		conteudo += "Decil: \t"+dadosTabela.getDecilT()+"\n";
+		txtDadosTabela.setText(conteudo);
 	}
 
 	public void clear() {
@@ -524,7 +540,7 @@ public class Controller {
 		}
 		ArrayList<Double> dados = new ArrayList<Double>();
 		for (int i = 0; i < conteudo.length; i++) {
-			if(conteudo[i] != null) {
+			if (conteudo[i] != null) {
 				dados.add(Double.parseDouble(conteudo[i]));
 			}
 		}
@@ -703,12 +719,13 @@ public class Controller {
 			System.out.println("chkSomaProdutos: " + chkSomaProdutos.selectedProperty().getValue());
 			String entrada = JOptionPane.showInputDialog("Informe a segunda amostra: ");
 			vet[0] = entrada;
-			if(vet[0].equalsIgnoreCase("")) {
+			if (vet[0].equalsIgnoreCase("")) {
 				vet[0] = "0";
 			}
 			String[] conteudo = vet[0].split(";");
 			Amostra amostraDado = txtDados(conteudo);
-			amostra.setResultadoSOMA_DE_PRODUTOS((amostraDado.somaDeProdutos(amostra.getDados(), amostraDado.getDados())));
+			amostra.setResultadoSOMA_DE_PRODUTOS(
+					(amostraDado.somaDeProdutos(amostra.getDados(), amostraDado.getDados())));
 			resultadoTabela somaDeProdutos = new resultadoTabela("SOMA_DE_PRODUTOS",
 					amostra.getResultadoSOMA_DE_PRODUTOS());
 			listResultadoTabela.add(somaDeProdutos);
@@ -725,13 +742,14 @@ public class Controller {
 				String entrada = JOptionPane.showInputDialog("Informe a segunda amostra: ");
 				vet[0] = entrada;
 			}
-			if(vet[0].equalsIgnoreCase("")) {
+			if (vet[0].equalsIgnoreCase("")) {
 				vet[0] = "0";
 			}
-			
+
 			String[] conteudo = vet[0].split(";");
 			Amostra amostraDado = txtDados(conteudo);
-			amostra.setResultadoPRODUTO_DAS_SOMAS(amostraDado.produtoDasSomas(amostra.getDados(), amostraDado.getDados()));
+			amostra.setResultadoPRODUTO_DAS_SOMAS(
+					amostraDado.produtoDasSomas(amostra.getDados(), amostraDado.getDados()));
 			resultadoTabela produtoDasSomas = new resultadoTabela("PRODUTO_DAS_SOMAS",
 					amostra.getResultadoPRODUTO_DAS_SOMAS());
 			listResultadoTabela.add(produtoDasSomas);
