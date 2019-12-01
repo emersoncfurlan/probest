@@ -56,8 +56,8 @@ public class Amostra {
 	public void result() {
 		this.ResultadoSOMATORIO = somatorio(dados);
 		this.ResultadoQUADRADO_DA_SOMA = (double) quadradoDaSoma(dados);
-		this.ResultadoSOMA_DE_PRODUTOS = 5.0; // USA DUAS AMOSTRAS
-		this.ResultadoPRODUTO_DAS_SOMAS = 5.0; // USA DUAS AMOSTRAS
+		this.ResultadoSOMA_DE_PRODUTOS = 0.0; // USA DUAS AMOSTRAS
+		this.ResultadoPRODUTO_DAS_SOMAS = 0.0; // USA DUAS AMOSTRAS
 		this.ResultadoMEDIA_ARITMETICA_SIMPLES = mediaAritmetica(dadosPesados(dados, pesos));
 		this.ResultadoMEDIA_ARITMETICA_PONDERADA = mediaAritmetica(dadosPesados(dados, pesos));
 		this.ResultadoMODA = moda(dados); // da erro caso não tenha repetido
@@ -291,16 +291,21 @@ public class Amostra {
 
 	public static double somaDeProdutos(ArrayList<Double> dados, ArrayList<Double> dados2) {
 		double somadeprodutos = 0;
-
-		for (int i = 0; i < dados.size(); i++) {
-			somadeprodutos += dados.get(i) * dados2.get(i);
+		if (dados.size() != dados2.size()) {
+			return 0;
+		}else {
+			for (int i = 0; i < dados.size(); i++) {
+				somadeprodutos += dados.get(i) * dados2.get(i);
+			}
+			return somadeprodutos;	
 		}
-
-		return somadeprodutos;
 	}
 
-	public static double produtoDasSomas(ArrayList<Double> dados, ArrayList<Double> dados2) {
-		return somatorio(dados) * somatorio(dados2);
+	public double produtoDasSomas(ArrayList<Double> dados, ArrayList<Double> dados2) {
+		if (dados.size() != dados2.size()) {
+			return 0;
+		}
+		else return somatorio(dados) * somatorio(dados2);
 	}
 
 	public static double somaDeQuadrados(ArrayList<Double> dados) {
