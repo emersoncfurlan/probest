@@ -530,6 +530,8 @@ public class Controller {
 	}
 
 	public void clear() {
+		listGraficoDeBarrasX.clear();
+		listGraficoDeLinha.clear();
 		listResultadoTabela.clear();
 		listClassesTabela.clear();
 		graficoDeLinhas.getData().clear();
