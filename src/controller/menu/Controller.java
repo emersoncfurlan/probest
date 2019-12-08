@@ -503,6 +503,8 @@ public class Controller {
 			amostra = new Amostra(dados, pesos);
 		}
 		System.out.println("Amostra do txtAmostra: " + amostra.toString());
+		segundaAmostra = null;
+		segAmostra = false;
 		amostra.result();
 		atualizarGraficosTabelas();
 	}
@@ -584,7 +586,6 @@ public class Controller {
 		BarChartCategoryAxis.setCategories(listGraficoDeBarrasX);
 		XYChart.Series<String, Integer> series = new XYChart.Series<>();
 		for (int i = 0; i < listClasses.size(); i++) {
-//			String conteudo = ""+listClasses.get(i).getlimiteMed(); 
 			series.getData().add(
 					new XYChart.Data<>("" + listClasses.get(i).getlimiteMed(), listClasses.get(i).getfreqAbsoluta()));
 		}
@@ -608,7 +609,6 @@ public class Controller {
 		LinhaCategoryAxis.setCategories(listGraficoDeLinha);
 		XYChart.Series<String, Integer> series = new XYChart.Series<>();
 		for (int i = 0; i < listClasses.size(); i++) {
-//			String conteudo = ""+listClasses.get(i).getlimiteMed(); 
 			series.getData().add(
 					new XYChart.Data<>("" + listClasses.get(i).getlimiteMed(), listClasses.get(i).getfreqAbsoluta()));
 		}
