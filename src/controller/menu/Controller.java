@@ -107,8 +107,8 @@ public class Controller {
 	@FXML
 	private CheckBox chkMediaAritmetica;
 
-	@FXML
-	private CheckBox chkMediaAritmeticaPonderada;
+//	@FXML
+//	private CheckBox chkMediaAritmeticaPonderada;
 
 	@FXML
 	private CheckBox chkMediaHarm;
@@ -296,7 +296,7 @@ public class Controller {
 	void gerenciaCheckBox(ActionEvent event) {
 		if (chkTudoDescritiva.selectedProperty().getValue()) {
 			chkMediaAritmetica.setSelected(true);
-			chkMediaAritmeticaPonderada.setSelected(true);
+//			chkMediaAritmeticaPonderada.setSelected(true);
 			chkMediaHarm.setSelected(true);
 			chkMediaGeo.setSelected(true);
 			chkSomat.setSelected(true);
@@ -312,7 +312,7 @@ public class Controller {
 			chkProdutoSoma.setSelected(true);
 		} else {
 			chkMediaAritmetica.setSelected(false);
-			chkMediaAritmeticaPonderada.setSelected(false);
+//			chkMediaAritmeticaPonderada.setSelected(false);
 			chkMediaHarm.setSelected(false);
 			chkMediaGeo.setSelected(false);
 			chkSomat.setSelected(false);
@@ -662,12 +662,12 @@ public class Controller {
 					amostra.getResultadoMEDIA_ARITMETICA_SIMPLES());
 			listResultadoTabela.add(mediaAritm);
 		}
-		if (chkMediaAritmeticaPonderada.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkMediaAritmetica: " + chkMediaAritmeticaPonderada.selectedProperty().getValue());
-			resultadoTabela mediaAritmPond = new resultadoTabela("MEDIA_ARITMETICA_PONDERADA",
-					amostra.getResultadoMEDIA_ARITMETICA_SIMPLES());
-			listResultadoTabela.add(mediaAritmPond);
-		}
+//		if (chkMediaAritmeticaPonderada.selectedProperty().getValue() || tudoDescritiva) {
+//			System.out.println("chkMediaAritmetica: " + chkMediaAritmeticaPonderada.selectedProperty().getValue());
+//			resultadoTabela mediaAritmPond = new resultadoTabela("MEDIA_ARITMETICA_PONDERADA",
+//					amostra.getResultadoMEDIA_ARITMETICA_SIMPLES());
+//			listResultadoTabela.add(mediaAritmPond);
+//		}
 		if (chkMediaHarm.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkMediaHarm: " + chkMediaHarm.selectedProperty().getValue());
 			resultadoTabela MEDIA_HARMONICA = new resultadoTabela("MEDIA_HARMONICA",
