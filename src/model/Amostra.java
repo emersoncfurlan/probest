@@ -54,7 +54,6 @@ public class Amostra {
 	}
 
 	public void result() {
-		this.ResultadoSOMATORIO = somatorio(dados);
 		this.ResultadoQUADRADO_DA_SOMA = (double) quadradoDaSoma(dados);
 		this.ResultadoSOMA_DE_PRODUTOS = 0.0; // USA DUAS AMOSTRAS
 		this.ResultadoPRODUTO_DAS_SOMAS = 0.0; // USA DUAS AMOSTRAS
@@ -70,6 +69,7 @@ public class Amostra {
 //		this.ResultadoPROBABILIDADE = probabilidade(dados, possibilidade);
 		// this.ResultadoFATORIAL = fatorial();
 		this.ResultadoSOMA_DOS_QUADRADOS = (double) somaDeQuadrados(dados);
+		this.ResultadoSOMATORIO = somatorio(dadosPesados);
 	}
 
 	public double getPossibilidade() {
