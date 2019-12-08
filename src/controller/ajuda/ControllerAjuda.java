@@ -82,7 +82,7 @@ public class ControllerAjuda implements Initializable {
 		String txt;
 		switch (codBotao) {
 		case 1: // somatorio simples
-			txt = "https://www.youtube-nocookie.com/embed/jJ4WJvZ7lqo";
+			txt = "https://www.youtube-nocookie.com/embed/17pZ7H7PCBM";
 			return txt;
 		case 2: // quadrado da soma
 			txt = "https://www.youtube-nocookie.com/embed/Vf7qfYX1Fck";

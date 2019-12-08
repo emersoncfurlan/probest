@@ -651,6 +651,7 @@ public class Controller {
 
 	private void listaResultados() {
 		boolean tudoDescritiva = false;
+		ArrayList<Double> amostra2 = null;
 		if (chkTudoDescritiva.selectedProperty().getValue()) {
 			System.out.println("chkTudoDescritiva: " + chkTudoDescritiva.selectedProperty().getValue());
 			tudoDescritiva = true;
@@ -712,35 +713,40 @@ public class Controller {
 			resultadoTabela PRODUTO = new resultadoTabela("PRODUTO", amostra.getResultadoPRODUTO());
 			listResultadoTabela.add(PRODUTO);
 		}
-		if (chkQuadradoSoma.selectedProperty().getValue() || tudoDescritiva) {
-			System.out.println("chkQuadradoSoma: " + chkQuadradoSoma.selectedProperty().getValue());
-			resultadoTabela quadradoDaSoma = new resultadoTabela("QUADRADO_DA_SOMA",
-					amostra.getResultadoQUADRADO_DA_SOMA());
-			listResultadoTabela.add(quadradoDaSoma);
-		}
-
-		if (chkSomaProdutos.selectedProperty().getValue() || tudoDescritiva) {
-			segAmostra = setSegundaAmostra(segAmostra);
-			amostra.setResultadoSOMA_DE_PRODUTOS(
-					(segundaAmostra.somaDeProdutos(amostra.getDados(), segundaAmostra.getDados())));
-			resultadoTabela somaDeProdutos = new resultadoTabela("SOMA_DE_PRODUTOS",
-					amostra.getResultadoSOMA_DE_PRODUTOS());
-			listResultadoTabela.add(somaDeProdutos);
-		}
 		if (chkSomaQuadrados.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkSomaQuadrados: " + chkSomaQuadrados.selectedProperty().getValue());
 			resultadoTabela SOMA_DOS_QUADRADOS = new resultadoTabela("SOMA_DOS_QUADRADOS",
 					amostra.getResultadoSOMA_DOS_QUADRADOS());
 			listResultadoTabela.add(SOMA_DOS_QUADRADOS);
 		}
+		if (chkQuadradoSoma.selectedProperty().getValue() || tudoDescritiva) {
+			System.out.println("chkQuadradoSoma: " + chkQuadradoSoma.selectedProperty().getValue());
+			resultadoTabela quadradoDaSoma = new resultadoTabela("QUADRADO_DA_SOMA",
+					amostra.getResultadoQUADRADO_DA_SOMA());
+			listResultadoTabela.add(quadradoDaSoma);
+		}
+		if (chkSomaProdutos.selectedProperty().getValue() || tudoDescritiva) {
+			segAmostra = setSegundaAmostra(segAmostra);
+			amostra2 = segundaAmostra.getDados();
+			if(amostra2 != null) {
+				amostra.setResultadoSOMA_DE_PRODUTOS(
+						(segundaAmostra.somaDeProdutos(amostra.getDados(), segundaAmostra.getDados())));
+				resultadoTabela somaDeProdutos = new resultadoTabela("SOMA_DE_PRODUTOS",
+						amostra.getResultadoSOMA_DE_PRODUTOS());
+				listResultadoTabela.add(somaDeProdutos);
+			}
+		}
 		if (chkProdutoSoma.selectedProperty().getValue() || tudoDescritiva) {
 			System.out.println("chkProdutoSoma: " + chkProdutoSoma.selectedProperty().getValue());
 			segAmostra = setSegundaAmostra(segAmostra);
+			amostra2 = segundaAmostra.getDados();
+			if(amostra2 != null) {
 			amostra.setResultadoPRODUTO_DAS_SOMAS(
 					segundaAmostra.produtoDasSomas(amostra.getDados(), segundaAmostra.getDados()));
 			resultadoTabela produtoDasSomas = new resultadoTabela("PRODUTO_DAS_SOMAS",
 					amostra.getResultadoPRODUTO_DAS_SOMAS());
 			listResultadoTabela.add(produtoDasSomas);
+			}
 		}
 		funcionalidadeCol.setCellValueFactory(new PropertyValueFactory<>("nomeFuncionalidade"));
 		resultadoCol.setCellValueFactory(new PropertyValueFactory<>("resultado"));
