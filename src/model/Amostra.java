@@ -69,7 +69,7 @@ public class Amostra {
 //		this.ResultadoPROBABILIDADE = probabilidade(dados, possibilidade);
 		// this.ResultadoFATORIAL = fatorial();
 		this.ResultadoSOMA_DOS_QUADRADOS = (double) somaDeQuadrados(dados);
-		this.ResultadoSOMATORIO = somatorio(dadosPesados);
+		this.ResultadoSOMATORIO = somatorio(dados);
 	}
 
 	public double getPossibilidade() {
